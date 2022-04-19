@@ -29,10 +29,16 @@ namespace SMP.Domain.Models.Entities
         public Status Status { get ; set; }
 
         [InverseProperty("User_Id")]
-        public List<Follower> Users { get; set; }
+        public List<Follower> Follow_Users { get; set; }
 
         [InverseProperty("Following_Id")]
-        public List<Follower> Followings{ get; set; }
+        public List<Follower> Following_Users { get; set; }
+
+        [InverseProperty("Message_Send_Id")]
+        public List<Message> Message_Sends { get; set; }
+
+        [InverseProperty("Message_Outgoing_Id")]
+        public List<Message> Message_Outgoings { get; set; }
         public List<Post_Score> Post_Scores { get; set; }
         public List<Favorite_Post> Favorite_Posts { get; set; }
         public List<Post_Comment> Post_Comments { get; set; }
