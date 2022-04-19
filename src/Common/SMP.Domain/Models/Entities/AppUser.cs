@@ -5,6 +5,7 @@ using SMP.Domain.Enums;
 using SMP.Domain.Models.Interface;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,5 +27,19 @@ namespace SMP.Domain.Models.Entities
         public DateTime? UpdateDate { get; set ; }
         public DateTime? DeleteDate { get ; set; }
         public Status Status { get ; set; }
+
+        [InverseProperty("User_Id")]
+        public List<Follower> Users { get; set; }
+
+        [InverseProperty("Following_Id")]
+        public List<Follower> Followings{ get; set; }
+        public List<Post_Score> Post_Scores { get; set; }
+        public List<Favorite_Post> Favorite_Posts { get; set; }
+        public List<Post_Comment> Post_Comments { get; set; }
+        
+
+
+
+
     }
 }
