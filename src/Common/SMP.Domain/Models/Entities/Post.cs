@@ -27,6 +27,7 @@ namespace SMP.Domain.Models.Entities
         public List<Post_Score> Post_Scores { get; set; }
         public List<Hashtag> Hashtags { get; set; }
         public List<Favorite_Post> Favorite_Posts { get; set; }
+        public List<PostSharing> PostSharings { get; set; }
 
 
 

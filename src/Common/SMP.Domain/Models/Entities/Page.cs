@@ -8,16 +8,15 @@ using System.Threading.Tasks;
 
 namespace SMP.Domain.Models.Entities
 {
-    public class Message :IBaseEntity
+    public class Page : IBaseEntity
     {
         public int Id { get; set; }
 
-        public int Message_Send_Id { get; set; }
-        public AppUser User { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public string Slug { get; set; }
 
-        public int Message_Outgoing_Id { get; set; }
-        public AppUser Following_User { get; set; }
-        
+
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
         public DateTime? DeleteDate { get; set; }

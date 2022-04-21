@@ -34,15 +34,13 @@ namespace SMP.Domain.Models.Entities
         [InverseProperty("Following_Id")]
         public List<Follower> Following_Users { get; set; }
 
-        [InverseProperty("Message_Send_Id")]
-        public List<Message> Message_Sends { get; set; }
-
-        [InverseProperty("Message_Outgoing_Id")]
-        public List<Message> Message_Outgoings { get; set; }
+      
         public List<Post_Score> Post_Scores { get; set; }
         public List<Favorite_Post> Favorite_Posts { get; set; }
         public List<Post_Comment> Post_Comments { get; set; }
-        
+        public List<PostSharing> PostSharings { get; set; }
+
+
 
 
 
