@@ -18,7 +18,7 @@ namespace SMP.Infrastructure.EntityTypeConfig
 
             builder.HasKey(x => x.Id);
 
-            builder.HasKey(x => x.Id);
+     
 
             builder.HasOne(x => x.User)
             .WithMany(x => x.PostSharings)

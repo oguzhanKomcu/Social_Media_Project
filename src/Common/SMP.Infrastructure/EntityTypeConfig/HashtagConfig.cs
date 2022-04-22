@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SMP.Infrastructure.EntityTypeConfig
 {
-    public  class HastagConfig : BaseEntityConfig<Hashtag>
+    public  class HashtagConfig : BaseEntityConfig<Hashtag>
     {
         public override void Configure(EntityTypeBuilder<Hashtag> builder)
         {

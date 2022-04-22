@@ -17,7 +17,7 @@ namespace SMP.Domain.UoW
         IAppUserRepository UserRepository { get; }
         IFavoritePostRepository FavoritePostRepository { get; }
         IFollowerRepository FollowerRepository { get; }
-        IHastagRepository HastagRepository { get; }
+        IHashtagRepository HashtagRepository { get; }
         IPostCommentRepository PostCommentRepository { get; }
         IPostRepository PostRepository { get; }
         IPostScoreRepository PostScoreRepository { get; }

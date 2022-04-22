@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SMP.Domain.Repositories
 {
-    public interface IFollowerRepository :IBaseRepository<Follower>
+    public interface IFollowerRepository :IBaseRepository<Follower> 
     {
 
         

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SMP.Domain.Repositories
 {
-    public interface IHastagRepository :IBaseRepository<Hashtag>
+    public interface IHashtagRepository :IBaseRepository<Hashtag>
     {
     }
 }
