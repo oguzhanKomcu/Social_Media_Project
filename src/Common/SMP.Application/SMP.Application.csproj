@@ -8,10 +8,19 @@
 
   <ItemGroup>
     <Folder Include="AutoMapper\" />
-    <Folder Include="IoC\" />
-    <Folder Include="Models\" />
-    <Folder Include="Validation\" />
+    <Folder Include="Models\VMs\" />
     <Folder Include="Services\" />
+    <Folder Include="Validation\FluentValidation\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SMP.Infrastructure\SMP.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
