@@ -15,7 +15,7 @@ namespace SMP.Domain.Models.Entities
         public AppUser AppUser { get; set; }
         public string  Total_Score { get; set; }
         public string  Total_Comment { get; set; }
-        public string Image { get; set; }
+        public string ImagePath { get; set; }
         public string Description { get; set; }
 
         public DateTime CreateDate { get; set; }

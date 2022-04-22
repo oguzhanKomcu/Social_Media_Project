@@ -8,20 +8,24 @@ using System.Threading.Tasks;
 
 namespace SMP.Infrastructure.EntityTypeConfig
 {
-    public class FavoritePostConfig : BaseEntityConfig<Favorite_Post>
+
+    public class PostCommentConfig : BaseEntityConfig<Post_Comment>
     {
-        public override void Configure(EntityTypeBuilder<Favorite_Post> builder)
+        public override void Configure(EntityTypeBuilder<Post_Comment> builder)
         {
             builder.HasKey(x => x.Id);
-          
+
             builder.HasOne(x => x.User)
-            .WithMany(x => x.Favorite_Posts)
+            .WithMany(x => x.Post_Comments)
             .HasForeignKey(x => x.User_Id);
 
 
             builder.HasOne(x => x.Post)
-            .WithMany(x => x.Favorite_Posts)
+            .WithMany(x => x.Post_Comments)
             .HasForeignKey(x => x.Post_Id);
+
+
+
 
 
 

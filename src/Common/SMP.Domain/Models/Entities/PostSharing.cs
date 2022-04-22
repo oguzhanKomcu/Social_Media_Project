@@ -15,7 +15,7 @@ namespace SMP.Domain.Models.Entities
         public Post Post { get; set; }
         public int User_Id { get; set; }
         public AppUser User { get; set; }
-        public string Text { get; set; }
+
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
         public DateTime? DeleteDate { get; set; }

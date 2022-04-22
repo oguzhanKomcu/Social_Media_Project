@@ -30,12 +30,18 @@ namespace SMP.Infrastructure
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
-          
+            builder.Entity<Follower>()
+            .HasOne(c => c.FollowUsers)
+           .WithMany(c => c.Follow)
+           .HasForeignKey(c => c.Follow_User_Id)
+            .OnDelete(DeleteBehavior.NoAction);
+            
+            builder.Entity<Follower>()
+           .HasOne(c => c.FollowingUsers)
+          .WithMany(c => c.Following)
+           .HasForeignKey(c => c.Following_UserId)
 
-
-            builder.ApplyConfiguration(new PageSeeding());
-
-
+           .OnDelete(DeleteBehavior.NoAction);
 
             base.OnModelCreating(builder);
         }

@@ -8,14 +8,17 @@ using System.Threading.Tasks;
 
 namespace SMP.Infrastructure.EntityTypeConfig
 {
-    public class AppUserConfig : BaseEntityConfig<AppUser>
+   
+    public class PageConfig : BaseEntityConfig<Page>
     {
-        public override void Configure(EntityTypeBuilder<AppUser> builder)
+        public override void Configure(EntityTypeBuilder<Page> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.UserName).IsRequired();
-            builder.Property(x => x.ImagePath).IsRequired(false);
-            
+
+            builder.Property(x => x.Title).IsRequired(true);
+            builder.Property(x => x.Content).IsRequired(true);
+            builder.Property(x => x.Slug).IsRequired(true);
+
 
 
 

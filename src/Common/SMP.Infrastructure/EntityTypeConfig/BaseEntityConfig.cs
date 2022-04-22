@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SMP.Infrastructure.EntityTypeConfig
 {
-    internal class BaseEntityConfig<T> : IEntityTypeConfiguration<T> where T : class, IBaseEntity
+    public class BaseEntityConfig<T> : IEntityTypeConfiguration<T> where T : class, IBaseEntity
     {
         public virtual void Configure(EntityTypeBuilder<T> builder)
         {

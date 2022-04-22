@@ -8,14 +8,18 @@ using System.Threading.Tasks;
 
 namespace SMP.Infrastructure.EntityTypeConfig
 {
-    public class AppUserConfig : BaseEntityConfig<AppUser>
+    public  class HastagConfig : BaseEntityConfig<Hashtag>
     {
-        public override void Configure(EntityTypeBuilder<AppUser> builder)
+        public override void Configure(EntityTypeBuilder<Hashtag> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.UserName).IsRequired();
-            builder.Property(x => x.ImagePath).IsRequired(false);
-            
+
+            builder.HasOne(x => x.Post)
+                .WithMany(x => x.Hashtags)
+                .HasForeignKey(x => x.Post_Id);
+
+
+            builder.Property(x => x.Text).IsRequired(true);
 
 
 
