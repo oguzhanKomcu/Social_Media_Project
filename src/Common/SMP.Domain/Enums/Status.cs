@@ -10,7 +10,7 @@ namespace SMP.Domain.Enums
     {
         Active=1 ,
         Passive= 2, 
-        modified = 3
+        Modified = 3
         
     }
 }

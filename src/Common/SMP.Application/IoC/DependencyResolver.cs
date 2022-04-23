@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using AutoMapper;
+using SMP.Application.AutoMapper;
 using SMP.Domain.UoW;
 using SMP.Infrastructure.UoW;
 using System;

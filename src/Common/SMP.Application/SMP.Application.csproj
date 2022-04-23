@@ -7,9 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="AutoMapper\" />
-    <Folder Include="Models\VMs\" />
-    <Folder Include="Services\" />
+    <Folder Include="Services\AppUserService\" />
+    <Folder Include="Services\FollowService\" />
+    <Folder Include="Services\FavoritePostService\" />
+    <Folder Include="Services\HashtagService\" />
+    <Folder Include="Services\PostSharing\" />
+    <Folder Include="Services\Post_Comment\" />
+    <Folder Include="Services\PageService\" />
+    <Folder Include="Services\Post_Score\" />
     <Folder Include="Validation\FluentValidation\" />
   </ItemGroup>
 
@@ -17,6 +22,7 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.16" />
   </ItemGroup>
 
   <ItemGroup>

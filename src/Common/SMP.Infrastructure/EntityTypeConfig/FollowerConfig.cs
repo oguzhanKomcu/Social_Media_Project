@@ -18,11 +18,14 @@ namespace SMP.Infrastructure.EntityTypeConfig
 
             builder.HasOne(c => c.FollowUsers)
               .WithMany(c => c.Follow)
+                 .HasForeignKey(x => x.Follow_User_Id)
                .OnDelete(DeleteBehavior.NoAction);
 
 
             builder.HasOne(c => c.FollowingUsers)
             .WithMany(c => c.Following)
+            .HasForeignKey(x => x.Following_UserId)
+            
               .OnDelete(DeleteBehavior.NoAction);
 
 

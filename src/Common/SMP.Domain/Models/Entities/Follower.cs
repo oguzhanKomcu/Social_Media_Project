@@ -13,10 +13,10 @@ namespace SMP.Domain.Models.Entities
     {
         public int Id { get; set; }
         
-       //public int Follow_User_Id { get; set; }
+         public int Follow_User_Id { get; set; }
         public AppUser FollowUsers { get; set; }
 
-      //public int Following_UserId { get; set; }
+        public int Following_UserId { get; set; }
         public AppUser FollowingUsers { get; set; }
         
         public DateTime CreateDate { get; set; }
