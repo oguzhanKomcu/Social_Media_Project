@@ -19,6 +19,7 @@ namespace SMP.Application.Services.PostService
         Task<UpdatePostDTO> GetById(int id);
 
         Task<List<GetPostVM>> GetPosts();
+        Task<List<GetPostVM>> TotalScore();
 
 
 

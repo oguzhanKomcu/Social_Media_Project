@@ -12,8 +12,8 @@ namespace SMP.Application.Models.VMs
         public int Id { get; set; }
         public int User_Id { get; set; }
         public AppUser AppUser { get; set; }
-        public string Total_Score { get; set; }
-        public string Total_Comment { get; set; }
+        public decimal Total_Score { get; set; }
+        public int Total_Comment { get; set; }
         public string ImagePath { get; set; }
         public string Description { get; set; }
         public string UserName { get; set; }
