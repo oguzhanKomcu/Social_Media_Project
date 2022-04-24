@@ -19,6 +19,15 @@ namespace SMP.Application.AutoMapper
             CreateMap<Post, UpdatePostDTO>().ReverseMap();
             CreateMap<Post, GetPostVM>().ReverseMap();
             CreateMap<UpdatePostDTO, GetPostVM>().ReverseMap();
+
+            CreateMap<Page, CreatePageDTO>().ReverseMap();
+            CreateMap<Page, UpdatePageDTO>().ReverseMap();
+            CreateMap<Page, GetPageVM>().ReverseMap();
+            CreateMap<UpdatePageDTO, GetPageVM>().ReverseMap();            
+
+
+            CreateMap<Hashtag, CreateHashtagDTO>().ReverseMap();
+            CreateMap<Hashtag, HashtagVM>().ReverseMap();
         }
     }
     

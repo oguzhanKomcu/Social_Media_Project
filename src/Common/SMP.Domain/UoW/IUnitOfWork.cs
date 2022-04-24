@@ -22,6 +22,7 @@ namespace SMP.Domain.UoW
         IPostRepository PostRepository { get; }
         IPostScoreRepository PostScoreRepository { get; }
         IPostSharingRepository PostSharingRepository { get; }
+        IPageRepository PageRepository { get; }
 
 
 

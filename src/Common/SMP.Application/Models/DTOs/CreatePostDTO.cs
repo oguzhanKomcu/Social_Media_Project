@@ -16,6 +16,7 @@ namespace SMP.Application.Models.DTOs
         public string? Total_Comment { get; set; }
         public string? ImagePath { get; set; }
         public string? Description { get; set; }
+   
         public IFormFile? UploadPath { get; set; }
         public DateTime CreateDate => DateTime.Now;
         public Status Status => Status.Active;
