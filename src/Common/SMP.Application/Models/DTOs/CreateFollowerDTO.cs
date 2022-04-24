@@ -10,8 +10,8 @@ namespace SMP.Application.Models.DTOs
 {
     public class CreateFollowerDTO
     {
-        
 
+        public int Id { get; set; }
         public int Follow_User_Id { get; set; }
 
 

@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Services\AppUserService\" />
-    <Folder Include="Services\FollowService\" />
-    <Folder Include="Services\FavoritePostService\" />
     <Folder Include="Services\PostSharing\" />
     <Folder Include="Services\Post_Comment\" />
     <Folder Include="Services\Post_Score\" />

@@ -23,11 +23,21 @@ namespace SMP.Application.AutoMapper
             CreateMap<Page, CreatePageDTO>().ReverseMap();
             CreateMap<Page, UpdatePageDTO>().ReverseMap();
             CreateMap<Page, GetPageVM>().ReverseMap();
-            CreateMap<UpdatePageDTO, GetPageVM>().ReverseMap();            
+            CreateMap<UpdatePageDTO, GetPageVM>().ReverseMap(); 
 
 
             CreateMap<Hashtag, CreateHashtagDTO>().ReverseMap();
             CreateMap<Hashtag, HashtagVM>().ReverseMap();
+
+
+            
+            CreateMap<Favorite_Post, CreateFavoritePost>().ReverseMap();
+            CreateMap<Favorite_Post, FavoritePostVM>().ReverseMap();
+
+            CreateMap<Follower, CreateFollowerDTO>().ReverseMap();
+            CreateMap<Follower, FollwersVm>().ReverseMap();
+            CreateMap<Follower, FollowingVM>().ReverseMap();
+
         }
     }
     

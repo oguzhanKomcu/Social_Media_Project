@@ -8,7 +8,7 @@ namespace SMP.Application.Models.VMs
 {
     public  class FollowingVM
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string FollowUpUserName{ get; set; }
         public string FollowUpFullName{ get; set; }
         public string FollowUpImage { get; set; }
