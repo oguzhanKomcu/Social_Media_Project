@@ -60,6 +60,20 @@ namespace SMP.Infrastructure.UoW
             }
         }
 
+        private IPageRepository _pageRepository;
+        public IPageRepository PageRepository
+        {
+            get
+            {
+                if (_pageRepository == null)
+                {
+                    _pageRepository = new PageRepository(_appDbContext);
+                }
+                return _pageRepository;
+            }
+        }
+
+
         private IHashtagRepository _hashtagRepository;
         public IHashtagRepository HashtagRepository
         {

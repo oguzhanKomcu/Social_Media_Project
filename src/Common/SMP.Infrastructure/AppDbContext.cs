@@ -31,16 +31,17 @@ namespace SMP.Infrastructure
         {
 
             builder.Entity<Follower>()
-            .HasOne(c => c.FollowUsers)
+            .HasOne(c => c.FollowUser)
            .WithMany(c => c.Follow)
-
+           .HasForeignKey(x => x.Follow_User_Id)
             .OnDelete(DeleteBehavior.NoAction);
             
-            builder.Entity<Follower>()
-           .HasOne(c => c.FollowingUsers)
-          .WithMany(c => c.Following)
-    
 
+            
+            builder.Entity<Follower>()
+           .HasOne(c => c.FollowingUser)
+            .WithMany(c => c.Following)
+            .HasForeignKey(x => x.Following_UserId)            
            .OnDelete(DeleteBehavior.NoAction);
 
             base.OnModelCreating(builder);

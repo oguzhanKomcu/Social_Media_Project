@@ -7,18 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\AppUserService\" />
-    <Folder Include="Services\PostSharing\" />
-    <Folder Include="Services\Post_Comment\" />
-    <Folder Include="Services\Post_Score\" />
-    <Folder Include="Validation\FluentValidation\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="FluentValidation" Version="10.4.0" />
+    <PackageReference Include="Microsoft.AspNet.Identity.Owin" Version="2.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="2.1.1" />
   </ItemGroup>
 

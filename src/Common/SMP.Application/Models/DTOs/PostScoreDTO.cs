@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SMP.Application.Models.DTOs
 {
-    public class CreatePostScoreDTO
+    public class PostScoreDTO
     {
 
         public int Post_Id { get; set; }

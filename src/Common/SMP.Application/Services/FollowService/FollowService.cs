@@ -41,10 +41,7 @@ namespace SMP.Application.Services.FollowService
             await _unitOfWork.Commit();
         }
 
-        public Task<CreateFollowerDTO> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
+ 
 
         public async Task<List<FollwersVm>> GetFollowers(int id)
         {
@@ -52,16 +49,14 @@ namespace SMP.Application.Services.FollowService
                  selector: x=>  new FollwersVm
                  {
                      Id = x.Id,
-                     FollowerUserName = x.FollowingUsers.UserName,
-                     FollowerImage = x.FollowingUsers.ImagePath,
+                     FollowerUserName = x.FollowingUser.UserName,
+                     FollowerImage = x.FollowingUser.ImagePath,
                     
 
-
-
                  },
-                 expression: x => x.Status == Status.Active && x.Follow_User_Id == id,
+                 expression: x => x.Status == Status.Active && x.Following_UserId == id,
                  orderBy: x => x.OrderBy(y => y.CreateDate),
-                 include: x => x.Include(x => x.FollowUsers));
+                 include: x => x.Include(x => x.FollowUser));
 
             return followersList;
 
@@ -78,16 +73,16 @@ namespace SMP.Application.Services.FollowService
              selector: x => new FollowingVM
              {
                  Id = x.Id,
-                 FollowUpUserName = x.FollowUsers.UserName,
-                 FollowUpImage = x.FollowUsers.ImagePath,
+                 FollowUpUserName = x.FollowUser.UserName,
+                 FollowUpImage = x.FollowUser.ImagePath,
 
 
 
 
              },
-             expression: x => x.Status == Status.Active && x.Following_UserId == id,
+             expression: x => x.Status == Status.Active && x.Follow_User_Id == id,
              orderBy: x => x.OrderBy(y => y.CreateDate),
-             include: x => x.Include(x => x.FollowUsers));
+             include: x => x.Include(x => x.FollowUser));
 
            return followingList;
         }

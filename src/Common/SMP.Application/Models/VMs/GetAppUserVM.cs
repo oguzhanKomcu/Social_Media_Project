@@ -8,7 +8,7 @@ namespace SMP.Application.Models.VMs
 {
     public class GetAppUserVM
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }

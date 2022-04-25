@@ -8,15 +8,13 @@ using System.Threading.Tasks;
 
 namespace SMP.Application.Models.DTOs
 {
-    internal class UpdatePostScore
+    public class PostSharingDTO
     {
-        public int Id { get; set; }
         public int Post_Id { get; set; }
 
         public int User_Id { get; set; }
 
-        public decimal Score { get; set; }
-        public DateTime UpdateDate => DateTime.Now;
-        public Status Status => Status.Modified;
+        public DateTime CreateDate => DateTime.Now;
+        public Status Status => Status.Active;
     }
 }

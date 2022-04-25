@@ -28,10 +28,10 @@ namespace SMP.Domain.Models.Entities
         public DateTime? DeleteDate { get ; set; }
         public Status Status { get ; set; }
 
-        [InverseProperty("FollowUsers")]
+        [InverseProperty("FollowUser")]
         public List<Follower> Follow { get; set; }
 
-        [InverseProperty("FollowingUsers")]
+        [InverseProperty("FollowingUser")]
         public List<Follower> Following { get; set; }
 
       
