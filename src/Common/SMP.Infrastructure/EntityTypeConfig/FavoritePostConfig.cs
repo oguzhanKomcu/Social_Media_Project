@@ -12,6 +12,7 @@ namespace SMP.Infrastructure.EntityTypeConfig
     {
         public override void Configure(EntityTypeBuilder<Favorite_Post> builder)
         {
+            
             builder.HasKey(x => x.Id);
           
             builder.HasOne(x => x.User)

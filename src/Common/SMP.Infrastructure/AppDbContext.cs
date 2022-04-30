@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SMP.Domain.Models.Entities;
+using SMP.Infrastructure.EntityTypeConfig;
+using SMP.Infrastructure.SeedData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,7 @@ namespace SMP.Infrastructure
         public DbSet<Follower> Followers { get; set; }
         public DbSet<Hashtag> Hashtags { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Page> Pages { get; set; }
         public DbSet<Post_Comment> Post_Comments { get; set; }
         public DbSet<Post_Score> Post_Scores { get; set; }
         public DbSet<PostSharing> PostSharings { get; set; }
@@ -30,23 +33,23 @@ namespace SMP.Infrastructure
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
-            builder.Entity<Follower>()
-            .HasOne(c => c.FollowUser)
-           .WithMany(c => c.Follow)
-           .HasForeignKey(x => x.Follow_User_Id)
-            .OnDelete(DeleteBehavior.NoAction);
-            
 
-            
-            builder.Entity<Follower>()
-           .HasOne(c => c.FollowingUser)
-            .WithMany(c => c.Following)
-            .HasForeignKey(x => x.Following_UserId)            
-           .OnDelete(DeleteBehavior.NoAction);
+            builder.ApplyConfiguration(new AppUserConfig());
+            builder.ApplyConfiguration(new FavoritePostConfig());
+            builder.ApplyConfiguration(new FollowerConfig());
+            builder.ApplyConfiguration(new PageConfig());
+            builder.ApplyConfiguration(new HashtagConfig());
+            builder.ApplyConfiguration(new PageConfig());
+            builder.ApplyConfiguration(new PostCommentConfig());
+            builder.ApplyConfiguration(new PostConfig());
+            builder.ApplyConfiguration(new PostScroreConfig());
+            builder.ApplyConfiguration(new PostSharingConfig());
+
+            builder.ApplyConfiguration(new PageSeeding());
 
             base.OnModelCreating(builder);
         }
-
+      
 
 
     }

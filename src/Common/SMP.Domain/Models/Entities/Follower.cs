@@ -14,9 +14,13 @@ namespace SMP.Domain.Models.Entities
         public int Id { get; set; }
         
          public int Follow_User_Id { get; set; }
+        
+        
         [ForeignKey("Follow_User_Id")]
         [InverseProperty("FollowUsers")]
         public AppUser FollowUser { get; set; }
+        
+        
         [ForeignKey("Follow_User_Id")]
         [InverseProperty("FollowingUsers")]
         public int Following_UserId { get; set; }
