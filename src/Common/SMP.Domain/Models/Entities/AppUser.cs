@@ -14,7 +14,16 @@ namespace SMP.Domain.Models.Entities
 {
     public class AppUser : IdentityUser, IBaseEntity
     {
-
+        public AppUser()
+        {
+            Posts = new List<Post>();
+            PostSharings = new List<PostSharing>();
+            Post_Scores = new List<Post_Score>();
+            Favorite_Posts = new List<Favorite_Post>();
+            Followers = new List<Follower>();
+            Followings = new List<Follower>();
+            Post_Comments = new List<Post_Comment>();
+        }
 
         public string Location { get; set; }    
         public string ImagePath { get; set; }
@@ -27,14 +36,15 @@ namespace SMP.Domain.Models.Entities
         public DateTime? UpdateDate { get; set ; }
         public DateTime? DeleteDate { get ; set; }
         public Status Status { get ; set; }
+        
+        [InverseProperty("Follower")]
+        public List<Follower> Followers { get; set; }
 
-        [InverseProperty("FollowUser")]
-        public List<Follower> Follow { get; set; }
+        [InverseProperty("Following")]
 
-        [InverseProperty("FollowingUser")]
-        public List<Follower> Following { get; set; }
+        public List<Follower> Followings { get; set; }
 
-      
+
         public List<Post_Score> Post_Scores { get; set; }
         public List<Favorite_Post> Favorite_Posts { get; set; }
         public List<Post_Comment> Post_Comments { get; set; }

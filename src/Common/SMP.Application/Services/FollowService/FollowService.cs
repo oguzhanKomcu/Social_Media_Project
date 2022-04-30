@@ -49,14 +49,14 @@ namespace SMP.Application.Services.FollowService
                  selector: x=>  new FollwersVm
                  {
                      Id = x.Id,
-                     FollowerUserName = x.FollowingUser.UserName,
-                     FollowerImage = x.FollowingUser.ImagePath,
+                     FollowerUserName = x.Following.UserName,
+                     FollowerImage = x.Following.ImagePath,
                     
 
                  },
-                 expression: x => x.Status == Status.Active && x.Following_UserId == id,
+                 expression: x => x.Status == Status.Active && x.FollowingId == id,
                  orderBy: x => x.OrderBy(y => y.CreateDate),
-                 include: x => x.Include(x => x.FollowUser));
+                 include: x => x.Include(x => x.Follow));
 
             return followersList;
 
@@ -73,23 +73,23 @@ namespace SMP.Application.Services.FollowService
              selector: x => new FollowingVM
              {
                  Id = x.Id,
-                 FollowUpUserName = x.FollowUser.UserName,
-                 FollowUpImage = x.FollowUser.ImagePath,
+                 FollowUpUserName = x.Follow.UserName,
+                 FollowUpImage = x.Follow.ImagePath,
 
 
 
 
              },
-             expression: x => x.Status == Status.Active && x.Follow_User_Id == id,
+             expression: x => x.Status == Status.Active && x.FollowerId == id,
              orderBy: x => x.OrderBy(y => y.CreateDate),
-             include: x => x.Include(x => x.FollowUser));
+             include: x => x.Include(x => x.Follow));
 
            return followingList;
         }
 
         public async  Task<bool> IsFollowExsist(UpdateFollowerDTO model)
         {
-            bool isExist = await _unitOfWork.FollowerRepository.Any(x => x.Following_UserId == model.Following_UserId && x.Follow_User_Id == model.Follow_User_Id);
+            bool isExist = await _unitOfWork.FollowerRepository.Any(x => x.FollowingId == model.Following_UserId && x.FollowerId == model.Follow_User_Id);
             return isExist;
         }
     }
