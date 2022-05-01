@@ -31,8 +31,8 @@ namespace SMP.Application.AutoMapper
 
 
             
-            CreateMap<Favorite_Post, CreateFavoritePost>().ReverseMap();
-            CreateMap<Favorite_Post, FavoritePostVM>().ReverseMap();
+            CreateMap<FavoritePost, CreateFavoritePost>().ReverseMap();
+            CreateMap<FavoritePost, FavoritePostVM>().ReverseMap();
 
             CreateMap<Follower, CreateFollowerDTO>().ReverseMap();
             CreateMap<Follower, FollwersVm>().ReverseMap();

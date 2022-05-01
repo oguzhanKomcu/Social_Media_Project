@@ -27,7 +27,7 @@ namespace SMP.Application.Services.FavoritePostService
 
         public async Task Create(CreateFavoritePost model)
         {
-            var favoritePost = _mapper.Map<Favorite_Post>(model);
+            var favoritePost = _mapper.Map<FavoritePost>(model);
             await _unitOfWork.FavoritePostRepository.Create(favoritePost);
             await _unitOfWork.Commit();
 
@@ -48,8 +48,8 @@ namespace SMP.Application.Services.FavoritePostService
                 selector: x=> new FavoritePostVM
                 {
                     Id = x.Id,
-                    User_Id = x.User_Id,
-                    Post_Id = x.Post_Id,
+                    User_Id = x.UserId,
+                    Post_Id = x.PostId,
                     
                 },
                 expression: x => x.Id == id && x.Status == Status.Active);
@@ -68,8 +68,8 @@ namespace SMP.Application.Services.FavoritePostService
                 selector: x => new FavoritePostVM
                 {
                     Id = x.Id,
-                    User_Id = x.User_Id,
-                    Post_Id = x.Post_Id,
+                    User_Id = x.UserId,
+                    Post_Id = x.PostId,
 
 
                 },

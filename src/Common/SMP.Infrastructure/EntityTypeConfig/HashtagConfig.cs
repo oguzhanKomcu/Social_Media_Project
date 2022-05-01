@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SMP.Domain.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace SMP.Infrastructure.EntityTypeConfig
 
             builder.HasOne(x => x.Post)
                 .WithMany(x => x.Hashtags)
-                .HasForeignKey(x => x.Post_Id);
+                .HasForeignKey(x => x.PostId).OnDelete(DeleteBehavior.Restrict); 
 
 
             builder.Property(x => x.Text).IsRequired(true);

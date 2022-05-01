@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SMP.Domain.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -22,12 +23,12 @@ namespace SMP.Infrastructure.EntityTypeConfig
 
             builder.HasOne(x => x.User)
             .WithMany(x => x.PostSharings)
-            .HasForeignKey(x => x.User_Id);
+            .HasForeignKey(x => x.UserId);
 
 
             builder.HasOne(x => x.Post)
             .WithMany(x => x.PostSharings)
-            .HasForeignKey(x => x.Post_Id);
+            .HasForeignKey(x => x.PostId).OnDelete(DeleteBehavior.Restrict); 
 
             base.Configure(builder);
         }

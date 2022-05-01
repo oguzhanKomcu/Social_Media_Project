@@ -48,8 +48,8 @@ namespace SMP.Application.Services.PostSharingService
                 selector: x => new PostandPostSharingVm
                 {
                     Id = x.Id,
-                    Post_Id = x.Post_Id,
-                    User_Id = x.User_Id,
+                    Post_Id = x.PostId,
+                    User_Id = x.UserId,
                     Total_Score = x.Post.Total_Score.ToString(),
                     Total_Comment = x.Post.Total_Comment.ToString(),
                     ImagePath = x.Post.ImagePath,
@@ -72,7 +72,7 @@ namespace SMP.Application.Services.PostSharingService
         public async Task<bool> IsRegisteredPostExsist(int postId)
         {
 
-            bool isExist = await _unitOfWork.HashtagRepository.Any(x => x.Post_Id == postId);
+            bool isExist = await _unitOfWork.HashtagRepository.Any(x => x.PostId == postId);
             return isExist;
         }
     }

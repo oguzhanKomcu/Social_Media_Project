@@ -17,7 +17,6 @@ namespace SMP.Infrastructure.EntityTypeConfig
             builder.Property(x => x.UserName).IsRequired();
             builder.Property(x => x.ImagePath).IsRequired(false);
 
-            
 
 
 

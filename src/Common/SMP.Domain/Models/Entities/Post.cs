@@ -18,7 +18,7 @@ namespace SMP.Domain.Models.Entities
 
         public int Total_Comment { get; set; }
         public string? ImagePath { get; set; }
-        public IFormFile? UploadPath { get; set; }
+
         public string? Description { get; set; }
 
         public DateTime CreateDate { get; set; }
@@ -26,11 +26,11 @@ namespace SMP.Domain.Models.Entities
         public DateTime? DeleteDate { get; set; }
         public Status Status { get; set; }
 
-        public List<Post_Comment>? Post_Comments { get; set; }
-        public List<Post_Score>? Post_Scores { get; set; }
-        public List<Hashtag>? Hashtags { get; set; }
-        public List<Favorite_Post>? Favorite_Posts { get; set; }
-        public List<PostSharing>? PostSharings { get; set; }
+        public List<Post_Comment> Post_Comments { get; set; }
+        public List<Post_Score> Post_Scores { get; set; }
+        public List<Hashtag> Hashtags { get; set; }
+        public List<FavoritePost> Favorite_Posts { get; set; }
+        public List<PostSharing> PostSharings { get; set; }
 
 
 

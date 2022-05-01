@@ -11,7 +11,7 @@ namespace SMP.Application.Models.VMs
         public int Id { get; set; }
         public int Post_Id { get; set; }
 
-        public int User_Id { get; set; }
+        public string User_Id { get; set; }
         public string UserName { get; set; }
         public string Text { get; set; }
     }

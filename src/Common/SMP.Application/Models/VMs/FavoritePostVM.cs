@@ -10,10 +10,10 @@ namespace SMP.Application.Models.VMs
     public  class FavoritePostVM
     {
         public int Id { get; set; }
-        public int User_Id { get; set; }
+        public string User_Id { get; set; }
         public AppUser AppUser { get; set; }
 
-        public int Post_Id { get; set; }
+        public int? Post_Id { get; set; }
         public Post Post { get; set; }
         public string Total_Score { get; set; }
         public string Total_Comment { get; set; }

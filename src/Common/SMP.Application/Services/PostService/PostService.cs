@@ -79,8 +79,8 @@ namespace SMP.Application.Services.PostService
                 selector: x => new PostCommentVM
                 {
                     Id = x.Id,
-                    Post_Id = x.Post_Id,
-                    User_Id = x.User_Id,
+                    Post_Id = x.PostId,
+                    User_Id = x.UserId,
                     Text = x.Text,
                 },
                 expression: x => x.Status != Status.Passive,
@@ -90,8 +90,8 @@ namespace SMP.Application.Services.PostService
                 selector: x=> new PostScoreVM
                 {
                     Id = x.Id,
-                    Post_Id = x.Post_Id,
-                    User_Id = x.User_Id,
+                    Post_Id = x.PostId,
+                    User_Id = x.UserId,
                     Score = x.Score,
 
                 },

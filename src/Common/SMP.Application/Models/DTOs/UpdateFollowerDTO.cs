@@ -12,11 +12,11 @@ namespace SMP.Application.Models.DTOs
     {
         public int Id { get; set; }
 
-        public int Follow_User_Id { get; set; }
+        public string Follow_User_Id { get; set; }
 
 
 
-        public int Following_UserId { get; set; }
+        public string Following_UserId { get; set; }
 
 
 

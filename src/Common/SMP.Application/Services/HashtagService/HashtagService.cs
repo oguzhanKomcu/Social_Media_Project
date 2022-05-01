@@ -48,7 +48,7 @@ namespace SMP.Application.Services.HashtagService
                 selector: x => new HashtagVM
                 {
                     Id = id,
-                    Post_Id = x.Post_Id,
+                    Post_Id = x.PostId,
                     Text = x.Text,
 
                 },
@@ -64,7 +64,7 @@ namespace SMP.Application.Services.HashtagService
                 selector: x => new HashtagVM
                 {
                     Id = x.Id,
-                    Post_Id = x.Post_Id,
+                    Post_Id = x.PostId,
                     Text = x.Text,
 
                 },

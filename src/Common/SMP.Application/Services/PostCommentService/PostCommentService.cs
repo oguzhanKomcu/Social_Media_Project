@@ -45,11 +45,11 @@ namespace SMP.Application.Services.PostCommentService
                 {
                     Id = x.Id,
                     
-                    User_Id = x.User_Id,
+                    User_Id = x.UserId,
                     UserName = x.User.UserName,
                     Text = x.Text,
                 },
-                expression: x => x.Status != Status.Passive && x.Post_Id == id,   
+                expression: x => x.Status != Status.Passive && x.PostId == id,   
         orderBy: x => x.OrderBy(x => x.CreateDate));
 
             return categories;

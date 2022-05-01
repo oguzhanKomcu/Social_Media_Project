@@ -43,7 +43,7 @@ namespace SMP.Application.Services.FollowService
 
  
 
-        public async Task<List<FollwersVm>> GetFollowers(int id)
+        public async Task<List<FollwersVm>> GetFollowers(string id)
         {
             var followersList = await _unitOfWork.FollowerRepository.GetFilteredList(
                  selector: x=>  new FollwersVm
@@ -54,7 +54,7 @@ namespace SMP.Application.Services.FollowService
                     
 
                  },
-                 expression: x => x.Status == Status.Active && x.FollowingId == id,
+                 expression: x => x.Status == Status.Active && x.Following.Id == id,
                  orderBy: x => x.OrderBy(y => y.CreateDate),
                  include: x => x.Include(x => x.Follow));
 
@@ -66,7 +66,7 @@ namespace SMP.Application.Services.FollowService
            
         
 
-        public  async Task<List<FollowingVM>> GetFollowings(int id)
+        public  async Task<List<FollowingVM>> GetFollowings(string id)
         {
 
           var followingList = await _unitOfWork.FollowerRepository.GetFilteredList(
@@ -80,7 +80,7 @@ namespace SMP.Application.Services.FollowService
 
 
              },
-             expression: x => x.Status == Status.Active && x.FollowerId == id,
+             expression: x => x.Status == Status.Active && x.Follow.Id == id,
              orderBy: x => x.OrderBy(y => y.CreateDate),
              include: x => x.Include(x => x.Follow));
 
@@ -89,7 +89,7 @@ namespace SMP.Application.Services.FollowService
 
         public async  Task<bool> IsFollowExsist(UpdateFollowerDTO model)
         {
-            bool isExist = await _unitOfWork.FollowerRepository.Any(x => x.FollowingId == model.Following_UserId && x.FollowerId == model.Follow_User_Id);
+            bool isExist = await _unitOfWork.FollowerRepository.Any(x => x.Following.Id == model.Following_UserId && x.Follow.Id== model.Follow_User_Id);
             return isExist;
         }
     }

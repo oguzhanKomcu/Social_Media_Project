@@ -13,8 +13,8 @@ namespace SMP.Application.Services.FollowService
         Task Create(CreateFollowerDTO model);
         Task Delete(int id);
 
-        Task<List<FollwersVm>> GetFollowers(int id);
-        Task<List<FollowingVM>> GetFollowings(int id);
+        Task<List<FollwersVm>> GetFollowers(string id);
+        Task<List<FollowingVM>> GetFollowings(string id);
         Task<bool> IsFollowExsist(UpdateFollowerDTO model);
 
     }

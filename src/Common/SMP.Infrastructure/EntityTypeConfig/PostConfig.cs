@@ -19,7 +19,10 @@ namespace SMP.Infrastructure.EntityTypeConfig
             //entityfreamwork tutoriale bak öğren 
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Total_Score).IsRequired();
+            builder.Property(x => x.Total_Score)
+                 .HasPrecision(18, 2)
+                 .HasConversion<decimal>()
+                 .IsRequired();
             builder.Property(x => x.Total_Comment).IsRequired();
             builder.Property(x => x.ImagePath).IsRequired();
             builder.Property(x => x.Description).IsRequired();

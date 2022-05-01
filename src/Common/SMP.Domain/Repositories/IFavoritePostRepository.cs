@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SMP.Domain.Repositories
 {
-    public  interface  IFavoritePostRepository : IBaseRepository<Favorite_Post>
+    public  interface  IFavoritePostRepository : IBaseRepository<FavoritePost>
     {
     }
 }

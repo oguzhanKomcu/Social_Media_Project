@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SMP.Infrastructure.Repositories
 {
-    public class FavoritePostRepository : BaseRepository<Favorite_Post>, IFavoritePostRepository
+    public class FavoritePostRepository : BaseRepository<FavoritePost>, IFavoritePostRepository
     {
         public FavoritePostRepository(AppDbContext context) : base(context)
         {

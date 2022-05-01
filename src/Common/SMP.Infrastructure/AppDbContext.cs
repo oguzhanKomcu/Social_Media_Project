@@ -20,7 +20,7 @@ namespace SMP.Infrastructure
 
 
         public DbSet<AppUser> AppUsers { get; set; }    
-        public DbSet<Favorite_Post> Favorite_Posts { get; set; }
+        public DbSet<FavoritePost> FavoritePosts { get; set; }
         public DbSet<Follower> Followers { get; set; }
         public DbSet<Hashtag> Hashtags { get; set; }
         public DbSet<Post> Posts { get; set; }
