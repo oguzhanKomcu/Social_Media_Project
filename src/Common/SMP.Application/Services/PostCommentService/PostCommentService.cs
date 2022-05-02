@@ -50,7 +50,7 @@ namespace SMP.Application.Services.PostCommentService
                     Text = x.Text,
                 },
                 expression: x => x.Status != Status.Passive && x.PostId == id,   
-        orderBy: x => x.OrderBy(x => x.CreateDate));
+        orderBy: x => x.OrderByDescending(x => x.CreateDate));
 
             return categories;
         }

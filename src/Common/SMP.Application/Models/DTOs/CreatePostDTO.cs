@@ -11,7 +11,7 @@ namespace SMP.Application.Models.DTOs
 {
     public  class CreatePostDTO
     {
-        public int User_Id { get; set; }
+        public string User_Id { get; set; }
         public string? Total_Score { get; set; }
         public string? Total_Comment { get; set; }
         public IFormFile? UploadPath { get; set; }

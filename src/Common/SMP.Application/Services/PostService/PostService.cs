@@ -103,7 +103,7 @@ namespace SMP.Application.Services.PostService
             return model;
         }
 
-        public async Task<List<GetPostVM>> GetPosts()
+        public async Task<List<GetPostVM>> UserGetPosts(string id)
         {
             var posts = await _unitOfWork.PostRepository.GetFilteredList(
                 selector: x => new GetPostVM
@@ -120,8 +120,9 @@ namespace SMP.Application.Services.PostService
 
 
                 },
-                expression: x => x.Status == Status.Active,
-                orderBy: x => x.OrderBy(y => y.CreateDate),
+                expression: x => x.Status == Status.Active ,
+
+                orderBy: x => x.OrderByDescending(y => y.CreateDate),
                 include: x => x.Include(x => x.AppUser).Include(x => x.Post_Comments).Include(x => x.Post_Scores)
                 );
 
@@ -146,7 +147,7 @@ namespace SMP.Application.Services.PostService
                 },
                 expression: x => x.Status == Status.Active,
                 orderBy: x => x.OrderByDescending(x => x.CreateDate),
-                include: x => x.Include(x => x.AppUser).Include(x => x.Post_Comments).Include(x => x.Post_Scores));
+                include: x => x.Include(x => x.AppUser).Include(x => x.Post_Comments).Include(x => x.Post_Scores)); 
 
             return posts;
 
