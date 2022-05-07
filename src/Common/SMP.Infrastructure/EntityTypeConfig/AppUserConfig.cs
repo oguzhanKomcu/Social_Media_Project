@@ -16,6 +16,11 @@ namespace SMP.Infrastructure.EntityTypeConfig
             builder.HasKey(x => x.Id);
             builder.Property(x => x.UserName).IsRequired();
             builder.Property(x => x.ImagePath).IsRequired(false);
+            builder.Property(x => x.Biyography).IsRequired(false);
+            builder.Property(x => x.User_Score).IsRequired(false);
+            builder.Property(x => x.Follower_Count).IsRequired(false);
+            builder.Property(x => x.Following_Count).IsRequired(false);
+            builder.Property(x => x.Location).IsRequired(false);
 
 
 

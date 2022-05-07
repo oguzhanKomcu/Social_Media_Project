@@ -6,3 +6,119 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+
+
+@*@model LoginDTO
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Register</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+
+	<div class="container mt-4">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Register</h4>
+			</div>
+			<form asp-action="LogIn" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+				<div class="card-body">
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+					<div class="form-group">
+						<label asp-for="UserName"></label>
+						<input asp-for="UserName" class="form-control" placeholder="User Name" />
+					</div>
+					<div class="form-group">
+						<label asp-for="Password"></label>
+						<input asp-for="Password" class="form-control" placeholder="Password" />
+					</div>
+				</div>
+				<div class="card-footer">
+					<input type="submit" value="Log In" class="btn btn-success btn-sm float-end mr-2 ml-2" />
+					<a asp-action="Register" class="btn btn-primary btn-sm float-end mr-2 ml-2">Register</a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+*@
+
+@*@model RegisterDTO
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+</head>
+<body>
+</body>
+</html><!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Register</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+
+	<div class="container mt-4">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Register</h4>
+			</div>
+			<form asp-action="Register">
+				<div class="card-body">
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+					<div class="form-control">
+						<label asp-for="UserName"></label>
+						<input asp-for="UserName" class="form-control" placeholder="User Name" />
+					</div>
+					<div class="form-control">
+						<label asp-for="Email"></label>
+						<input asp-for="Email" class="form-control" placeholder="Email" />
+					</div>
+					<div class="form-control">
+						<label asp-for="Password"></label>
+						<input asp-for="Password" class="form-control" placeholder="Password" />
+					</div>
+					<div class="form-control">
+						<label asp-for="ConfirmPassword"></label>
+						<input asp-for="ConfirmPassword" class="form-control" placeholder="ConfirmPassword" />
+					</div>
+				</div>
+				<div class="card-footer">
+					<input type="submit" value="Register" class="btn btn-success btn-sm float-end mr-2 ml-2" />
+					<a asp-action="LogIn" class="btn btn-primary btn-sm float-end mr-2 ml-2">Log In</a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+
+*@

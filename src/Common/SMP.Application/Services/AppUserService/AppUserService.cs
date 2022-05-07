@@ -8,7 +8,6 @@ using SMP.Domain.Enums;
 using SMP.Domain.Models.Entities;
 using SMP.Domain.UoW;
 
-
 namespace SMP.Application.Services.AppUserService
 {
     public class AppUserService : IAppUserService
@@ -28,7 +27,7 @@ namespace SMP.Application.Services.AppUserService
             _signInManager = signInManager;
         }
 
-        public async Task<UpdateProfilDTO> GetById(string id)
+        public async Task<GetAppUserVM> GetById(string id)
         {
             var user = await _unitOfWork.UserRepository.GetFilteredFirstOrDefault(
 
@@ -37,15 +36,36 @@ namespace SMP.Application.Services.AppUserService
                     Id = x.Id,
                     UserName = x.UserName,
                     Email = x.Email,
-
+                    Location = x.Location,
+                    ImagePath = x.ImagePath,
+                    Biyography = x.Biyography,
+                    User_Score = x.User_Score,
+                    Follower_Count = x.Follower_Count,
+                    Following_Count = x.Following_Count,
                 },
 
             expression: x => x.Id == id && x.Status != Status.Passive);
 
-            var model = _mapper.Map<UpdateProfilDTO>(user);
+            var model = _mapper.Map<GetAppUserVM>(user);
 
             return model;
 
+        }
+
+        public async Task<List<GetAppUserVM>> GetUsers()
+        {
+            var categories = await _unitOfWork.UserRepository.GetFilteredList(
+               selector: x => new GetAppUserVM
+               {
+                   Id = x.Id,
+                   UserName = x.UserName,
+                   Password = x.PasswordHash,
+                   Email = x.Email,
+               },
+               expression: x => x.Status != Domain.Enums.Status.Passive,
+               orderBy: x => x.OrderBy(x => x.UserName));
+
+            return categories;
         }
 
         public async Task<SignInResult> Login(LoginDTO model)
@@ -62,15 +82,15 @@ namespace SMP.Application.Services.AppUserService
         public async Task<IdentityResult> Register(RegisterDTO model)
         {
             var user = _mapper.Map<AppUser>(model);
+
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
-                await _signInManager.SignInAsync(user, isPersistent: false); 
+                await _signInManager.SignInAsync(user, isPersistent: false);
             }
 
             return result;
-
 
         }
 
@@ -109,6 +129,30 @@ namespace SMP.Application.Services.AppUserService
 
             }
 
+        }
+
+        public async Task<GetAppUserVM> UserDetails(string id)
+        {
+            var user = await _unitOfWork.UserRepository.GetFilteredFirstOrDefault(
+
+                 selector: x => new GetAppUserVM
+                 {
+                     Id = x.Id,
+                     UserName = x.UserName,
+                     Email = x.Email,
+                     Location = x.Location,
+                     ImagePath = x.ImagePath,
+                     Biyography = x.Biyography,
+                     User_Score = x.User_Score,
+                     Follower_Count = x.Follower_Count,
+                     Following_Count = x.Following_Count,
+                 },
+
+             expression: x => x.Id == id && x.Status != Status.Passive);
+
+            var model = _mapper.Map<GetAppUserVM>(user);
+
+            return model;
         }
     }
 }

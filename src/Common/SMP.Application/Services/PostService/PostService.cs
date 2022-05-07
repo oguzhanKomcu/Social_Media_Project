@@ -120,7 +120,7 @@ namespace SMP.Application.Services.PostService
 
 
                 },
-                expression: x => x.Status == Status.Active ,
+                expression: x => x.User_Id == id && x.Status != Status.Passive,
 
                 orderBy: x => x.OrderByDescending(y => y.CreateDate),
                 include: x => x.Include(x => x.AppUser).Include(x => x.Post_Comments).Include(x => x.Post_Scores)

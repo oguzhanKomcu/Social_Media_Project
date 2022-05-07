@@ -164,7 +164,6 @@ namespace SMP.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Biyography")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -185,18 +184,15 @@ namespace SMP.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Follower_Count")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Following_Count")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -240,7 +236,6 @@ namespace SMP.Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("User_Score")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -404,7 +399,7 @@ namespace SMP.Infrastructure.Migrations
                         {
                             Id = 1,
                             Content = "Home",
-                            CreateDate = new DateTime(2022, 5, 1, 14, 29, 55, 845, DateTimeKind.Local).AddTicks(3817),
+                            CreateDate = new DateTime(2022, 5, 4, 12, 9, 51, 89, DateTimeKind.Local).AddTicks(2551),
                             Slug = "home",
                             Status = 1,
                             Title = "Home"
@@ -413,7 +408,7 @@ namespace SMP.Infrastructure.Migrations
                         {
                             Id = 2,
                             Content = "Profil",
-                            CreateDate = new DateTime(2022, 5, 1, 14, 29, 55, 845, DateTimeKind.Local).AddTicks(3830),
+                            CreateDate = new DateTime(2022, 5, 4, 12, 9, 51, 89, DateTimeKind.Local).AddTicks(2585),
                             Slug = "profil",
                             Status = 1,
                             Title = "Profil"
@@ -422,7 +417,7 @@ namespace SMP.Infrastructure.Migrations
                         {
                             Id = 3,
                             Content = "Favorite Post",
-                            CreateDate = new DateTime(2022, 5, 1, 14, 29, 55, 845, DateTimeKind.Local).AddTicks(3833),
+                            CreateDate = new DateTime(2022, 5, 4, 12, 9, 51, 89, DateTimeKind.Local).AddTicks(2589),
                             Slug = "favorite-post",
                             Status = 1,
                             Title = "Favorite Post"

@@ -46,6 +46,11 @@ namespace SMP.Application.AutoMapper
            CreateMap<Post_Comment, PostCommentVM>().ReverseMap();
            CreateMap<UpdatePostCommentDTO, PostCommentVM>().ReverseMap();
 
+
+            CreateMap<AppUser, RegisterDTO>().ReverseMap();
+            CreateMap<AppUser, LoginDTO>().ReverseMap();
+            CreateMap<AppUser, GetAppUserVM>().ReverseMap();
+            CreateMap<UpdateProfilDTO, GetAppUserVM>().ReverseMap();
         }
     }
     

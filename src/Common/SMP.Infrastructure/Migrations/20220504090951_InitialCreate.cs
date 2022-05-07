@@ -28,12 +28,12 @@ namespace SMP.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Biyography = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    User_Score = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Follower_Count = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Following_Count = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Biyography = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    User_Score = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Follower_Count = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Following_Count = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -389,17 +389,17 @@ namespace SMP.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "Pages",
                 columns: new[] { "Id", "Content", "CreateDate", "DeleteDate", "Slug", "Status", "Title", "UpdateDate" },
-                values: new object[] { 1, "Home", new DateTime(2022, 5, 1, 14, 29, 55, 845, DateTimeKind.Local).AddTicks(3817), null, "home", 1, "Home", null });
+                values: new object[] { 1, "Home", new DateTime(2022, 5, 4, 12, 9, 51, 89, DateTimeKind.Local).AddTicks(2551), null, "home", 1, "Home", null });
 
             migrationBuilder.InsertData(
                 table: "Pages",
                 columns: new[] { "Id", "Content", "CreateDate", "DeleteDate", "Slug", "Status", "Title", "UpdateDate" },
-                values: new object[] { 2, "Profil", new DateTime(2022, 5, 1, 14, 29, 55, 845, DateTimeKind.Local).AddTicks(3830), null, "profil", 1, "Profil", null });
+                values: new object[] { 2, "Profil", new DateTime(2022, 5, 4, 12, 9, 51, 89, DateTimeKind.Local).AddTicks(2585), null, "profil", 1, "Profil", null });
 
             migrationBuilder.InsertData(
                 table: "Pages",
                 columns: new[] { "Id", "Content", "CreateDate", "DeleteDate", "Slug", "Status", "Title", "UpdateDate" },
-                values: new object[] { 3, "Favorite Post", new DateTime(2022, 5, 1, 14, 29, 55, 845, DateTimeKind.Local).AddTicks(3833), null, "favorite-post", 1, "Favorite Post", null });
+                values: new object[] { 3, "Favorite Post", new DateTime(2022, 5, 4, 12, 9, 51, 89, DateTimeKind.Local).AddTicks(2589), null, "favorite-post", 1, "Favorite Post", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

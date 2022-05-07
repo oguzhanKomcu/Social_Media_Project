@@ -6,18 +6,22 @@ using SMP.Application.Services.AppUserService;
 
 namespace SMP.Presantation.Controllers
 {
-    public class AccountController : Controller
+    public class ProfileController : Controller
     {
 
         private readonly IAppUserService _appUserService;
-        public AccountController(IAppUserService appUserService)
+        public ProfileController(IAppUserService appUserService)
         {
             _appUserService = appUserService;
         }
 
-  
+        public async Task<IActionResult> Details(string id)
+        {
+            var authors = await _appUserService.UserDetails(id);
+            return View(authors);
+        }
 
- 
+
         public IActionResult Register()//LOYOUT NULL OLUCAK DİKAATT^'!!
         {
             if (User.Identity.IsAuthenticated) //user sistem tarafından geldi ..//kullanıcı hali hazırda sisteme authenticate olmuşsa
@@ -35,7 +39,7 @@ namespace SMP.Presantation.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterDTO model)//LOYOUT NULL OLUCAK DİKAATT^'!!
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid == true)
             {
                 var result = await _appUserService.Register(model);
 
@@ -155,7 +159,17 @@ namespace SMP.Presantation.Controllers
 
 
         }
+        
+        [HttpGet]
+        public async Task<IActionResult> Users()
+        {
+
+            await _appUserService.GetUsers();
+            return View(await _appUserService.GetUsers());
 
 
+
+
+        }
     }
 }

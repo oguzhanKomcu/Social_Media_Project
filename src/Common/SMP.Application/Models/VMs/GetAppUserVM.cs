@@ -20,5 +20,9 @@ namespace SMP.Application.Models.VMs
         public string Follower_Count { get; set; }
         public string Following_Count { get; set; }
 
+
+        
+
+
     }
 }
