@@ -17,10 +17,18 @@ namespace SMP.Presantation.Controllers
 
         public async Task<IActionResult> Details(string id)
         {
-            var authors = await _appUserService.UserDetails(id);
-            return View(authors);
+            var users = await _appUserService.UserDetails(id);
+            return View(users);
         }
 
+        public async Task<IActionResult> UserProfile()
+        {
+             
+            var user = await _appUserService.UserDetails(User.GetUserId());
+            return View(user);
+        }
+
+        
 
         public IActionResult Register()//LOYOUT NULL OLUCAK DİKAATT^'!!
         {

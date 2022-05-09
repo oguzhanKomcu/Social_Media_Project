@@ -15,10 +15,10 @@ namespace SMP.Application.AutoMapper
         public Mapping()
         {
 
-            CreateMap<Post, CreatePostDTO>().ReverseMap();
-            CreateMap<Post, UpdatePostDTO>().ReverseMap();
+            CreateMap<Post, PostDTO>().ReverseMap();
+
             CreateMap<Post, GetPostVM>().ReverseMap();
-            CreateMap<UpdatePostDTO, GetPostVM>().ReverseMap();
+            CreateMap<PostDTO, GetPostVM>().ReverseMap();
 
             CreateMap<Page, CreatePageDTO>().ReverseMap();
             CreateMap<Page, UpdatePageDTO>().ReverseMap();

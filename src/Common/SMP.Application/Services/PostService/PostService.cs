@@ -29,7 +29,7 @@ namespace SMP.Application.Services.PostService
             _mapper = mapper;
         }
 
-        public async Task Create(CreatePostDTO model)
+        public async Task Create(PostDTO model)
         {
             var product = _mapper.Map<Post>(model);
 
@@ -56,7 +56,7 @@ namespace SMP.Application.Services.PostService
             await _unitOfWork.Commit();
         }
 
-        public async Task<UpdatePostDTO> GetById(int id)
+        public async Task<PostDTO> GetById(int id)
         {
             var post = await _unitOfWork.PostRepository.GetFilteredFirstOrDefault(
                 selector: x => new GetPostVM
@@ -74,7 +74,7 @@ namespace SMP.Application.Services.PostService
                 expression: x => x.Id == id && x.Status == Status.Active
                 );
 
-            var model = _mapper.Map<UpdatePostDTO>(post);
+            var model = _mapper.Map<PostDTO>(post);
             model.Post_Comments = await _unitOfWork.PostCommentRepository.GetFilteredList(
                 selector: x => new PostCommentVM
                 {
@@ -155,7 +155,7 @@ namespace SMP.Application.Services.PostService
 
 
 
-        public async Task Update(UpdatePostDTO model)
+        public async Task Update(PostDTO model)
         {
 
             var product = _mapper.Map<Post>(model);

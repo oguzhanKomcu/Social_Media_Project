@@ -22,7 +22,7 @@ namespace SMP.Presantation.Areas.Admin.Controllers
         
         
         [HttpPost]
-        public async Task<IActionResult> CreatePost(CreatePostDTO model)
+        public async Task<IActionResult> CreatePost(PostDTO model)
         {
             if (ModelState.IsValid)
             {

@@ -10,13 +10,13 @@ namespace SMP.Application.Services.PostService
 {
     public interface IPostService
     {
-        Task Create(CreatePostDTO model);
+        Task Create(PostDTO model);
         
-        Task Update(UpdatePostDTO model);
+        Task Update(PostDTO model);
 
         Task Delete(int id);
 
-        Task<UpdatePostDTO> GetById(int id);
+        Task<PostDTO> GetById(int id);
 
         Task<List<GetPostVM>> UserGetPosts(string id);
       

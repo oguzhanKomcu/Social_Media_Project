@@ -19,7 +19,7 @@ namespace SMP.Presantation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreatePostDTO model)
+        public async Task<IActionResult> Create(PostDTO model)
         {
             if (ModelState.IsValid)
             {
@@ -52,10 +52,8 @@ namespace SMP.Presantation.Controllers
         [HttpGet]
         public async Task<IActionResult> AllPosts()
         {
-           
-            
-                var model = await _postService.GetPostsForMembers();
-                return View(model);
+           var model = await _postService.GetPostsForMembers();
+           return View(model);
          
 
 
@@ -68,7 +66,7 @@ namespace SMP.Presantation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(UpdatePostDTO model)
+        public async Task<IActionResult> Update(PostDTO model)
         {
             if (ModelState.IsValid)
             {
@@ -84,6 +82,12 @@ namespace SMP.Presantation.Controllers
                 return View(model);
             }
 
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _postService.Delete(id);
+            return RedirectToAction("List");
         }
 
 

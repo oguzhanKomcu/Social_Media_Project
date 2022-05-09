@@ -1,35 +1,35 @@
-﻿@model CreatePostDTO
+﻿@model PostDTO
 @{
     ViewData["Title"] = "Create";
 }
 
+<div class="row ml-2 mt-2 mr-2">
+    <div class="col-sm-6">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Create Post</h3>
+            </div>
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="UploadPath"></label>
+                        <input class="form-control" type="file" asp-for="UploadPath">
+                        <span asp-validation-for="UploadPath" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description"></label>
+                        <input class="form-control" placeholder="Content" asp-for="Description">
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
 
 
-<div class="col-sm-6">
-    <div class="card">
-        <div class="card-header">
-            <h4 class="card-title">
-                Create Page
-            </h4>
+                </div>
+                <div class="card-footer">
+                    <a asp-action="List" class="btn btn-dark btn-sm mr-2 float-end">Back To List</a>
+                    <input type="submit" class="btn btn-primary btn-sm float-end mr-2" value="Submit" />
+                </div>
+            </form>
         </div>
-       <div class="card-body">
-           <form asp-action="Create">
-               <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-               <div class="form-group">
-                   <label asp-for="UploadPath"></label>
-                   <input asp-for="UploadPath" class="form-control" placeholder="UploadPath" />
-               </div>
-               <div class="form-group">
-                   <label asp-for="Description"></label>
-                   <input asp-for="Description" class="form-control" placeholder="Description" />
-               </div>
-               <div class="form-group">
-                   <input type="submit" class="btn btn-primary btn-sm" value="Submit" />
-               </div>
-           </form>
-       </div>
-       <div class="card-body">
-           <a asp-action="List" class="btn btn-dark btn-sm">Back to List</a>
-       </div>
     </div>
 </div>
+
