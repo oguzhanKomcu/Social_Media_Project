@@ -25,8 +25,8 @@ namespace SMP.Application.Models.DTOs
         public DateTime UpdateDate => DateTime.Now;
         public Status Status => Status.Modified;
 
-        public List<PostCommentVM> Post_Comments { get; set; }
-        public List<PostScoreVM> Post_Scores { get; set; }
+        public List<PostCommentVM>? Post_Comments { get; set; }
+        public List<PostScoreVM>? Post_Scores { get; set; }
 
     }
 }

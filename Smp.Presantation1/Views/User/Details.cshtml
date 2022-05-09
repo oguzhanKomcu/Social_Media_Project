@@ -1,0 +1,32 @@
+﻿@model GetAppUserVM
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<a asp-action="Follow" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Edit</a>
+
+<div class="card-body box-profile">
+    <div class="text-center">
+        <img class="profile-user-img img-fluid img-circle" src="@Model.ImagePath" alt="User profile picture">
+    </div>
+
+    <h3 class="profile-username text-center">@Model.UserName</h3>
+
+       <li class="list-group-item">
+            <b>User_Score</b> <a class="float-right">@Model.User_Score</a>
+       </li>    
+
+    <ul class="list-group list-group-unbordered mb-3">
+        <li class="list-group-item">
+            <b>Follower</b> <a class="float-right">@Model.Follower_Count</a>
+        </li>
+        <li class="list-group-item">
+            <b>Following</b> <a class="float-right">@Model.Following_Count</a>
+        </li>
+       
+    </ul>
+
+    <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+</div>

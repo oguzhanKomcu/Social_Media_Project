@@ -38,8 +38,8 @@ namespace SMP.Application.Services.PostService
                 using var image = Image.Load(model.UploadPath.OpenReadStream());
                 image.Mutate(x => x.Resize(256, 256));
                 string guid = Guid.NewGuid().ToString();
-                image.Save($"wwwroot/images/products/{guid}.jpg");
-                product.ImagePath = $"/images/products/{guid}.jpg";
+                image.Save($"wwwroot/images/posts/{guid}.jpg");
+                product.ImagePath = $"/images/posts/{guid}.jpg";
 
 
             }
@@ -165,8 +165,8 @@ namespace SMP.Application.Services.PostService
                 using var image = Image.Load(model.UploadPath.OpenReadStream());
                 image.Mutate(x => x.Resize(256, 256));
                 string guid = Guid.NewGuid().ToString();
-                image.Save($"wwwroot/images/products/{guid}.jpg");
-                product.ImagePath = $"/images/products/{guid}.jpg";
+                image.Save($"wwwroot/images/posts/{guid}.jpg");
+                product.ImagePath = $"/images/posts/{guid}.jpg";
 
 
             }
