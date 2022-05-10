@@ -109,23 +109,21 @@ namespace SMP.Application.Services.PostService
                 selector: x => new GetPostVM
                 {
                     Id = x.Id,
+                    User_Id = x.User_Id,
                     Description = x.Description,
                     ImagePath = x.ImagePath,
                     UserName = x.AppUser.UserName,
                     UserImagePath = x.AppUser.ImagePath,
-                    Total_Score = x.Post_Scores.Average(y => y.Score),
-                    Total_Comment = x.Post_Comments.Count(y => y.Id == x.Id),
+                    //Total_Score = x.Post_Scores.Average(y => y.Score),
+                    //Total_Comment = x.Post_Comments.Count(y => y.Id == x.Id),
                     CreateDate = x.CreateDate,
 
 
 
                 },
                 expression: x => x.User_Id == id && x.Status != Status.Passive,
-
-                orderBy: x => x.OrderByDescending(y => y.CreateDate),
-                include: x => x.Include(x => x.AppUser).Include(x => x.Post_Comments).Include(x => x.Post_Scores)
-                );
-
+                orderBy: x => x.OrderBy(x => x.CreateDate));
+               
             return posts;
         }
 
@@ -139,15 +137,15 @@ namespace SMP.Application.Services.PostService
                     ImagePath = x.ImagePath,
                     UserName = x.AppUser.UserName,
                     UserImagePath = x.AppUser.ImagePath,
-                    Total_Score = x.Post_Scores.Average(y => y.Score),
-                    Total_Comment = x.Post_Comments.Count(y => y.Id == x.Id),
+                    //Total_Score = x.Post_Scores.Average(y => y.Score),
+                    //Total_Comment = x.Post_Comments.Count(y => y.Id == x.Id),
                     User_Id = x.AppUser.Id,
                     CreateDate = x.CreateDate,
 
                 },
-                expression: x => x.Status == Status.Active,
+               expression: x => x.Status != Status.Passive,
                 orderBy: x => x.OrderByDescending(x => x.CreateDate),
-                include: x => x.Include(x => x.AppUser).Include(x => x.Post_Comments).Include(x => x.Post_Scores)); 
+              include: x => x.Include(x => x.AppUser).Include(x => x.Post_Comments).Include(x => x.Post_Scores)); 
 
             return posts;
 

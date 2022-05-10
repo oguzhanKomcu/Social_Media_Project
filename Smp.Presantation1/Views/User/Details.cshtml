@@ -5,8 +5,7 @@
 
 
 
-<a asp-action="Follow" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Edit</a>
-
+<form id="userDetails" novalidate class="needs-validation">
 <div class="card-body box-profile">
     <div class="text-center">
         <img class="profile-user-img img-fluid img-circle" src="@Model.ImagePath" alt="User profile picture">
@@ -27,6 +26,36 @@
         </li>
        
     </ul>
+    
 
-    <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+     <button type="button"  class="btn btn-primary" onclick="following()">Follow</button>
+    
+
+
+
 </div>
+</form>
+
+<script type="text/javascript">
+
+ 
+    function following() {
+       
+  
+        $.ajax({
+            type: 'POST',
+            url: '/Follow/Create/',
+
+
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+            data: { id :'@Model.Id'},
+
+            success: function (result) {
+                alert('başarılı oldu lannnnnnn ');
+                console.log(result);
+            },
+            
+        })
+    }
+
+</script>

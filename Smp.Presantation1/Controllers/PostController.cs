@@ -29,7 +29,7 @@ namespace Smp.Presantation1.Controllers
                 if (model.User_Id == User.GetUserId())
                 {
                     await _postService.Create(model);
-                    return RedirectToAction("List");
+                    return RedirectToAction("UserPosts");
                 }
                 else
                 {
@@ -44,6 +44,8 @@ namespace Smp.Presantation1.Controllers
         }
         public async Task<IActionResult> UserPosts()
         {
+
+           
             var model = await _postService.UserGetPosts(User.GetUserId());
             return View(model);
 

@@ -22,7 +22,8 @@ namespace SMP.Application.Models.DTOs
         public IFormFile? UploadPath { get; set; }
         public string? Description { get; set; }
 
-        public DateTime UpdateDate => DateTime.Now;
+        public DateTime UpdateDate { get; set; }
+        public DateTime CreateDate => DateTime.Now;
         public Status Status => Status.Modified;
 
         public List<PostCommentVM>? Post_Comments { get; set; }

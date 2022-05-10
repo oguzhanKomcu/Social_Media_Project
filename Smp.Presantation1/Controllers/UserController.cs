@@ -2,14 +2,18 @@
 using SMP.Application.Extensions;
 using SMP.Application.Models.DTOs;
 using SMP.Application.Services.AppUserService;
+using SMP.Application.Services.FollowService;
 
 namespace Smp.Presantation1.Controllers
 {
     public class UserController : Controller
     {
         private readonly IAppUserService _appUserService;
-        public UserController(IAppUserService appUserService)
+        private readonly IFollowService _followService;
+        public UserController(IAppUserService appUserService, IFollowService followService)
         {
+            _followService = followService;
+            
             _appUserService = appUserService;
         }
 
@@ -25,7 +29,7 @@ namespace Smp.Presantation1.Controllers
             var user = await _appUserService.UserDetails(User.GetUserId());
             return View(user);
         }
-
+        
 
 
         public IActionResult Register()//LOYOUT NULL OLUCAK DİKAATT^'!!

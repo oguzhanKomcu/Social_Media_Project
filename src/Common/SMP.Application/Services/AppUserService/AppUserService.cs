@@ -54,7 +54,7 @@ namespace SMP.Application.Services.AppUserService
 
         public async Task<List<GetAppUserVM>> GetUsers()
         {
-            var categories = await _unitOfWork.UserRepository.GetFilteredList(
+            var users = await _unitOfWork.UserRepository.GetFilteredList(
                selector: x => new GetAppUserVM
                {
                    Id = x.Id,
@@ -65,7 +65,7 @@ namespace SMP.Application.Services.AppUserService
                expression: x => x.Status != Domain.Enums.Status.Passive,
                orderBy: x => x.OrderBy(x => x.UserName));
 
-            return categories;
+            return users;
         }
 
         public async Task<SignInResult> Login(LoginDTO model)

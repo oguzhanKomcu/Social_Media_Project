@@ -87,9 +87,9 @@ namespace SMP.Application.Services.FollowService
            return followingList;
         }
 
-        public async  Task<bool> IsFollowExsist(UpdateFollowerDTO model)
+        public async  Task<bool> IsFollowExsist(CreateFollowerDTO model)
         {
-            bool isExist = await _unitOfWork.FollowerRepository.Any(x => x.Following.Id == model.Following_UserId && x.Follow.Id== model.Follow_User_Id);
+            bool isExist = await _unitOfWork.FollowerRepository.Any(x => x.Following.Id == model.FollowingId && x.Follow.Id== model.FollowerId);
             return isExist;
         }
     }
