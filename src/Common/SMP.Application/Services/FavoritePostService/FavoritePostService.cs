@@ -82,9 +82,9 @@ namespace SMP.Application.Services.FavoritePostService
 
         }
 
-        public async Task<bool> IsFavoriteExsist(string text)
+        public async Task<bool> IsFavoriteExsist(int postId, string userId)
         {
-            bool isExist = await _unitOfWork.HashtagRepository.Any(x => x.Text == text);
+            bool isExist = await _unitOfWork.FavoritePostRepository.Any(x => x.PostId == postId && x.UserId == userId);
             return isExist;
         }
     }

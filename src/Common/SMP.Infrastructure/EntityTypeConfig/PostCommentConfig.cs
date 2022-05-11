@@ -18,12 +18,12 @@ namespace SMP.Infrastructure.EntityTypeConfig
 
             builder.HasOne(x => x.User)
             .WithMany(x => x.Post_Comments)
-            .HasForeignKey(x => x.UserId);
+            .HasForeignKey(x => x.UserId).IsRequired(false); 
 
 
             builder.HasOne(x => x.Post)
             .WithMany(x => x.Post_Comments)
-            .HasForeignKey(x => x.PostId).OnDelete(DeleteBehavior.Restrict); 
+            .HasForeignKey(x => x.PostId).OnDelete(DeleteBehavior.Restrict);  
 
 
 

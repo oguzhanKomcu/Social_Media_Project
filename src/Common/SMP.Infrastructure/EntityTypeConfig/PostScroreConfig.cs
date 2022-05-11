@@ -30,7 +30,7 @@ namespace SMP.Infrastructure.EntityTypeConfig
 
             builder.HasOne(x => x.Post)
                 .WithMany(x => x.Post_Scores)
-                .HasForeignKey(x => x.PostId).OnDelete(DeleteBehavior.Restrict); 
+                .HasForeignKey(x => x.PostId).OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.User)
                 .WithMany(x => x.Post_Scores)

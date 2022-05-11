@@ -19,12 +19,8 @@ namespace SMP.Application.Services.PostService
         Task<PostDTO> GetById(int id);
 
         Task<List<GetPostVM>> UserGetPosts(string id);
-      
 
-
-
-        //Post create işeminde ilk adımda View'a giderken Genre ve Author listesini doldurmak için aşağıdaki fonksiyonu kullanacağız.
-
+        Task<PostDetailsVM> GetPostDetails(int id);
 
         Task<List<GetPostVM>> GetPostsForMembers();
     }

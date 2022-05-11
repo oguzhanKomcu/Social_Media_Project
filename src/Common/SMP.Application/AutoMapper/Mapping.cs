@@ -19,6 +19,7 @@ namespace SMP.Application.AutoMapper
 
             CreateMap<Post, GetPostVM>().ReverseMap();
             CreateMap<PostDTO, GetPostVM>().ReverseMap();
+            CreateMap<PostDTO, PostDetailsVM>().ReverseMap();
 
             CreateMap<Page, CreatePageDTO>().ReverseMap();
             CreateMap<Page, UpdatePageDTO>().ReverseMap();
@@ -33,6 +34,10 @@ namespace SMP.Application.AutoMapper
             
             CreateMap<FavoritePost, CreateFavoritePost>().ReverseMap();
             CreateMap<FavoritePost, FavoritePostVM>().ReverseMap();
+
+            CreateMap<PostSharing, PostSharingDTO>().ReverseMap();
+            CreateMap<PostSharing, PostandPostSharingVm>().ReverseMap();
+            
 
             CreateMap<Follower, CreateFollowerDTO>().ReverseMap();
             CreateMap<Follower, FollwersVm>().ReverseMap();

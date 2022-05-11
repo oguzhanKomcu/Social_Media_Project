@@ -14,6 +14,6 @@ namespace SMP.Application.Services.FavoritePostService
         Task Delete(int id);
         Task<CreateFavoritePost> GetById(int id);
         Task<List<FavoritePostVM>> GetFavoritePosts();
-        Task<bool> IsFavoriteExsist(string text);
+        Task<bool> IsFavoriteExsist(int postId, string userId);
     }
 }

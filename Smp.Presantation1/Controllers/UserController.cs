@@ -32,14 +32,14 @@ namespace Smp.Presantation1.Controllers
         
 
 
-        public IActionResult Register()//LOYOUT NULL OLUCAK DİKAATT^'!!
+        public IActionResult Register()
         {
-            if (User.Identity.IsAuthenticated) //user sistem tarafından geldi ..//kullanıcı hali hazırda sisteme authenticate olmuşsa
+            if (User.Identity.IsAuthenticated) 
             {
-                return RedirectToAction("Index", "Home"); //direk member home controlera gidicek // list gibi
+                return RedirectToAction("Index", "Home"); 
 
 
-                //home controllerada authorzia ekledil.
+               
             }
 
 
@@ -47,7 +47,7 @@ namespace Smp.Presantation1.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterDTO model)//LOYOUT NULL OLUCAK DİKAATT^'!!
+        public async Task<IActionResult> Register(RegisterDTO model)
         {
             if (ModelState.IsValid == true)
             {
@@ -69,15 +69,15 @@ namespace Smp.Presantation1.Controllers
         }
 
         //[AllowAnonymous]
-        public IActionResult LogIn(string returnUrl = "/") //LOYOUT NULL OLUCAK DİKAATT^'!!
+        public IActionResult LogIn(string returnUrl = "/") 
         {
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            ViewData["ReturnUrl"] = returnUrl; //view data tasıdık hidden inputa alternatif //login olduktan sonra kaldıgımız yerden devam etmesiiçin bunu yazdık
-            return View(); //hali haırda böyle bir kullanıcı var mı ? Yoksa view sayfası
+            ViewData["ReturnUrl"] = returnUrl; 
+            return View(); 
 
         }
 
@@ -92,7 +92,7 @@ namespace Smp.Presantation1.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToLocal(returnUrl); //kendi yazdıgımız methot 
+                    return RedirectToLocal(returnUrl);
                 }
 
                 TempData["Warning"] = "Invalid log in credantial..!!";
@@ -128,9 +128,9 @@ namespace Smp.Presantation1.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string userName)
+        public async Task<IActionResult> Edit(string id)
         {
-            if (userName == User.Identity.Name) //login olmus kullanıcı ile sistemdeki kullanıcıyı yakalıyacak
+            if (id == User.GetUserId()) //login olmus kullanıcı ile sistemdeki kullanıcıyı yakalıyacak
             {
                 var user = await _appUserService.GetById(User.GetUserId()); // bunun için bir ClaimPrincipleExtensions metot yazdım..Snra burada metodu çağırdım GetUserId().. 
 

@@ -3,8 +3,11 @@
     ViewData["Title"] = "UserProfile";
 }
 
-<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Edit</a>
 
+
+
+
+<form id="userDetails" novalidate class="needs-validation">
 <div class="card-body box-profile">
     <div class="text-center">
         <img class="profile-user-img img-fluid img-circle" src="@Model.ImagePath" alt="User profile picture">
@@ -26,5 +29,6 @@
        
     </ul>
 
-    <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Edit</a>
 </div>
+</form>

@@ -42,6 +42,13 @@ namespace Smp.Presantation1.Controllers
                 return BadRequest(String.Join(Environment.NewLine, ModelState.Values.SelectMany(h => h.Errors).Select(h => h.ErrorMessage + "" + h.Exception)));
             }
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            
+            
+           return  View(await _postService.GetPostDetails(id));
+        }
         public async Task<IActionResult> UserPosts()
         {
 

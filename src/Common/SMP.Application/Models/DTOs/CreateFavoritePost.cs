@@ -11,9 +11,9 @@ namespace SMP.Application.Models.DTOs
     public  class CreateFavoritePost
     {
 
-        public int Post_Id { get; set; }
+        public int PostId { get; set; }
 
-        public int User_Id { get; set; }
+        public string UserId { get; set; }
 
 
 
