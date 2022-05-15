@@ -17,6 +17,9 @@ namespace SMP.Application.Models.DTOs
         public string Email { get; set; }
 
 
+        public IFormFile? UploadPath { get; set; }
+        public string? ImagePath { get; set; }
+
         public DateTime CreateDate => DateTime.Now;
         public Status Status => Status.Active;
     }

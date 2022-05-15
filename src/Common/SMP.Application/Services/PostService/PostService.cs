@@ -69,6 +69,7 @@ namespace SMP.Application.Services.PostService
                     UserImagePath = x.AppUser.ImagePath,
                     Total_Score = x.Post_Scores.Average(y => y.Score),
                     Total_Comment = x.Post_Comments.Count(y => y.Id == id),
+                    
 
                 },
                 expression: x => x.Id == id && x.Status == Status.Active
@@ -114,10 +115,10 @@ namespace SMP.Application.Services.PostService
                     ImagePath = x.ImagePath,
                     UserName = x.AppUser.UserName,
                     UserImagePath = x.AppUser.ImagePath,
-                    //Total_Score = x.Post_Scores.Average(y => y.Score),
-                    //Total_Comment = x.Post_Comments.Count(y => y.Id == x.Id),
+                    Total_Score = x.Post_Scores.Average(y => y.Score).ToString(),
+                    Total_Comment = x.Post_Comments.Count(y => y.Id == x.Id).ToString(),
                     CreateDate = x.CreateDate,
-
+                    
 
 
                 },

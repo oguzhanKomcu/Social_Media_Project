@@ -27,7 +27,7 @@ namespace SMP.Application.Services.AppUserService
             _signInManager = signInManager;
         }
 
-        public async Task<GetAppUserVM> GetById(string id)
+        public async Task<UpdateProfilDTO> GetById(string id)
         {
             var user = await _unitOfWork.UserRepository.GetFilteredFirstOrDefault(
 
@@ -46,7 +46,7 @@ namespace SMP.Application.Services.AppUserService
 
             expression: x => x.Id == id && x.Status != Status.Passive);
 
-            var model = _mapper.Map<GetAppUserVM>(user);
+            var model = _mapper.Map<UpdateProfilDTO>(user);
 
             return model;
 
@@ -57,14 +57,15 @@ namespace SMP.Application.Services.AppUserService
             var users = await _unitOfWork.UserRepository.GetFilteredList(
                selector: x => new GetAppUserVM
                {
-                   Id = x.Id,
+
                    UserName = x.UserName,
-                   Password = x.PasswordHash,
-                   Email = x.Email,
+                   Location = x.Location,
+                   ImagePath = x.ImagePath,
+                   User_Score = x.Post_Scores.Average(y => y.Score).ToString(),
                },
                expression: x => x.Status != Domain.Enums.Status.Passive,
                orderBy: x => x.OrderBy(x => x.UserName));
-
+   
             return users;
         }
 
@@ -81,6 +82,9 @@ namespace SMP.Application.Services.AppUserService
 
         public async Task<IdentityResult> Register(RegisterDTO model)
         {
+
+            model.ImagePath = $"/images/user/default-profile-icon-24.jpg";
+            
             var user = _mapper.Map<AppUser>(model);
 
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -89,6 +93,8 @@ namespace SMP.Application.Services.AppUserService
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
             }
+
+
 
             return result;
 
@@ -105,8 +111,9 @@ namespace SMP.Application.Services.AppUserService
                     using var image = Image.Load(model.UploadPath.OpenReadStream());
                     image.Mutate(x => x.Resize(256, 256));
                     string guid = Guid.NewGuid().ToString();
-                    image.Save($"wwwrote/images/user/ {guid} jpg");
+                    image.Save($"wwwroot/images/user/{guid}.jpg");
                     user.ImagePath = $"/images/user/{guid}.jpg";
+
                 }
 
                 if (model.UserName != null)

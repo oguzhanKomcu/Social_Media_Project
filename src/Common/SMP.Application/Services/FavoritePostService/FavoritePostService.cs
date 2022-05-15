@@ -62,7 +62,7 @@ namespace SMP.Application.Services.FavoritePostService
                
         
 
-        public async Task<List<FavoritePostVM>> GetFavoritePosts()
+        public async Task<List<FavoritePostVM>> GetFavoritePosts(string id)
         {
             var favoritePosts = await _unitOfWork.FavoritePostRepository.GetFilteredList(
                 selector: x => new FavoritePostVM
@@ -70,10 +70,19 @@ namespace SMP.Application.Services.FavoritePostService
                     Id = x.Id,
                     User_Id = x.UserId,
                     Post_Id = x.PostId,
+                    UserImagePath = x.User.ImagePath,
+                    UserName = x.User.UserName,
+                    PostImage = x.Post.ImagePath,
+                    Description = x.Post.Description,
+                    Total_Score = x.Post_Scores.Average(y => y.Score).ToString(),
+                    Total_Comment = x.Post_Comments.Count(y => y.Id == x.Id).ToString(),
+                    CreateDate = x.CreateDate.ToString(),
+
+
 
 
                 },
-                expression: x => x.Status == Status.Active,
+                expression: x => x.Status == Status.Active && x.UserId == id,
                 orderBy: x => x.OrderBy(x => x.CreateDate),
                 include: x => x.Include(x => x.Post).Include(x => x.User));
 

@@ -29,6 +29,33 @@
        
     </ul>
 
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Edit</a>
+     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Edit</a>
+		@*<button type="button" class="btn btn-warning btn-sm" onclick="edit()">Edit</button>*@
+    
 </div>
 </form>
+
+@*<script type="text/javascript">
+
+
+	function edit() {
+       
+  
+        $.ajax({
+            type: 'Get',
+            url: '/User/UserGet/',
+
+
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+            data: { id :'@Model.Id'},
+
+            success: function (result) {
+                alert('başarılı oldu lannnnnnn ');
+                console.log(result);
+            },
+            
+        })
+    }
+    
+	
+</script>*@

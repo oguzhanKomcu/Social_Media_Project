@@ -16,12 +16,12 @@ namespace SMP.Application.Models.DTOs
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
 
-        
-        public string ImagePath { get; set; }
+        public IFormFile UploadPath { get; set; }
+        public string? ImagePath { get; set; }
 
         public DateTime UpdateDate => DateTime.Now;
         public Status Status => Status.Modified;
 
-        public IFormFile UploadPath { get; set; }
+
     }
 }

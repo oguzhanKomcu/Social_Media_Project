@@ -1,5 +1,6 @@
 ﻿
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using SMP.Domain.Enums;
 using SMP.Domain.Models.Interface;
@@ -25,7 +26,9 @@ namespace SMP.Domain.Models.Entities
             Post_Comments = new List<Post_Comment>();
         }
 
-        public string Location { get; set; }    
+        public string Location { get; set; }
+        [NotMapped]
+        public IFormFile UploadPath { get; set; }
         public string ImagePath { get; set; }
         public string Biyography { get; set; }
         public string User_Score { get; set; }

@@ -126,8 +126,8 @@ namespace Smp.Presantation1.Controllers
             return RedirectToAction("Index", "Home");
 
         }
-
-        [HttpPost]
+        
+        [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == User.GetUserId()) //login olmus kullanıcı ile sistemdeki kullanıcıyı yakalıyacak
@@ -140,6 +140,8 @@ namespace Smp.Presantation1.Controllers
                 }
                 else
                 {
+
+
                     return View(user);
                 }
 
@@ -174,7 +176,6 @@ namespace Smp.Presantation1.Controllers
         public async Task<IActionResult> Users()
         {
 
-            await _appUserService.GetUsers();
             return View(await _appUserService.GetUsers());
 
 

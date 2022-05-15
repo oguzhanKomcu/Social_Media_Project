@@ -31,6 +31,7 @@ namespace SMP.Domain.Models.Entities
         public List<Hashtag> Hashtags { get; set; }
         public List<FavoritePost> Favorite_Posts { get; set; }
         public List<PostSharing> PostSharings { get; set; }
+        public List<AppUser> AppUsers { get; set; }
 
 
 

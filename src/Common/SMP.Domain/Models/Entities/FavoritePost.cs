@@ -23,7 +23,8 @@ namespace SMP.Domain.Models.Entities
         public DateTime? UpdateDate { get; set; }
         public DateTime? DeleteDate { get; set; }
         public Status Status { get; set; }
-
+        public List<Post_Comment> Post_Comments { get; set; }
+        public List<Post_Score> Post_Scores { get; set; }
 
     }
 }

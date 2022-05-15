@@ -22,6 +22,9 @@ namespace SMP.Application.Models.VMs
         public string UserName { get; set; }
         public string UserImagePath { get; set; }
         public string FullName { get; set; }
+        public string PostImage { get; set; }
+        public string CreateDate { get; set; }
+        
 
 
         public List<Post_Comment> Post_Comments { get; set; }
