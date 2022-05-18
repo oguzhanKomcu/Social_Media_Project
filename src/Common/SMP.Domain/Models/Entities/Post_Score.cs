@@ -22,9 +22,9 @@ namespace SMP.Domain.Models.Entities
         public Status Status { get; set; }
 
 
-        public List<Post_Comment> Post_Comments { get; set; }
-        public List<AppUser> AppUsers { get; set; }
-        public List<Post> Posts { get; set; }
+        //public List<Post_Comment> Post_Comments { get; set; }
+
+        //public List<Post> Posts { get; set; }
 
 
     }

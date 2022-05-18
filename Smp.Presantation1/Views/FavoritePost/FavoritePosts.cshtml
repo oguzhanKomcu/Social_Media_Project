@@ -1,8 +1,7 @@
-﻿@model List<GetPostVM>
+﻿@model List<FavoritePostVM>
 @{
-    ViewData["Title"] = "AllPosts";
+    ViewData["Title"] = "FavoritePosts";
 }
-
 
 <form id="allPosts" novalidate class="needs-validation">
 
@@ -16,31 +15,38 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-
+                       
 
                             <tr>
                                 <td id="postId">@item.Id</td>
                                 <td>@item.Description</td>
-                                <td>@item.CreateDate</td>
-                                <td>@item.UserImagePath</td>
+                                <td>@item.Post_Scores</td>
+                                <td>@item.Total_Comment</td>
+                                 <td>@item.CreateDate</td>                                
+
+                                
                                 <td>
                                     <img src="@item.ImagePath" width="100" height="100">
                                 </td>
-
+                                
+                                <td>
+                                    <img src="@item.UserImagePath" width="100" height="100">
+                                </td>
+                           
                                 <td>
                                     <a asp-controller="User" asp-action="Details" asp-route-id="@item.User_Id">@item.UserName</a>
 
                                 </td>
-                                
-                                <td>
-                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a>
-                                </td>
 
+                                <td>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Delete</a>
+                                </td>
+                                
 
 
                             </tr>
 
-
+                           
 
 
                         }

@@ -67,8 +67,8 @@ namespace SMP.Application.Services.PostService
                     ImagePath = x.ImagePath,
                     UserName = x.AppUser.UserName,
                     UserImagePath = x.AppUser.ImagePath,
-                    Total_Score = x.Post_Scores.Average(y => y.Score),
-                    Total_Comment = x.Post_Comments.Count(y => y.Id == id),
+                    Total_Score = x.Post_Scores.Average(y => y.Score).ToString(),
+                    Total_Comment = x.Post_Comments.Count(y => y.Id == id).ToString(),
                     
 
                 },
@@ -122,7 +122,7 @@ namespace SMP.Application.Services.PostService
 
 
                 },
-                expression: x => x.User_Id == id && x.Status != Status.Passive,
+                expression: x => x.User_Id == id   && x.Status != Status.Passive,
                 orderBy: x => x.OrderBy(x => x.CreateDate));
 
             return posts;
@@ -138,8 +138,8 @@ namespace SMP.Application.Services.PostService
                     ImagePath = x.ImagePath,
                     UserName = x.AppUser.UserName,
                     UserImagePath = x.AppUser.ImagePath,
-                    //Total_Score = x.Post_Scores.Average(y => y.Score),
-                    //Total_Comment = x.Post_Comments.Count(y => y.Id == x.Id),
+                    Total_Score = x.Post_Scores.Average(y => y.Score).ToString(),
+                    Total_Comment = x.Post_Comments.Count(y => y.Id == x.Id).ToString(),
                     User_Id = x.AppUser.Id,
                     CreateDate = x.CreateDate,
 
@@ -185,35 +185,46 @@ namespace SMP.Application.Services.PostService
                     ImagePath = x.ImagePath,
                     UserName = x.AppUser.UserName,
                     UserImagePath = x.AppUser.ImagePath,
-                    //Total_Score = x.Post_Scores.Average(y => y.Score),
-                    //Total_Comment = x.Post_Comments.Count(y => y.Id == id),
+                    Total_Score = x.Post_Scores.Average(y => y.Score).ToString(),
+                    Total_Comment = x.Post_Comments.Count(y => y.Id == id).ToString(),
+                    Comments = x.Post_Comments.Where(x => x.PostId == id)
+                    .OrderByDescending(x => x.CreateDate)
+                    .Select(x => new PostCommentVM
+                    {
+                        Text = x.Text,
+                        UserImage = x.User.ImagePath,
+                        UserName = x.User.UserName,
+                        CreateDate = x.CreateDate.ToString()
+                    }).ToList(),
+
 
                 },
-                expression: x => x.Id == id
-                );
+                expression: x => x.Id == id,
+                include: x => x.Include(x => x.AppUser).Include(x => x.Post_Comments).Include(x => x.Post_Scores));
+                
 
-            //var model = _mapper.Map<PostDTO>(post);
-            //model.Post_Comments = await _unitOfWork.PostCommentRepository.GetFilteredList(
-            //    selector: x => new PostCommentVM
-            //    {
-            //        Id = x.Id,
-            //        Post_Id = x.PostId,
-            //        User_Id = x.UserId,
-            //        Text = x.Text,
-            //    },
-            //    expression: x => x.PostId == null);
+            var model = _mapper.Map<PostDTO>(post);
+            model.Post_Comments = await _unitOfWork.PostCommentRepository.GetFilteredList(
+                selector: x => new PostCommentVM
+                {
+                    Id = x.Id,
+                    Post_Id = x.PostId,
+                    User_Id = x.UserId,
+                    Text = x.Text,
+                },
+                expression: x => x.PostId == id);
 
 
-            //model.Post_Scores = await _unitOfWork.PostScoreRepository.GetFilteredList(
-            //    selector: x => new PostScoreVM
-            //    {
-            //        Id = x.Id,
-            //        Post_Id = x.PostId,
-            //        User_Id = x.UserId,
-            //        Score = x.Score,
+            model.Post_Scores = await _unitOfWork.PostScoreRepository.GetFilteredList(
+                selector: x => new PostScoreVM
+                {
+                    Id = x.Id,
+                    Post_Id = x.PostId,
+                    User_Id = x.UserId,
+                    Score = x.Score,
 
-            //    },
-            //expression: x => x.PostId == null);
+                },
+            expression: x => x.PostId == id);
 
 
 

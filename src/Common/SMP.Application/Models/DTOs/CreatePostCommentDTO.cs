@@ -13,7 +13,7 @@ namespace SMP.Application.Models.DTOs
 
         public int Post_Id { get; set; }
 
-        public int User_Id { get; set; }
+        public string User_Id { get; set; }
 
         public string Text { get; set; } // hasmalenght 300     
         public DateTime CreateDate => DateTime.Now;

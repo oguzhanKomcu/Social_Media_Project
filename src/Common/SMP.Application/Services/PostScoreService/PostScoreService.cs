@@ -30,5 +30,12 @@ namespace SMP.Application.Services.PostScoreService
             await _unitOfWork.Commit();
            
         }
+
+        public async Task<bool> IsScoreExsist(int postId, string id)
+        {
+            bool isExist = await _unitOfWork.PostScoreRepository.Any(x => x.UserId == id && x.PostId == postId);
+            return isExist;
+        }
+
     }
 }

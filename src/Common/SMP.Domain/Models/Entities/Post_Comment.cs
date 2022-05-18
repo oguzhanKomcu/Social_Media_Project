@@ -24,6 +24,7 @@ namespace SMP.Domain.Models.Entities
         public DateTime? DeleteDate { get; set; }
         public Status Status { get; set; }
 
+
     }
     
 }

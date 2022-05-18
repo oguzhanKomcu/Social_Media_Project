@@ -35,11 +35,11 @@ namespace SMP.Domain.Models.Entities
         public string Follower_Count { get; set; }
         public string Following_Count { get; set; }
 
-        public DateTime CreateDate { get ; set ; }
-        public DateTime? UpdateDate { get; set ; }
-        public DateTime? DeleteDate { get ; set; }
-        public Status Status { get ; set; }
-        
+        public DateTime CreateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
+        public DateTime? DeleteDate { get; set; }
+        public Status Status { get; set; }
+
         [InverseProperty("Follow")]
         public List<Follower> Followers { get; set; }
 

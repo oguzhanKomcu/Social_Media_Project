@@ -39,6 +39,16 @@ namespace Smp.Presantation1.Controllers
             }
 
         }
+        
+        [HttpGet]
+        public async Task<IActionResult> FavoritePosts()
+        {
+            var model = await _favoritePostService.GetFavoritePosts(User.GetUserId());
+            return View(model);
+
+
+
+        }
 
     }
 }

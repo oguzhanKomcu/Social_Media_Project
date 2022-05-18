@@ -150,12 +150,13 @@ namespace SMP.Application.Services.AppUserService
                      Location = x.Location,
                      ImagePath = x.ImagePath,
                      Biyography = x.Biyography,
-                     User_Score = x.User_Score,
-                     Follower_Count = x.Follower_Count,
-                     Following_Count = x.Following_Count,
+                     User_Score = x.Post_Scores.Average(y => y.Score).ToString(),
+                     Follower_Count = x.Followers.Count.ToString(),
+                     Following_Count = x.Followings.Count.ToString(),
                  },
 
              expression: x => x.Id == id && x.Status != Status.Passive);
+            
 
             var model = _mapper.Map<GetAppUserVM>(user);
 

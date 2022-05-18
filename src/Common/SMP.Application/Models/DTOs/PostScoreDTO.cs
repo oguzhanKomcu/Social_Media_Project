@@ -10,13 +10,13 @@ namespace SMP.Application.Models.DTOs
 {
     public class PostScoreDTO
     {
+        public int Id { get; set; }
+        public int PostId { get; set; }
 
-        public int Post_Id { get; set; }
-
-        public int User_Id { get; set; }
+        public string UserId { get; set; }
 
         public decimal Score { get; set; }
-        public DateTime CreateDate { get; set; }
-        public Status Status { get; set; }
+        public DateTime CreateDate => DateTime.Now;
+        public Status Status => Status.Active;
     }
 }

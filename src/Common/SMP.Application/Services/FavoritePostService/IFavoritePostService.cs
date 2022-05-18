@@ -13,7 +13,7 @@ namespace SMP.Application.Services.FavoritePostService
         Task Create(CreateFavoritePost model);
         Task Delete(int id);
         Task<CreateFavoritePost> GetById(int id);
-        Task<List<FavoritePostVM>> GetFavoritePosts();
+        Task<List<FavoritePostVM>> GetFavoritePosts(string id);
         Task<bool> IsFavoriteExsist(int postId, string userId);
     }
 }

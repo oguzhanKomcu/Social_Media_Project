@@ -12,15 +12,15 @@ namespace SMP.Application.Models.VMs
         public int Id { get; set; }
         public string User_Id { get; set; }
         public AppUser AppUser { get; set; }
-        public decimal Total_Score { get; set; }
-        public int Total_Comment { get; set; }
+        public string? Total_Score { get; set; }
+        public string? Total_Comment { get; set; }
         public string ImagePath { get; set; }
         public string Description { get; set; }
         public string UserName { get; set; }
         public string UserImagePath { get; set; }
         public string FullName { get; set; }
         public decimal Score { get; set; }
-        public string Comment { get; set; }
+        public List<PostCommentVM> Comments { get; set; }
 
         public DateTime CreateDate { get; set; }
 
