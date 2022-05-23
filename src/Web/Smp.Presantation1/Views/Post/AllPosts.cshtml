@@ -1,0 +1,64 @@
+﻿@model List<GetPostVM>
+@{
+    ViewData["Title"] = "AllPosts";
+}
+
+
+<form id="allPosts" novalidate class="needs-validation">
+
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="card-header">
+                <h4>Post List</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+
+                            <tr>
+                                <td id="postId">@item.Id</td>
+                                <td>@item.Description</td>
+                                <td>@item.CreateDate</td>
+                                <td>@item.UserImagePath</td>
+                                <td>
+                                    <img src="@item.ImagePath" width="100" height="100">
+                                </td>
+
+                                <td>
+                                    <a asp-controller="User" asp-action="Details" asp-route-id="@item.User_Id">@item.UserName</a>
+
+                                </td>
+                                
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a>
+                                </td>
+
+
+
+                            </tr>
+
+
+
+
+                        }
+
+
+
+
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="card-footer">
+                <a asp-action="Create" class="btn btn-primary">Create New One</a>
+            </div>
+        </div>
+    </div>
+
+
+
+</form>
+

@@ -38,7 +38,7 @@ namespace Smp.Presantation1.Controllers
 
                 await _postScore.Create(post_Score);
                 TempData["Success"] = $"The {post_Score.PostId} has been added..!";
-                return RedirectToAction("User", "Details");
+                return RedirectToAction("Post", "Details");
             }
         }
     }

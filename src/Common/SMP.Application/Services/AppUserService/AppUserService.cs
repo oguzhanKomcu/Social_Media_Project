@@ -153,7 +153,7 @@ namespace SMP.Application.Services.AppUserService
                      User_Score = x.Post_Scores.Average(y => y.Score).ToString(),
                      Follower_Count = x.Followers.Count.ToString(),
                      Following_Count = x.Followings.Count.ToString(),
-                     UserPosts = x.Posts.Where(x => x.User_Id == id).OrderByDescending(z => z.CreateDate).Select(y => new GetPostVM
+                     UserPosts = x.Posts.Where(x => x.User_Id == id && x.Status != Status.Passive).OrderByDescending(z => z.CreateDate).Select(y => new GetPostVM
                      {
                          Id = y.Id,
                          Description = y.Description,

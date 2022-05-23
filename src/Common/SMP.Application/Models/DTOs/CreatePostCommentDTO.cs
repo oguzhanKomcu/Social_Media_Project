@@ -10,7 +10,7 @@ namespace SMP.Application.Models.DTOs
 {
     public  class CreatePostCommentDTO
     {
-
+        public int Id { get; set; }
         public int Post_Id { get; set; }
 
         public string User_Id { get; set; }

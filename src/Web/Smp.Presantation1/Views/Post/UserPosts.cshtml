@@ -1,0 +1,62 @@
+﻿@model List<GetPostVM>
+@{
+    ViewData["Title"] = "UserPosts";
+}
+
+<div class="col-sm-6">
+    <div class="row">
+        <div class="card-header">
+            <h4>User Post List</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Description</td>
+                            <td>@item.ImagePath</td>
+                            <td>@item.Post_Scores</td>
+                            <td>@item.CreateDate</td>
+                            
+                            <td>
+                                <a asp-action="Post_Comments" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Post_Comments</a>
+                            </td> 
+                            <td>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Delete</a>
+                            </td>
+                            
+                        </tr>
+                    }
+                </tbody>
+                
+            </table>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Create" class="btn btn-primary">Create New One</a>
+        </div>
+    </div>
+</div>
+
+@*<script type="text/javascript">
+    $(function(){
+    $("button.commentbuton").click(function(){ //bu yorum yap butonu
+    var commentcreate = $("input[name=commentcreate]").val(); // burda yorum içeriğini çekiyorum
+    commentcreate=$.trim(commentcreate); boşlukları kaldır
+    var nesne =$(this);
+    var id=nesne.attr("id");
+
+    var degerler = "id="+id+"&commentcreate="+commentcreate;
+    $.ajax({
+    type: "POST",
+    url: "docs/commentcreate",
+    data: degerler,
+    success:function(sonuc){
+    $("#"+id+".refresh").html(sonuc);  //classı refresh olan divin içine koy
+    }
+    });
+    });
+    });
+    $(function(){ $("button.deneme").click(function(){ alert(); }); });
+</script>*@

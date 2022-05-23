@@ -23,8 +23,10 @@ namespace SMP.Infrastructure.EntityTypeConfig
 
             builder.HasOne(x => x.Post)
             .WithMany(x => x.Post_Comments)
-            .HasForeignKey(x => x.PostId).OnDelete(DeleteBehavior.Restrict);  
+            .HasForeignKey(x => x.PostId).OnDelete(DeleteBehavior.Restrict);
 
+
+            builder.Property(x => x.Text).IsRequired(true);
 
 
 
