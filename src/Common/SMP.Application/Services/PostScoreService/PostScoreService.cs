@@ -28,7 +28,7 @@ namespace SMP.Application.Services.PostScoreService
             var postScore = _mapper.Map<Post_Score>(model);
             await _unitOfWork.PostScoreRepository.Create(postScore);
             await _unitOfWork.Commit();
-           
+
         }
 
         public async Task<bool> IsScoreExsist(int postId, string id)

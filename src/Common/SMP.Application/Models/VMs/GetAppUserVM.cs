@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMP.Domain.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,9 @@ namespace SMP.Application.Models.VMs
         public string User_Score { get; set; }
         public string Follower_Count { get; set; }
         public string Following_Count { get; set; }
+        public List<GetPostVM> UserPosts { get; set; }
 
-
+        
         
 
 

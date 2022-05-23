@@ -1,9 +1,4 @@
 ﻿using SMP.Application.Models.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SMP.Application.Services.PostScoreService
 {
@@ -11,8 +6,6 @@ namespace SMP.Application.Services.PostScoreService
     {
         Task Create(PostScoreDTO model);
         Task<bool> IsScoreExsist(int postId, string id);
-
-
-
     }
+
 }

@@ -19,6 +19,10 @@ namespace Smp.Presantation1.Controllers
 
         public async Task<IActionResult> Details(string id)
         {
+            if (id  == User.GetUserId())
+            {
+                return RedirectToAction("UserProfile", "User");
+            }
             var users = await _appUserService.UserDetails(id);
             return View(users);
         }

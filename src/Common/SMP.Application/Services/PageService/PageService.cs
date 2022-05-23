@@ -16,6 +16,7 @@ namespace SMP.Application.Services.PageService
     {
 
 
+
         private readonly IUnitOfWork _unitOfWork;
 
         private readonly IMapper _mapper;

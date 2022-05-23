@@ -6,57 +6,84 @@
 
 
 <form id="userDetails" novalidate class="needs-validation">
-<div class="card-body box-profile">
-    <div class="text-center">
-        <img class="profile-user-img img-fluid img-circle" src="@Model.ImagePath" alt="User profile picture">
-    </div>
+    <div class="card-body box-profile">
+        <div class="text-center">
+            <img class="profile-user-img img-fluid img-circle" src="@Model.ImagePath" alt="User profile picture">
+        </div>
 
-    <h3 class="profile-username text-center">@Model.UserName</h3>
+        <h3 class="profile-username text-center">@Model.UserName</h3>
 
-       <li class="list-group-item">
+        <li class="list-group-item">
             <b>User_Score</b> <a class="float-right">@Model.User_Score</a>
-       </li>    
-
-    <ul class="list-group list-group-unbordered mb-3">
-        <li class="list-group-item">
-            <b>Follower</b> <a class="float-right">@Model.Follower_Count</a>
-        </li>
-        <li class="list-group-item">
-            <b>Following</b> <a class="float-right">@Model.Following_Count</a>
         </li>
 
-       
-    </ul>
-    
+        <ul class="list-group list-group-unbordered mb-3">
+            <li class="list-group-item">
+                <b>Follower</b> <a class="float-right">@Model.Follower_Count</a>
+            </li>
+            <li class="list-group-item">
+                <b>Following</b> <a class="float-right">@Model.Following_Count</a>
+            </li>
 
-     <button type="button"  class="btn btn-primary" onclick="following()">Follow</button>
-    
+
+        </ul>
+
+
+        <button type="button" class="btn btn-primary" onclick="following()">Follow</button>
+
+        @foreach (var item in Model.UserPosts)
+        {
+            <div class="card card-widget">
+                <div class="card-header">
+                    <div class="user-block">
+                        <img class="img-circle" src="@item.UserImagePath" alt="User Image">
+                        <span class="username"><a href="#">@item.UserName</a></span>
+                        <span class="description">Shared publicly - @item.CreateDate.ToShortDateString()</span>
+                    </div>
+                    <!-- /.user-block -->
+            </div>
+                <!-- /.card-header -->
+            <div class="card-body">
+                    <img class="img-fluid pad" src="@item.ImagePath" alt="Photo">
+                    <br />
+                    <h4 class="card-text">@item.Description</h4>
+    @*                <button type="button" class="btn btn-warning btn-sm" onclick="details()">Details</button>*@
+
+                    <span class="float-right text-muted">@item.Total_Score Score - @item.Total_Comment Comments</span>
+                </div>
+                <!-- /.card-body -->
+                <!-- /.card-footer -->
+
+        </div>
+
+        }
 
 
 
-</div>
+
+    </div>
 </form>
 
-<script type="text/javascript">
+@*<script type="text/javascript">
 
- 
+
     function following() {
-       
-  
+
+
         $.ajax({
             type: 'POST',
             url: '/Follow/Create/',
 
 
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: { id :'@Model.Id'},
 
             success: function (result) {
                 alert('başarılı oldu lannnnnnn ');
                 console.log(result);
             },
-            
+
         })
     }
 
-</script>
+</script>*@

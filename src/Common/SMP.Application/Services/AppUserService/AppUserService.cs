@@ -153,6 +153,18 @@ namespace SMP.Application.Services.AppUserService
                      User_Score = x.Post_Scores.Average(y => y.Score).ToString(),
                      Follower_Count = x.Followers.Count.ToString(),
                      Following_Count = x.Followings.Count.ToString(),
+                     UserPosts = x.Posts.Where(x => x.User_Id == id).OrderByDescending(z => z.CreateDate).Select(y => new GetPostVM
+                     {
+                         Id = y.Id,
+                         Description = y.Description,
+                         ImagePath = y.ImagePath,
+                         Total_Score = y.Post_Scores.Average(z => z.Score).ToString(),
+                         Total_Comment = y.Post_Comments.Count.ToString(),
+                         UserName = y.AppUser.UserName,
+                         UserImagePath = y.AppUser.ImagePath,
+
+                     }).ToList(),
+
                  },
 
              expression: x => x.Id == id && x.Status != Status.Passive);
