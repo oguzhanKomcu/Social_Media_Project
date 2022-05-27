@@ -4,6 +4,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SMP.Application.Models.DTOs;
 using SMP.Application.Models.VMs;
+using SMP.Application.Services.FollowService;
 using SMP.Domain.Enums;
 using SMP.Domain.Models.Entities;
 using SMP.Domain.Repositories;
@@ -20,13 +21,16 @@ namespace SMP.Application.Services.PostService
     {
 
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IFollowService _followService;
+        
 
         private readonly IMapper _mapper;
 
-        public PostService(IUnitOfWork unitOfWork, IMapper mapper)
+        public PostService(IUnitOfWork unitOfWork, IMapper mapper, IFollowService followService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _followService = followService;
         }
 
         public async Task Create(PostDTO model)
@@ -105,7 +109,10 @@ namespace SMP.Application.Services.PostService
         }
 
         public async Task<List<GetPostVM>> UserGetPosts(string id)
+            
         {
+
+
             var posts = await _unitOfWork.PostRepository.GetFilteredList(
                 selector: x => new GetPostVM
                 {
@@ -128,8 +135,11 @@ namespace SMP.Application.Services.PostService
             return posts;
         }
 
-        public async Task<List<GetPostVM>> GetPostsForMembers()
+        public async Task<List<GetPostVM>> GetPostsForMembers(string id)
         {
+            var followings = await _followService.PostFollowingControl(id);
+            
+
             var posts = await _unitOfWork.PostRepository.GetFilteredList(
                 selector: x => new GetPostVM
                 {
@@ -144,7 +154,8 @@ namespace SMP.Application.Services.PostService
                     CreateDate = x.CreateDate,
 
                 },
-               expression: x => x.Status != Status.Passive,
+           
+               expression: x => x.Status != Status.Passive && followings.Contains(x.User_Id),
                 orderBy: x => x.OrderByDescending(x => x.CreateDate),
               include: x => x.Include(x => x.AppUser).Include(x => x.Post_Comments).Include(x => x.Post_Scores));
 

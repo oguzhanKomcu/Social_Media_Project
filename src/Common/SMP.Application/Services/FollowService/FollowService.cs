@@ -49,42 +49,56 @@ namespace SMP.Application.Services.FollowService
                  selector: x=>  new FollwersVm
                  {
                      Id = x.Id,
-                     FollowerUserName = x.Following.UserName,
-                     FollowerImage = x.Following.ImagePath,
-                    
+                     FollowerUserName = x.Follow.UserName,
+                     FollowerImage = x.Follow.ImagePath,
+                     
+
 
                  },
-                 expression: x => x.Status == Status.Active && x.Following.Id == id,
+                 expression: x => x.Status == Status.Active && x.FollowingId == id,
                  orderBy: x => x.OrderBy(y => y.CreateDate),
                  include: x => x.Include(x => x.Follow));
 
             return followersList;
 
         }
-                 
-                
-           
-        
 
-        public  async Task<List<FollowingVM>> GetFollowings(string id)
+
+        public async Task<List<string>> PostFollowingControl(string id)
         {
 
-          var followingList = await _unitOfWork.FollowerRepository.GetFilteredList(
-             selector: x => new FollowingVM
-             {
-                 Id = x.Id,
-                 FollowUpUserName = x.Follow.UserName,
-                 FollowUpImage = x.Follow.ImagePath,
+            var followings = await _unitOfWork.FollowerRepository.GetFilteredList(
+                selector: x => x.FollowerId,
+                    expression: x => x.Status == Status.Active && x.FollowingId == id,
+                    orderBy: x => x.OrderBy(y => y.CreateDate),
+                    include: x => x.Include(x => x.Follow));
+
+            
+            return followings;
+        }
 
 
 
 
-             },
-             expression: x => x.Status == Status.Active && x.Follow.Id == id,
-             orderBy: x => x.OrderBy(y => y.CreateDate),
-             include: x => x.Include(x => x.Follow));
+        public async Task<List<FollowingVM>> GetFollowings(string id)
+        {
 
-           return followingList;
+            var followingList = await _unitOfWork.FollowerRepository.GetFilteredList(
+               selector: x => new FollowingVM
+               {
+                   Id = x.Id,
+                   FollowUpUserName = x.Follow.UserName,
+                   FollowUpImage = x.Follow.ImagePath,
+
+
+
+
+               },
+               expression: x => x.Status == Status.Active && x.Follow.Id == id,
+               orderBy: x => x.OrderBy(y => y.CreateDate),
+               include: x => x.Include(x => x.Follow));
+
+            return followingList;
         }
 
         public async  Task<bool> IsFollowExsist(CreateFollowerDTO model)

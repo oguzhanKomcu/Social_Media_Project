@@ -12,6 +12,8 @@ namespace SMP.Application.Models.VMs
         public string FollowUpUserName{ get; set; }
         public string FollowUpFullName{ get; set; }
         public string FollowUpImage { get; set; }
+        public string FollowingId { get; set; }
+        public string FollowerId { get; set; }
 
 
 

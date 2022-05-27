@@ -22,6 +22,6 @@ namespace SMP.Application.Services.PostService
 
         Task<PostDetailsVM> GetPostDetails(int id);
 
-        Task<List<GetPostVM>> GetPostsForMembers();
+        Task<List<GetPostVM>> GetPostsForMembers(string id);
     }
 }

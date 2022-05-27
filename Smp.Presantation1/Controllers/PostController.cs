@@ -62,7 +62,9 @@ namespace Smp.Presantation1.Controllers
         [HttpGet]
         public async Task<IActionResult> AllPosts()
         {
-            var model = await _postService.GetPostsForMembers();
+            var model = await _postService.GetPostsForMembers(User.GetUserId());
+
+
             return View(model);
 
 
