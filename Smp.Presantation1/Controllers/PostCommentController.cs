@@ -29,17 +29,23 @@ namespace Smp.Presantation1.Controllers
             else
             {
                 CreatePostCommentDTO post_comment = new CreatePostCommentDTO();
-                post_comment.Post_Id = postId;
-                post_comment.User_Id = User.GetUserId();
+                post_comment.PostId = postId;
+                post_comment.UserId = User.GetUserId();
                 post_comment.Text = comment;
 
 
                 await _postCommentService.Create(post_comment);
-                TempData["Success"] = $"The {post_comment.Post_Id} has been added..!";
-                return RedirectToAction("Post", "Details");
+                TempData["Success"] = $"The {post_comment.PostId} has been added..!";
+                return RedirectToAction("Details", "Post", routeValues: new { id = postId });
             }
         }
 
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _postCommentService.Delete(id);
+            return RedirectToAction("Details", "Post");
+
+        }
 
     }
 }

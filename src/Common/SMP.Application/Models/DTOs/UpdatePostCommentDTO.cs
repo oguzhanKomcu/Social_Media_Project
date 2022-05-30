@@ -11,9 +11,9 @@ namespace SMP.Application.Models.DTOs
     public class UpdatePostCommentDTO
     {
         public int Id { get; set; }
-        public int Post_Id { get; set; }
+        public int PostId { get; set; }
 
-        public int User_Id { get; set; }
+        public int UserId { get; set; }
 
         public string Text { get; set; } // hasmalenght 300     
         public DateTime UpdateDate => DateTime.Now;

@@ -49,6 +49,12 @@ namespace Smp.Presantation1.Controllers
 
 
         }
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _favoritePostService.Delete(id);
+            return RedirectToAction("FavoritePost", "FavoritePosts");
+        }
+
 
     }
 }

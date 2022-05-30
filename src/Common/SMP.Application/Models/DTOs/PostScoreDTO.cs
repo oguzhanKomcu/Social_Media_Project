@@ -18,5 +18,9 @@ namespace SMP.Application.Models.DTOs
         public decimal Score { get; set; }
         public DateTime CreateDate => DateTime.Now;
         public Status Status => Status.Active;
+
+
+
+
     }
 }

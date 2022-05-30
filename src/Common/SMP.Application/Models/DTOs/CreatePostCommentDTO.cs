@@ -11,9 +11,9 @@ namespace SMP.Application.Models.DTOs
     public  class CreatePostCommentDTO
     {
         public int Id { get; set; }
-        public int Post_Id { get; set; }
+        public int PostId { get; set; }
 
-        public string User_Id { get; set; }
+        public string UserId { get; set; }
 
         public string Text { get; set; } // hasmalenght 300     
         public DateTime CreateDate => DateTime.Now;

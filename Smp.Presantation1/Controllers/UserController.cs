@@ -87,7 +87,7 @@ namespace Smp.Presantation1.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> LogIn(LoginDTO model, string returnUrl = "/") //returUrl kaldıgımız yere yönlendirir.
+        public async Task<IActionResult> LogIn(LoginDTO model, string returnUrl = "/") 
         {
 
             if (ModelState.IsValid)
@@ -106,11 +106,11 @@ namespace Smp.Presantation1.Controllers
 
             return View(model);
         }
-        //view olusturulup yeler kalınca sayfa tarayısından sildik 
 
-        private IActionResult RedirectToLocal(string returnUrl)  // kendimiz yazdıksadece burada çalıaşacak
+
+        private IActionResult RedirectToLocal(string returnUrl)  
         {
-            //IsLocalUrl() fonksiyonu, parametresine aldığı değerin yerel bir URL olup olmadıgını kontrol eder.Bir Url bizim domain alanımızda ise yani biizm yetki alanımızda ise bize true değilse false dönecektik.
+
 
 
             if (Url.IsLocalUrl(returnUrl))
@@ -134,9 +134,9 @@ namespace Smp.Presantation1.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            if (id == User.GetUserId()) //login olmus kullanıcı ile sistemdeki kullanıcıyı yakalıyacak
+            if (id == User.GetUserId())
             {
-                var user = await _appUserService.GetById(User.GetUserId()); // bunun için bir ClaimPrincipleExtensions metot yazdım..Snra burada metodu çağırdım GetUserId().. 
+                var user = await _appUserService.GetById(User.GetUserId()); 
 
                 if (user == null)
                 {

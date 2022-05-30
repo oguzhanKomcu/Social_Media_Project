@@ -70,13 +70,13 @@ namespace SMP.Application.Services.FavoritePostService
                     Id = x.Id,
                     User_Id = x.UserId,
                     Post_Id = x.PostId,
-                    UserImagePath = x.User.ImagePath,
-                    UserName = x.User.UserName,
+                    UserImagePath = x.Post.AppUser.ImagePath,
+                    UserName = x.Post.AppUser.UserName,
                     PostImage = x.Post.ImagePath,
                     Description = x.Post.Description,
-                    Total_Score = x.Post_Scores.Average(y => y.Score).ToString(),
-                    Total_Comment = x.Post_Comments.Count(y => y.Id == x.Id).ToString(),
-                    CreateDate = x.CreateDate.ToString(),
+                    Total_Score = x.Post.Total_Score.ToString(),
+                    Total_Comment = x.Post.Total_Comment.ToString(),
+                    CreateDate = x.CreateDate.ToShortDateString(),
 
 
 

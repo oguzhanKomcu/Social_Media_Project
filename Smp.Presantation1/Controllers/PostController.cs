@@ -104,9 +104,9 @@ namespace Smp.Presantation1.Controllers
 
        
 
-        private IActionResult RedirectToLocal(string returnUrl)  // kendimiz yazdıksadece burada çalıaşacak
+        private IActionResult RedirectToLocal(string returnUrl)  
         {
-            //IsLocalUrl() fonksiyonu, parametresine aldığı değerin yerel bir URL olup olmadıgını kontrol eder.Bir Url bizim domain alanımızda ise yani biizm yetki alanımızda ise bize true değilse false dönecektik.
+          
 
 
             if (Url.IsLocalUrl(returnUrl))

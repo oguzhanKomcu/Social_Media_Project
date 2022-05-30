@@ -1,4 +1,5 @@
-﻿@model PostDetailsVM
+﻿
+@model PostDetailsVM
 @{
     ViewData["Title"] = "Details";
 }
@@ -31,13 +32,21 @@
           {
               <div class="card-footer card-comments">
                       
-        
+         
              <div class="card-comment">
                 <img class="img-circle img-sm" src="@c.UserImage" alt="User Image">
                 <div class="comment-text">
                     <span class="username">
                         @c.UserName
-                        <span class="text-muted float-right">@Model.CreateDate</span>
+                        <span class="text-muted float-right">@c.CreateDate</span>
+                        @if (c.User_Id == @User.GetUserId())
+                        {
+                            <button type="button" class="btn btn-warning btn-sm" onclick="deleteComment(@c.Id)">Delete</button>
+                        }
+
+                       
+                      
+
                     </span>
                     @c.Text
                  </div>
@@ -58,6 +67,8 @@
 			<div class="img-push">
 				<input type="text" id="comment2" class="form-control form-control-sm" placeholder="Press enter to post comment">
                 <button type="button" class="btn btn-warning btn-sm" onclick="comment1()">Comment</button>
+              
+                
 
 			</div>
 		</form>
@@ -147,6 +158,25 @@
         })
      }    
     
+         
+     function deleteComment(e) {
+       
+  
+        $.ajax({
+            type: 'POST',
+            url: '/PostComment/Delete/',
+
+
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+            data: { id:e },
+
+            success: function (result) {
+                alert('başarılı oldu ');
+                console.log(result);
+            },
+            
+        })
+     }       
 
 
 

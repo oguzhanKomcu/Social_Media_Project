@@ -57,7 +57,7 @@ namespace SMP.Application.Services.AppUserService
             var users = await _unitOfWork.UserRepository.GetFilteredList(
                selector: x => new GetAppUserVM
                {
-
+                   Id = x.Id,
                    UserName = x.UserName,
                    Location = x.Location,
                    ImagePath = x.ImagePath,
@@ -162,7 +162,7 @@ namespace SMP.Application.Services.AppUserService
                          Total_Comment = y.Post_Comments.Count.ToString(),
                          UserName = y.AppUser.UserName,
                          UserImagePath = y.AppUser.ImagePath,
-
+                         CreateDate = y.CreateDate,
                      }).ToList(),
 
                  },
