@@ -104,7 +104,7 @@ namespace Smp.Presantation1.Controllers
 
 
 
-            return View(model);
+            return RedirectToAction("Posts", "Post");
         }
 
 

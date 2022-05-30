@@ -12,45 +12,35 @@
                 <h4>Post List</h4>
             </div>
             <div class="card-body">
-                <table class="table table-hover">
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
+            <div class="card-body">
+                @foreach (var item in Model)
+                {
+                    <form asp-action="UserProfile" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+                        <div class="card card-widget">
+                            <div class="card-header">
+                                <div class="user-block">
+                                    <img class="img-circle" src="@item.UserImagePath" alt="User Image">
+                                    <span class="username"><a href="#">@item.UserName</a></span>
+                                    <span class="description">Shared publicly - @item.CreateDate</span>
+                                </div>
+                                <!-- /.user-block -->
+                        </div>
+                            <!-- /.card-header -->
+                        <div class="card-body">
+                                <img class="img-fluid pad" src="@item.ImagePath" alt="Photo">
+                                <br />
+                                <h4 class="card-text">@item.Description</h4>
+                                <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a>
+                                <a asp-controller="FavoritePost" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Delete</a>
+                                <span class="float-right text-muted">@item.Total_Score Score - @item.Total_Comment Comments</span>
+                            </div>
+                            <!-- /.card-body -->
 
 
-                            <tr>
-                                <td id="postId">@item.Id</td>
-                                <td>@item.Description</td>
-                                <td>@item.CreateDate</td>
-                                <td>@item.UserImagePath</td>
-                                <td>
-                                    <img src="@item.ImagePath" width="100" height="100">
-                                </td>
-
-                                <td>
-                                    <a asp-controller="User" asp-action="Details" asp-route-id="@item.User_Id">@item.UserName</a>
-
-                                </td>
-                                
-                                <td>
-                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a>
-                                </td>
-
-
-
-                            </tr>
-
-
-
-
-                        }
-
-
-
-
-                    </tbody>
-
-                </table>
+                    </div>
+                    </form>
+                }
+            </div>
             </div>
             <div class="card-footer">
                 <a asp-action="Create" class="btn btn-primary">Create New One</a>
