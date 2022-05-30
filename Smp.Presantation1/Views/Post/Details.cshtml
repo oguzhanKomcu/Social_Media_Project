@@ -8,7 +8,7 @@
 	<div class="card-header">
 		<div class="user-block">
 			<img class="img-circle" src="@Model.UserImagePath" alt="User Image">
-			<span class="username"><a href="#">@Model.UserName</a></span>
+			 <a asp-controller="User" asp-action="Details" asp-route-id="@Model.User_Id">@Model.UserName</a>
 			<span class="description">Shared publicly - @Model.CreateDate.ToShortDateString()</span>
 		</div>
 		<!-- /.user-block -->

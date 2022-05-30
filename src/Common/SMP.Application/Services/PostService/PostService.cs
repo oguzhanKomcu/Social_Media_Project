@@ -197,7 +197,7 @@ namespace SMP.Application.Services.PostService
                     UserName = x.AppUser.UserName,
                     UserImagePath = x.AppUser.ImagePath,
                     Total_Score = x.Post_Scores.Average(y => y.Score).ToString(),
-                    Total_Comment = x.Post_Comments.Count(y => y.Id == id).ToString(),
+                    Total_Comment = x.Post_Comments.Count(y => y.PostId == id).ToString(),
                     CreateDate = x.CreateDate,
                     Comments = x.Post_Comments.Where(x => x.PostId == id)
                     .OrderByDescending(x => x.CreateDate)
