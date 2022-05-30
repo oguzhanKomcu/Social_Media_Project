@@ -15,6 +15,10 @@ namespace Smp.Presantation1.Controllers
 
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("AllPosts", "Post");
+            }
             return View();
         }
 

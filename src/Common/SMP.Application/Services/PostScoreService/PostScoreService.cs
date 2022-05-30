@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SMP.Application.Models.DTOs;
+using SMP.Domain.Enums;
 using SMP.Domain.Models.Entities;
 using SMP.Domain.UoW;
 using System;
@@ -26,8 +27,16 @@ namespace SMP.Application.Services.PostScoreService
         {
 
             var postScore = _mapper.Map<Post_Score>(model);
+
             await _unitOfWork.PostScoreRepository.Create(postScore);
+
             await _unitOfWork.Commit();
+
+            //var totalscore = await _unitOfWork.PostRepository.GetFilteredFirstOrDefault(
+            //   selector: x => x.Post_Scores.Average(y => y.Score),
+            //       expression: x => x.Status == Status.Active && x.Id == postScore.PostId);
+            
+            //await _unitOfWork.ExecuteSqlRaw("tp_Total_Score", parameteres: new { @postId = postScore.PostId, @postScore = totalscore });
 
         }
 

@@ -43,7 +43,7 @@ namespace SMP.Application.AutoMapper
             CreateMap<Follower, FollwersVm>().ReverseMap();
             CreateMap<Follower, FollowingVM>().ReverseMap();
             
-            CreateMap<Post_Score, PostScoreDTO>().ReverseMap();
+            CreateMap<PostScoreDTO, Post_Score>().ReverseMap();
 
 
            CreateMap<Post_Comment, CreatePostCommentDTO>().ReverseMap();

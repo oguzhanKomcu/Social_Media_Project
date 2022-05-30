@@ -32,6 +32,7 @@ namespace SMP.Domain.Models.Entities
         public string ImagePath { get; set; }
         public string Biyography { get; set; }
         public string User_Score { get; set; }
+
         public string Follower_Count { get; set; }
         public string Following_Count { get; set; }
 

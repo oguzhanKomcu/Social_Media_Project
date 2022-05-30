@@ -8,10 +8,6 @@
 
     <div class="col-sm-6">
         <div class="row">
-            <div class="card-header">
-                <h4>Post List</h4>
-            </div>
-            <div class="card-body">
             <div class="card-body">
                 @foreach (var item in Model)
                 {
@@ -20,7 +16,7 @@
                             <div class="card-header">
                                 <div class="user-block">
                                     <img class="img-circle" src="@item.UserImagePath" alt="User Image">
-                                    <span class="username"><a href="#">@item.UserName</a></span>
+                                 	 <a asp-controller="User" asp-action="Details" asp-route-id="@item.User_Id">@item.UserName</a>
                                     <span class="description">Shared publicly - @item.CreateDate</span>
                                 </div>
                                 <!-- /.user-block -->

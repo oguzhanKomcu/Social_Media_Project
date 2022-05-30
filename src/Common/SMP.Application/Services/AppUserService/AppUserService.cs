@@ -150,7 +150,7 @@ namespace SMP.Application.Services.AppUserService
                      Location = x.Location,
                      ImagePath = x.ImagePath,
                      Biyography = x.Biyography,
-                     User_Score = x.Post_Scores.Average(y => y.Score).ToString(),
+                     User_Score = x.Posts.Average(y => y.Total_Score).ToString(),
                      Follower_Count = x.Followers.Count.ToString(),
                      Following_Count = x.Followings.Count.ToString(),
                      UserPosts = x.Posts.Where(x => x.User_Id == id && x.Status != Status.Passive).OrderByDescending(z => z.CreateDate).Select(y => new GetPostVM

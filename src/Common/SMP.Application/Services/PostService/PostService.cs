@@ -159,6 +159,9 @@ namespace SMP.Application.Services.PostService
                 orderBy: x => x.OrderByDescending(x => x.CreateDate),
               include: x => x.Include(x => x.AppUser).Include(x => x.Post_Comments).Include(x => x.Post_Scores));
 
+
+            
+
             return posts;
 
         }
@@ -168,7 +171,7 @@ namespace SMP.Application.Services.PostService
         public async Task Update(PostDTO model)
         {
 
-            var product = _mapper.Map<Post>(model);
+            var post = _mapper.Map<Post>(model);
 
             if (model.UploadPath != null)
             {
@@ -176,12 +179,12 @@ namespace SMP.Application.Services.PostService
                 image.Mutate(x => x.Resize(256, 256));
                 string guid = Guid.NewGuid().ToString();
                 image.Save($"wwwroot/images/posts/{guid}.jpg");
-                product.ImagePath = $"/images/posts/{guid}.jpg";
+                post.ImagePath = $"/images/posts/{guid}.jpg";
 
 
             }
 
-            await _unitOfWork.PostRepository.Create(product);
+             _unitOfWork.PostRepository.Update(post);
             await _unitOfWork.Commit();
         }
 

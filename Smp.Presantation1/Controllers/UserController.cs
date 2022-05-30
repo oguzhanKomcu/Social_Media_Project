@@ -87,7 +87,7 @@ namespace Smp.Presantation1.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> LogIn(LoginDTO model, string returnUrl = "/") 
+        public async Task<IActionResult> LogIn(LoginDTO model) 
         {
 
             if (ModelState.IsValid)
@@ -96,7 +96,7 @@ namespace Smp.Presantation1.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("AllPosts", "Post");
                 }
 
                 TempData["Warning"] = "Invalid log in credantial..!!";
@@ -104,9 +104,31 @@ namespace Smp.Presantation1.Controllers
 
 
 
-            return RedirectToAction("Posts", "Post");
+            return RedirectToAction("Index", "Home");
         }
 
+
+        //[HttpPost]
+        //public async Task<IActionResult> Search(string text)
+        //{
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        var result = await _appUserService.Search(model);
+
+        //        if (result.Succeeded)
+        //        {
+        //            return RedirectToAction("AllPosts", "Post");
+        //        }
+
+        //        TempData["Warning"] = "Invalid log in credantial..!!";
+        //    }
+
+
+
+        //    return RedirectToAction("Index", "Home");
+        //}
+        
 
         private IActionResult RedirectToLocal(string returnUrl)  
         {
