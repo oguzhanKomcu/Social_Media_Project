@@ -19,18 +19,28 @@
 
         <ul class="list-group list-group-unbordered mb-3">
             <li class="list-group-item">
-                <b>Follower</b> <a class="float-right">@Model.Follower_Count</a>
+                <a asp-controller="Follower" asp-action="Followers" asp-route-id="@Model.Id">Followers</a>  <a class="float-right">@Model.Follower_Count</a>
             </li>
             <li class="list-group-item">
-                <b>Following</b> <a class="float-right">@Model.Following_Count</a>
+             <a asp-controller="Follower" asp-action="Followings" asp-route-id="@Model.Id">Followings</a>  <a class="float-right">@Model.Following_Count</a>
+
             </li>
 
 
         </ul>
-
-
+        
+   
         <button type="button" class="btn btn-primary" onclick="following()">Follow</button>
 
+
+        
+        <button type="button" class="btn btn-danger" onclick="unfollow()">UnFollow</button>
+        
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        
         @foreach (var item in Model.UserPosts)
         {
              <form asp-action="Details" asp-route-returnUrl="@ViewData["ReturnUrl"]">
@@ -51,7 +61,7 @@
                     <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a> 
 
                     <span class="float-right text-muted">@item.Total_Score Score - @item.Total_Comment Comments</span>
-                </div>
+            </div>
                 <!-- /.card-body -->
                 <!-- /.card-footer -->
 
@@ -74,6 +84,27 @@
         $.ajax({
             type: 'POST',
             url: '/Follow/Create/',
+
+
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: { id :'@Model.Id'},
+
+            success: function (result) {
+                alert('başarılı oldu ');
+                console.log(result);
+            },
+
+        })
+    }
+
+
+    
+    function unfollow() {
+
+
+        $.ajax({
+            type: 'POST',
+            url: '/Follow/Delete/',
 
 
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',

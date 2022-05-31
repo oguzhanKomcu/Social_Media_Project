@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SMP.Application.Extensions;
 using SMP.Application.Models.DTOs;
+using SMP.Application.Models.VMs;
 using SMP.Application.Services.AppUserService;
 using SMP.Application.Services.FollowService;
+using SMP.Domain.Models.Entities;
 
 namespace Smp.Presantation1.Controllers
 {
@@ -108,27 +110,7 @@ namespace Smp.Presantation1.Controllers
         }
 
 
-        //[HttpPost]
-        //public async Task<IActionResult> Search(string text)
-        //{
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        var result = await _appUserService.Search(model);
-
-        //        if (result.Succeeded)
-        //        {
-        //            return RedirectToAction("AllPosts", "Post");
-        //        }
-
-        //        TempData["Warning"] = "Invalid log in credantial..!!";
-        //    }
-
-
-
-        //    return RedirectToAction("Index", "Home");
-        //}
-        
 
         private IActionResult RedirectToLocal(string returnUrl)  
         {
@@ -198,11 +180,34 @@ namespace Smp.Presantation1.Controllers
 
         }
 
+
+
         [HttpGet]
         public async Task<IActionResult> Users()
         {
 
+
+
             return View(await _appUserService.GetUsers());
+
+
+
+
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Users(string userName)
+        {
+            if (!string.IsNullOrEmpty(userName))
+            {
+                return View(await _appUserService.GetUserName(userName));
+            }
+            else
+            {
+                return View(await _appUserService.GetUsers());
+            }
+      
 
 
 

@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace SMP.Application.Models.VMs
 {
-    public  class FollwersVm
+    public  class FollowVM
     {
         public int Id { get; set; }
-        public string FollowerUserName { get; set; }
-        public string FollowerFullName { get; set; }
-        public string FollowerImage { get; set; }
+        public string UserName{ get; set; }
+
+        public string Image { get; set; }
+        public string? User_Id { get; set; }
+        public string? User_Score { get; set; }
+
 
 
 

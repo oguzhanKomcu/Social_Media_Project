@@ -5,6 +5,7 @@ using SixLabors.ImageSharp.Processing;
 using SMP.Application.Models.DTOs;
 using SMP.Application.Models.VMs;
 using SMP.Application.Services.FollowService;
+using SMP.Application.Services.HashtagService;
 using SMP.Domain.Enums;
 using SMP.Domain.Models.Entities;
 using SMP.Domain.Repositories;
@@ -22,20 +23,22 @@ namespace SMP.Application.Services.PostService
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFollowService _followService;
-        
+        private readonly IHashtagService _hashtagService; 
+
 
         private readonly IMapper _mapper;
 
-        public PostService(IUnitOfWork unitOfWork, IMapper mapper, IFollowService followService)
+        public PostService(IUnitOfWork unitOfWork, IMapper mapper, IFollowService followService, IHashtagService hashtagService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _followService = followService;
+            _hashtagService = hashtagService;
         }
 
         public async Task Create(PostDTO model)
         {
-            var product = _mapper.Map<Post>(model);
+            var post = _mapper.Map<Post>(model);
 
             if (model.UploadPath != null)
             {
@@ -43,12 +46,17 @@ namespace SMP.Application.Services.PostService
                 image.Mutate(x => x.Resize(256, 256));
                 string guid = Guid.NewGuid().ToString();
                 image.Save($"wwwroot/images/posts/{guid}.jpg");
-                product.ImagePath = $"/images/posts/{guid}.jpg";
+                post.ImagePath = $"/images/posts/{guid}.jpg";
 
 
             }
 
-            await _unitOfWork.PostRepository.Create(product);
+            await _unitOfWork.PostRepository.Create(post);
+            
+
+
+
+
             await _unitOfWork.Commit();
         }
 
@@ -134,10 +142,10 @@ namespace SMP.Application.Services.PostService
 
             return posts;
         }
-
-        public async Task<List<GetPostVM>> GetPostsForMembers(string id)
+        
+        public async Task<List<GetPostVM>> GetPostsForMembers(string id,string userId)
         {
-            var followings = await _followService.PostFollowingControl(id);
+            var followings = await _followService.PostFollowingControl(id, userId);
             
 
             var posts = await _unitOfWork.PostRepository.GetFilteredList(

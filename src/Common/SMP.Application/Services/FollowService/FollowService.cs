@@ -32,10 +32,10 @@ namespace SMP.Application.Services.FollowService
             await _unitOfWork.Commit();
         }
         
-
-        public async Task Delete(int id)
+        
+        public async Task Delete(string id , string userId)
         {
-            var follow = await _unitOfWork.FollowerRepository.GetDefault(X => X.Id == id);
+            var follow = await _unitOfWork.FollowerRepository.GetDefault(X => X.FollowingId == id && X.FollowerId == userId);
             follow.Status = Status.Passive;
             follow.DeleteDate = DateTime.Now;
             await _unitOfWork.Commit();
@@ -43,15 +43,17 @@ namespace SMP.Application.Services.FollowService
 
  
 
-        public async Task<List<FollwersVm>> GetFollowers(string id)
+        public async Task<List<FollowVM>> GetFollowers(string id)
         {
             var followersList = await _unitOfWork.FollowerRepository.GetFilteredList(
-                 selector: x=>  new FollwersVm
+                 selector: x=>  new FollowVM
                  {
                      Id = x.Id,
-                     FollowerUserName = x.Follow.UserName,
-                     FollowerImage = x.Follow.ImagePath,
-                     
+                     UserName = x.Following.UserName,
+                     Image = x.Following.ImagePath,
+                     User_Id = x.FollowingId,
+                     User_Score = x.Following.User_Score,
+
 
 
                  },
@@ -64,31 +66,40 @@ namespace SMP.Application.Services.FollowService
         }
 
 
-        public async Task<List<string>> PostFollowingControl(string id)
+        public async Task<List<string>> PostFollowingControl(string id, string userId)
         {
+            var followingList = await _unitOfWork.FollowerRepository.GetFilteredList(
+                 selector: x => x.FollowingId,
+                 expression: x => x.Status == Status.Active && x.FollowerId == userId && x.FollowingId == id);
 
-            var followings = await _unitOfWork.FollowerRepository.GetFilteredList(
-                selector: x => x.FollowerId,
-                    expression: x => x.Status == Status.Active && x.FollowingId == id,
-                    orderBy: x => x.OrderBy(y => y.CreateDate),
-                    include: x => x.Include(x => x.Follow));
+            return followingList;
+        }
+        //{
+
+        //    var followings = await _unitOfWork.FollowerRepository.GetFilteredList(
+        //        selector: x => x.FollowerId,
+        //            expression: x => x.Status == Status.Active && x.FollowingId == id,
+        //            orderBy: x => x.OrderBy(y => y.CreateDate),
+        //            include: x => x.Include(x => x.Follow));
 
             
-            return followings;
-        }
+        //    return followings;
+        //}
 
 
 
 
-        public async Task<List<FollowingVM>> GetFollowings(string id)
+        public async Task<List<FollowVM>> GetFollowings(string id)
         {
 
             var followingList = await _unitOfWork.FollowerRepository.GetFilteredList(
-               selector: x => new FollowingVM
+               selector: x => new FollowVM
                {
                    Id = x.Id,
-                   FollowUpUserName = x.Follow.UserName,
-                   FollowUpImage = x.Follow.ImagePath,
+                   UserName = x.Following.UserName,
+                   Image = x.Following.ImagePath,
+                   User_Id = x.FollowingId,
+                   User_Score = x.Following.User_Score,
 
 
 
@@ -103,7 +114,7 @@ namespace SMP.Application.Services.FollowService
 
         public async  Task<bool> IsFollowExsist(CreateFollowerDTO model)
         {
-            bool isExist = await _unitOfWork.FollowerRepository.Any(x => x.Following.Id == model.FollowingId && x.Follow.Id== model.FollowerId);
+            bool isExist = await _unitOfWork.FollowerRepository.Any(x => x.Following.Id == model.FollowingId && x.Follow.Id == model.FollowerId && x.Status == Status.Active  );
             return isExist;
         }
     }

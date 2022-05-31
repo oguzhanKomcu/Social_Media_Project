@@ -21,6 +21,7 @@ namespace SMP.Application.Services.AppUserService
 
         Task<UpdateProfilDTO> GetById(string id);
         Task<List<GetAppUserVM>> GetUsers();
+        Task<List<GetAppUserVM>> GetUserName(string user);
 
     }
 }

@@ -95,29 +95,16 @@ namespace Smp.Presantation1.Controllers
             }
 
         }
-
-        public async Task<IActionResult> Delete(int id, string returnUrl = "/")
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
         {
             await _postService.Delete(id);
-            return RedirectToLocal(returnUrl);
+            return RedirectToAction("Post", "Details");
         }
 
        
 
-        private IActionResult RedirectToLocal(string returnUrl)  
-        {
-          
 
-
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-        }
 
     }
 

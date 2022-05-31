@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SMP.Application.Models.DTOs;
@@ -7,6 +8,7 @@ using SMP.Application.Models.VMs;
 using SMP.Domain.Enums;
 using SMP.Domain.Models.Entities;
 using SMP.Domain.UoW;
+using SMP.Infrastructure;
 
 namespace SMP.Application.Services.AppUserService
 {
@@ -65,7 +67,26 @@ namespace SMP.Application.Services.AppUserService
                },
                expression: x => x.Status != Domain.Enums.Status.Passive,
                orderBy: x => x.OrderBy(x => x.UserName));
-   
+
+            return users;
+        }
+
+        public async Task<List<GetAppUserVM>> GetUserName(string user)
+        {
+
+
+            var users = await _unitOfWork.UserRepository.GetFilteredList(
+               selector: x => new GetAppUserVM
+               {
+                   Id = x.Id,
+                   UserName = x.UserName,
+                   Location = x.Location,
+                   ImagePath = x.ImagePath,
+                   User_Score = x.Post_Scores.Average(y => y.Score).ToString(),
+               },
+               expression: x => x.Status != Domain.Enums.Status.Passive && x.UserName.Contains(user));
+
+
             return users;
         }
 

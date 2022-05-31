@@ -1,6 +1,6 @@
-﻿@model List<GetAppUserVM>
+﻿@model List<FollowVM>
 @{
-    ViewData["Title"] = "Users";
+    ViewData["Title"] = "Followings";
 }
 
 <div class="col-sm-12">
@@ -28,12 +28,15 @@
                             </td>
 
                             <td>
-                                <img src="@item.ImagePath" width="100" height="100">
+                                <img src="@item.Image" width="100" height="100">
                             </td>
                             <td>@item.User_Score</td>
  
                             <td>
                                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a>
+                            </td>
+                             <td>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Details</a>
                             </td>
                             
                         </tr>
@@ -44,3 +47,4 @@
         
     </div>
 </div>
+

@@ -40,5 +40,25 @@ namespace Smp.Presantation1.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _followService.Delete(id,User.GetUserId());
+            return RedirectToAction("User", "Details");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Followings(string id)
+        {
+            await _followService.GetFollowings( id);
+            return RedirectToAction("Follow", "Followings");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Followers(string id)
+        {
+            await _followService.GetFollowers(id);
+            return RedirectToAction("Follow", "Followers");
+        }
     }
 }

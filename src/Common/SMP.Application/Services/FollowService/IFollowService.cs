@@ -11,12 +11,12 @@ namespace SMP.Application.Services.FollowService
     public  interface IFollowService
     {
         Task Create(CreateFollowerDTO model);
-        Task Delete(int id);
+        Task Delete(string id, string userId);
 
-        Task<List<FollwersVm>> GetFollowers(string id);
-        Task<List<FollowingVM>> GetFollowings(string id);
+        Task<List<FollowVM>> GetFollowers(string id);
+        Task<List<FollowVM>> GetFollowings(string id);
         Task<bool> IsFollowExsist(CreateFollowerDTO model);
-        Task<List<string>> PostFollowingControl(string id);
+        Task<List<string>> PostFollowingControl(string id, string userId);
 
 
     }
