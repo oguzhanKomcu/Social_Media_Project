@@ -3,77 +3,70 @@
     ViewData["Title"] = "Update";
 }
 
-<div class="row ml-2 mt-2 mr-2">
+
+@if (Model.User_Id == User.GetUserId())
+{
+
+
     <div class="col-sm-6">
-        <div class="card card-primary">
+        <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Create Post</h3>
+                <h4 class="card-title">Edit Profile</h4>
             </div>
-            <form asp-action="Create" enctype="multipart/form-data">
+            <form asp-action="Update" enctype="multipart/form-data">
+
+                <input type="hidden" asp-for="ImagePath" />
+                <input type="hidden" asp-for="User_Id" />
+                <input type="hidden" asp-for="Id" />
                 <div class="card-body">
-                    <div class="form-group">
-                        <label asp-for="UploadPath"></label>
-                        <input class="form-control" type="file" asp-for="UploadPath">
-                        <span asp-validation-for="UploadPath" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Description"></label>
-                        <input class="form-control" placeholder="Content" asp-for="Description">
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <a asp-action="List" class="btn btn-dark btn-sm mr-2 float-end">Back To List</a>
-                    <input type="submit" class="btn btn-primary btn-sm float-end mr-2" value="Submit" />
-                </div>
+                        <img class="img-fluid pad" src="@Model.ImagePath" alt="Photo">
+                        <br />
+                  </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="Description"></label>
+                                <input asp-for="Description" class="form-control" placeholder="Email" />
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="card-footer">
+                            <input type="submit" class="btn-success btn-sm float-end mr-2" value="Submit" />
+                            <a asp-action="Index" asp-controller="Home" class="btn-primary btn-sm float-end mr-2 ml-2">Home</a>
+                        </div>
             </form>
         </div>
     </div>
-</div>
+    @*    <div class="row ml-2 mt-2 mr-2">
+        <div class="col-sm-6">
+        <div class="card card-primary">
+        <div class="card-header">
+        <h3 class="card-title">Create Post</h3>
+        </div>
+        <form asp-action="Create" enctype="multipart/form-data">
+        <div class="card-body">
+        <input type="hidden" asp-for="Id" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
 
-@*@model UpdateProfilDTO
-@{
-    ViewData["Title"] = "Edit";
+        <label asp-for="UploadPath"></label>
+        <input type="hidden" asp-for="UploadPath"/>
+        <span asp-validation-for="UploadPath" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+        <label asp-for="Description"></label>
+        <input class="form-control" placeholder="Content" asp-for="Description">
+        <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        </div>
+        <div class="card-footer">
+        <a asp-action="List" class="btn btn-dark btn-sm mr-2 float-end">Back To List</a>
+        <input type="submit" class="btn btn-primary btn-sm float-end mr-2" value="Submit" />
+        </div>
+        </form>
+        </div>
+        </div>
+        </div>*@
 }
 
-<div class="col-sm-6">
-    <div class="card">
-        <div class="card-header">
-            <h4 class="card-title">Edit Profile</h4>
-        </div>
-        <form asp-action="Edit" enctype="multipart/form-data">
-            <input type="hidden" asp-for="Id" />
-            <div class="card-body">
-                <div class="form-group">
-                    <label asp-for="UserName"></label>
-                    <input asp-for="UserName" class="form-control" placeholder="User Name" />
-                    <span asp-validation-for="UserName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email"></label>
-                    <input asp-for="Email" class="form-control" placeholder="Email" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password"></label>
-                    <input asp-for="Password" class="form-control" placeholder="Password" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ConfirmPassword"></label>
-                    <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="UploadPath"></label>
-                    <input class="form-control" type="file" asp-for="UploadPath">
-                    <span asp-validation-for="UploadPath" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="card-footer">
-                <input type="submit" class="btn-success btn-sm float-end mr-2" value="Submit" />
-                <a asp-action="Index" asp-controller="Home" class="btn-primary btn-sm float-end mr-2 ml-2">Home</a>
-            </div>
-        </form>
-    </div>
-</div>*@
+

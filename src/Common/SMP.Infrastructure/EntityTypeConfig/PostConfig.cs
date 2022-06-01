@@ -22,7 +22,7 @@ namespace SMP.Infrastructure.EntityTypeConfig
             builder.Property(x => x.Total_Score)
                  .HasPrecision(18, 2)
                  .HasConversion<decimal>()
-                 .IsRequired();
+                 .IsRequired(false);
             builder.Property(x => x.Total_Comment).IsRequired();
             builder.Property(x => x.ImagePath).IsRequired();
             builder.Property(x => x.Description).IsRequired();

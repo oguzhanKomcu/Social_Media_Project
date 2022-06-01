@@ -23,9 +23,8 @@ namespace SMP.Application.Models.DTOs
         public string? Description { get; set; }
 
         public DateTime UpdateDate { get; set; }
-        public DateTime CreateDate => DateTime.Now;
-        public Status Status => Status.Modified;
-
+        public DateTime CreateDate { get; set; }
+        public Status Status { get; set; }
         public List<PostCommentVM>? Post_Comments { get; set; }
         public List<PostScoreVM>? Post_Scores { get; set; }
 

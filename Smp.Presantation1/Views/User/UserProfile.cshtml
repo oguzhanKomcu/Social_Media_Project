@@ -8,33 +8,37 @@
 
 
 <form id="userDetails" novalidate class="needs-validation">
-<div class="card-body box-profile">
-    <div class="text-center">
-        <img class="profile-user-img img-fluid img-circle" src="@Model.ImagePath" alt="User profile picture">
-    </div>
+    <div class="card-body box-profile">
+        <div class="text-center">
+            <img class="profile-user-img img-fluid img-circle" src="@Model.ImagePath" alt="User profile picture">
+        </div>
 
-    <h3 class="profile-username text-center">@Model.UserName</h3>
+        <h3 class="profile-username text-center">@Model.UserName</h3>
 
-       <li class="list-group-item">
+        <li class="list-group-item">
             <b>User_Score</b> <a class="float-right">@Model.User_Score</a>
-       </li>    
-
-    <ul class="list-group list-group-unbordered mb-3">
-        <li class="list-group-item">
-            <b>Follower</b> <a class="float-right">@Model.Follower_Count</a>
         </li>
-        <li class="list-group-item">
-            <b>Following</b> <a class="float-right">@Model.Following_Count</a>
-        </li>
-       
-    </ul>
 
-     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Edit</a>
 
-</div>
-        @foreach (var item in Model.UserPosts)
-        {
-            <form asp-action="UserProfile" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+        <ul class="list-group list-group-unbordered mb-3">
+            <li class="list-group-item">
+                <a asp-controller="Follower" asp-action="Followers" asp-route-id="@Model.Id">Followers</a>  <a class="float-right">@Model.Follower_Count</a>
+            </li>
+            <li class="list-group-item">
+                <a asp-controller="Follower" asp-action="Followings" asp-route-id="@Model.Id">Followings</a>  <a class="float-right">@Model.Following_Count</a>
+
+            </li>
+
+
+        </ul>
+
+
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Edit</a>
+
+    </div>
+    @foreach (var item in Model.UserPosts)
+    {
+        <form asp-action="UserProfile" asp-route-returnUrl="@ViewData["ReturnUrl"]">
             <div class="card card-widget">
                 <div class="card-header">
                     <div class="user-block">
@@ -50,16 +54,18 @@
                     <br />
                     <h4 class="card-text">@item.Description</h4>
                     <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a>
-                     <a asp-controller="Post" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Delete</a>
+           
+
+                    <a asp-controller="Post" asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Update</a>
                     <span class="float-right text-muted">@item.Total_Score Score - @item.Total_Comment Comments</span>
                 </div>
                 <!-- /.card-body -->
-   
+
 
         </div>
         </form>
 
-        }
+    }
 
 
 
@@ -68,27 +74,27 @@
 @*<script type="text/javascript">
 
 
-	function edit() {
-       
-  
-        $.ajax({
-            type: 'Get',
-            url: '/User/UserGet/',
+    function edit() {
 
 
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
-            data: { id :'@Model.Id'},
+    $.ajax({
+    type: 'Get',
+    url: '/User/UserGet/',
 
-            success: function (result) {
-                alert('başarılı oldu lannnnnnn ');
-                console.log(result);
-            },
-            
-        })
+
+    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+    data: { id :'@Model.Id'},
+
+    success: function (result) {
+    alert('başarılı oldu lannnnnnn ');
+    console.log(result);
+    },
+
+    })
     }
-    
-	
-</script>*@
+
+
+    </script>*@
 
 
 

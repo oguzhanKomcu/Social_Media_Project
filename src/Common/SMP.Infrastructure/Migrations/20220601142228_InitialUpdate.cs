@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SMP.Infrastructure.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -220,7 +220,7 @@ namespace SMP.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     User_Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Total_Score = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    Total_Score = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
                     Total_Comment = table.Column<int>(type: "int", nullable: false),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -301,7 +301,7 @@ namespace SMP.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PostId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -315,8 +315,7 @@ namespace SMP.Infrastructure.Migrations
                         name: "FK_Post_Comments_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Post_Comments_Posts_PostId",
                         column: x => x.PostId,
@@ -389,17 +388,17 @@ namespace SMP.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "Pages",
                 columns: new[] { "Id", "Content", "CreateDate", "DeleteDate", "Slug", "Status", "Title", "UpdateDate" },
-                values: new object[] { 1, "Home", new DateTime(2022, 5, 4, 12, 9, 51, 89, DateTimeKind.Local).AddTicks(2551), null, "home", 1, "Home", null });
+                values: new object[] { 1, "Home", new DateTime(2022, 6, 1, 17, 22, 28, 437, DateTimeKind.Local).AddTicks(3392), null, "home", 1, "Home", null });
 
             migrationBuilder.InsertData(
                 table: "Pages",
                 columns: new[] { "Id", "Content", "CreateDate", "DeleteDate", "Slug", "Status", "Title", "UpdateDate" },
-                values: new object[] { 2, "Profil", new DateTime(2022, 5, 4, 12, 9, 51, 89, DateTimeKind.Local).AddTicks(2585), null, "profil", 1, "Profil", null });
+                values: new object[] { 2, "Profil", new DateTime(2022, 6, 1, 17, 22, 28, 437, DateTimeKind.Local).AddTicks(3406), null, "profil", 1, "Profil", null });
 
             migrationBuilder.InsertData(
                 table: "Pages",
                 columns: new[] { "Id", "Content", "CreateDate", "DeleteDate", "Slug", "Status", "Title", "UpdateDate" },
-                values: new object[] { 3, "Favorite Post", new DateTime(2022, 5, 4, 12, 9, 51, 89, DateTimeKind.Local).AddTicks(2589), null, "favorite-post", 1, "Favorite Post", null });
+                values: new object[] { 3, "Favorite Post", new DateTime(2022, 6, 1, 17, 22, 28, 437, DateTimeKind.Local).AddTicks(3407), null, "favorite-post", 1, "Favorite Post", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

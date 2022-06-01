@@ -1,113 +1,116 @@
-﻿
-@model PostDetailsVM
+﻿@model PostDetailsVM
 @{
     ViewData["Title"] = "Details";
 }
 
 <div class="card card-widget">
-	<div class="card-header">
-		<div class="user-block">
-			<img class="img-circle" src="@Model.UserImagePath" alt="User Image">
-			 <a asp-controller="User" asp-action="Details" asp-route-id="@Model.User_Id">@Model.UserName</a>
-			<span class="description">Shared publicly - @Model.CreateDate.ToShortDateString()</span>
-		</div>
-		<!-- /.user-block -->
-	</div>
-	<!-- /.card-header -->
-	<div class="card-body">
-		<img class="img-fluid pad" src="@Model.ImagePath" alt="Photo">
-		<br />
-		<h4 class="card-text">@Model.Description</h4>
-		<button type="button" class="btn btn-warning btn-sm"  onclick="share()" > Share</button>
-    
-		 <input name=opacity id="score" type="number" min=-10 max=10 step=0.1>
-		<button type="button" class="btn btn-warning btn-sm" onclick="score()">Score</button>
+    <div class="card-header">
+        <div class="user-block">
+            <img class="img-circle" src="@Model.UserImagePath" alt="User Image">
+            <a asp-controller="User" asp-action="Details" asp-route-id="@Model.User_Id">@Model.UserName</a>
+            <span class="description">Shared publicly - @Model.CreateDate.ToShortDateString()</span>
+        </div>
+        <!-- /.user-block -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <img class="img-fluid pad" src="@Model.ImagePath" alt="Photo">
+        <br />
+        <h4 class="card-text">@Model.Description</h4>
+        <button type="button" class="btn btn-warning btn-sm" onclick="share()"> Share</button>
+        @if (User.GetUserId() != Model.User_Id)
+        {
+            <input name=opacity id="score" type="number" min=0 max=10 step=0.1>
+            <button type="button" class="btn btn-warning btn-sm" onclick="score()">Score</button>
+        }
 
-		<button type="button" class="btn btn-warning btn-sm" onclick="favorite()">Favorite</button>
-		<span class="float-right text-muted">@Model.Total_Score Score - @Model.Total_Comment Comments</span>
-	</div>
-	<!-- /.card-body -->
 
-          @foreach(var c in Model.Comments)
-          {
-              <div class="card-footer card-comments">
-                      
-         
-             <div class="card-comment">
+        <button type="button" class="btn btn-warning btn-sm" onclick="favorite()">Favorite</button>
+        @if (Model.User_Id == User.GetUserId())
+        {
+            <a asp-controller="Post" asp-action="Update" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Update</a>
+            <button type="button" class="btn btn-warning btn-sm" onclick="deletePost()">Delete</button>
+
+        }
+        <span class="float-right text-muted">@Model.Total_Score Score - @Model.Total_Comment Comments</span>
+    </div>
+    <!-- /.card-body -->
+    @foreach (var c in Model.Comments)
+    {
+        <div class="card-footer card-comments">
+
+
+            <div class="card-comment">
                 <img class="img-circle img-sm" src="@c.UserImage" alt="User Image">
                 <div class="comment-text">
                     <span class="username">
                         @c.UserName
                         <span class="text-muted float-right">@c.CreateDate</span>
-                        @if (c.User_Id == @User.GetUserId())
+                    </span>
+                    @c.Text
+                     @if (c.User_Id == User.GetUserId())
                         {
                             <button type="button" class="btn btn-warning btn-sm" onclick="deleteComment(@c.Id)">Delete</button>
                         }
+                </div>
+            </div>
+        </div>
+    }
 
-                       
-                      
 
-                    </span>
-                    @c.Text
-                 </div>
-              </div>
-              </div>
-          }
-            
-            
 
-            
-        
 
-	<!-- /.card-footer -->
-	<div class="card-footer">
-		<form action="#" method="post">
-			
-			<!-- .img-push is used to add margin to elements next to floating images -->
-			<div class="img-push">
-				<input type="text" id="comment2" class="form-control form-control-sm" placeholder="Press enter to post comment">
+
+
+    <!-- /.card-footer -->
+    <div class="card-footer">
+        <form action="#" method="post">
+
+            <!-- .img-push is used to add margin to elements next to floating images -->
+            <div class="img-push">
+                <input type="text" id="comment2" class="form-control form-control-sm" placeholder="Press enter to post comment">
                 <button type="button" class="btn btn-warning btn-sm" onclick="comment1()">Comment</button>
-              
-                
 
-			</div>
-		</form>
-	</div>
-	<!-- /.card-footer -->
+
+
+            </div>
+        </form>
+    </div>
+    <!-- /.card-footer -->
 </div>
 
 <script type="text/javascript">
 
- 
+
     function share() {
-       
-  
+
+
         $.ajax({
             type: 'POST',
             url: '/PostSharing/Create/',
 
 
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: { id :'@Model.Id'},
 
             success: function (result) {
                 alert('başarılı oldu lannnnnnn ');
                 console.log(result);
             },
-            
+
         })
     }
-	
+
     function score() {
 
         var score = $('#score').val();
-  
+
         $.ajax({
             type: 'POST',
             url: '/PostScore/Create/',
 
 
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: { postId :'@Model.Id',
             score: score},
 
@@ -115,38 +118,38 @@
                 alert('başarılı oldu  ');
                 console.log(result);
             },
-            
+
         })
     }
 
-	function favorite() {
-       
-  
+    function favorite() {
+
+
         $.ajax({
             type: 'POST',
             url: '/FavoritePost/Create/',
 
 
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: { id :'@Model.Id'},
 
             success: function (result) {
                 alert('başarılı oldu  ');
                 console.log(result);
             },
-            
+
         })
     }
-    
+
      function comment1() {
-       
+
        var comment2 = $('#comment2').val();
         $.ajax({
             type: 'POST',
             url: '/PostComment/Create/',
 
 
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: { postId :'@Model.Id',
             comment: comment2},
 
@@ -154,38 +157,57 @@
                 alert('başarılı oldu ');
                 console.log(result);
             },
-            
+
         })
-     }    
-    
-         
+     }
+
+
      function deleteComment(e) {
-       
-  
+
+
         $.ajax({
             type: 'POST',
             url: '/PostComment/Delete/',
 
 
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: { id:e },
 
             success: function (result) {
                 alert('başarılı oldu ');
                 console.log(result);
             },
-            
+
         })
-     }       
+     }
+
+     
+     function deletePost() {
+
+
+        $.ajax({
+            type: 'POST',
+            url: '/Post/Delete/',
+
+
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: { id:'@Model.Id'},
+
+            success: function (result) {
+                alert('başarılı oldu ');
+                console.log(result);
+            },
+
+        })
+     }
 
 
 
 
-    
 
 
 
 
-    
-	
+
+
 </script>

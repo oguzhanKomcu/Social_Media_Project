@@ -38,6 +38,8 @@ namespace SMP.Application.Services.PostService
 
         public async Task Create(PostDTO model)
         {
+            model.CreateDate =  DateTime.Now;
+            model.Status = Status.Active;
             var post = _mapper.Map<Post>(model);
 
             if (model.UploadPath != null)
@@ -71,49 +73,29 @@ namespace SMP.Application.Services.PostService
         public async Task<PostDTO> GetById(int id)
         {
             var post = await _unitOfWork.PostRepository.GetFilteredFirstOrDefault(
-                selector: x => new PostDetailsVM
+                selector: x => new PostDTO
                 {
                     Id = x.Id,
 
                     Description = x.Description,
                     ImagePath = x.ImagePath,
-                    UserName = x.AppUser.UserName,
-                    UserImagePath = x.AppUser.ImagePath,
-                    Total_Score = x.Post_Scores.Average(y => y.Score).ToString(),
-                    Total_Comment = x.Post_Comments.Count(y => y.Id == id).ToString(),
-                    
+                    CreateDate = x.CreateDate,
+                    User_Id = x.User_Id,
+                    //UserName = x.AppUser.UserName,
+                    //UserImagePath = x.AppUser.ImagePath,
+                    //Total_Score = x.Post_Scores.Average(y => y.Score).ToString(),
+                    //Total_Comment = x.Post_Comments.Count(y => y.Id == id).ToString(),
+
 
                 },
-                expression: x => x.Id == id && x.Status == Status.Active
+                expression: x => x.Id == id && x.Status != Status.Passive
                 );
 
-            var model = _mapper.Map<PostDTO>(post);
-            model.Post_Comments = await _unitOfWork.PostCommentRepository.GetFilteredList(
-                selector: x => new PostCommentVM
-                {
-                    Id = x.Id,
-                    Post_Id = x.PostId,
-                    User_Id = x.UserId,
-                    Text = x.Text,
-                },
-                expression: x => x.Status != Status.Passive,
-                orderBy: x => x.OrderBy(x => x.CreateDate));
-
-            model.Post_Scores = await _unitOfWork.PostScoreRepository.GetFilteredList(
-                selector: x => new PostScoreVM
-                {
-                    Id = x.Id,
-                    Post_Id = x.PostId,
-                    User_Id = x.UserId,
-                    Score = x.Score,
-
-                },
-                expression: x => x.Status != Status.Passive,
-                orderBy: x => x.OrderByDescending(x => x.Score));
+            //var model = _mapper.Map<PostDTO>(post);
+       
 
 
-
-            return model;
+            return post;
         }
 
         public async Task<List<GetPostVM>> UserGetPosts(string id)
@@ -143,9 +125,9 @@ namespace SMP.Application.Services.PostService
             return posts;
         }
         
-        public async Task<List<GetPostVM>> GetPostsForMembers(string id,string userId)
+        public async Task<List<GetPostVM>> GetPostsForMembers(string id)
         {
-            var followings = await _followService.PostFollowingControl(id, userId);
+            var followings = await _followService.PostFollowingControl(id);
             
 
             var posts = await _unitOfWork.PostRepository.GetFilteredList(
@@ -178,7 +160,8 @@ namespace SMP.Application.Services.PostService
 
         public async Task Update(PostDTO model)
         {
-
+            model.UpdateDate = DateTime.Now;
+            model.Status = Status.Modified;
             var post = _mapper.Map<Post>(model);
 
             if (model.UploadPath != null)
@@ -207,6 +190,7 @@ namespace SMP.Application.Services.PostService
                     ImagePath = x.ImagePath,
                     UserName = x.AppUser.UserName,
                     UserImagePath = x.AppUser.ImagePath,
+                    User_Id = x.User_Id,
                     Total_Score = x.Post_Scores.Average(y => y.Score).ToString(),
                     Total_Comment = x.Post_Comments.Count(y => y.PostId == id).ToString(),
                     CreateDate = x.CreateDate,
@@ -214,6 +198,7 @@ namespace SMP.Application.Services.PostService
                     .OrderByDescending(x => x.CreateDate)
                     .Select(x => new PostCommentVM
                     {
+                        User_Id = x.UserId,
                         Text = x.Text,
                         UserImage = x.User.ImagePath,
                         UserName = x.User.UserName,

@@ -66,11 +66,11 @@ namespace SMP.Application.Services.FollowService
         }
 
 
-        public async Task<List<string>> PostFollowingControl(string id, string userId)
+        public async Task<List<string>> PostFollowingControl(string id)
         {
             var followingList = await _unitOfWork.FollowerRepository.GetFilteredList(
                  selector: x => x.FollowingId,
-                 expression: x => x.Status == Status.Active && x.FollowerId == userId && x.FollowingId == id);
+                 expression: x => x.Status == Status.Active &&  x.FollowerId == id);
 
             return followingList;
         }

@@ -12,14 +12,14 @@ using SMP.Infrastructure;
 namespace SMP.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220504090951_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220601142228_InitialUpdate")]
+    partial class InitialUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.4")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -401,7 +401,7 @@ namespace SMP.Infrastructure.Migrations
                         {
                             Id = 1,
                             Content = "Home",
-                            CreateDate = new DateTime(2022, 5, 4, 12, 9, 51, 89, DateTimeKind.Local).AddTicks(2551),
+                            CreateDate = new DateTime(2022, 6, 1, 17, 22, 28, 437, DateTimeKind.Local).AddTicks(3392),
                             Slug = "home",
                             Status = 1,
                             Title = "Home"
@@ -410,7 +410,7 @@ namespace SMP.Infrastructure.Migrations
                         {
                             Id = 2,
                             Content = "Profil",
-                            CreateDate = new DateTime(2022, 5, 4, 12, 9, 51, 89, DateTimeKind.Local).AddTicks(2585),
+                            CreateDate = new DateTime(2022, 6, 1, 17, 22, 28, 437, DateTimeKind.Local).AddTicks(3406),
                             Slug = "profil",
                             Status = 1,
                             Title = "Profil"
@@ -419,7 +419,7 @@ namespace SMP.Infrastructure.Migrations
                         {
                             Id = 3,
                             Content = "Favorite Post",
-                            CreateDate = new DateTime(2022, 5, 4, 12, 9, 51, 89, DateTimeKind.Local).AddTicks(2589),
+                            CreateDate = new DateTime(2022, 6, 1, 17, 22, 28, 437, DateTimeKind.Local).AddTicks(3407),
                             Slug = "favorite-post",
                             Status = 1,
                             Title = "Favorite Post"
@@ -454,7 +454,7 @@ namespace SMP.Infrastructure.Migrations
                     b.Property<int>("Total_Comment")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Total_Score")
+                    b.Property<decimal?>("Total_Score")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
@@ -500,7 +500,6 @@ namespace SMP.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -709,9 +708,7 @@ namespace SMP.Infrastructure.Migrations
 
                     b.HasOne("SMP.Domain.Models.Entities.AppUser", "User")
                         .WithMany("Post_Comments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Post");
 

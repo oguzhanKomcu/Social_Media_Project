@@ -17,6 +17,7 @@ namespace SMP.Application.Models.VMs
         public string UserName { get; set; }
         public string UserImagePath { get; set; }
         public string Total_Score { get; set; }
+        public string Total_Post { get; set; }
         public string Total_Comment { get; set; }
         public DateTime CreateDate { get; set; }
 

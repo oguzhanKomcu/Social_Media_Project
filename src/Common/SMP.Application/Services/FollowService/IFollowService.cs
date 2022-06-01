@@ -16,7 +16,7 @@ namespace SMP.Application.Services.FollowService
         Task<List<FollowVM>> GetFollowers(string id);
         Task<List<FollowVM>> GetFollowings(string id);
         Task<bool> IsFollowExsist(CreateFollowerDTO model);
-        Task<List<string>> PostFollowingControl(string id, string userId);
+        Task<List<string>> PostFollowingControl(string id);
 
 
     }

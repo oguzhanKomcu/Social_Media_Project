@@ -5,7 +5,9 @@
 
 
 <form id="allPosts" novalidate class="needs-validation">
-
+    <div class="card-footer">
+        <a asp-action="Create" class="btn btn-primary">Create New One</a>
+    </div>
     <div class="col-sm-6">
         <div class="row">
             <div class="card-body">
@@ -16,19 +18,18 @@
                             <div class="card-header">
                                 <div class="user-block">
                                     <img class="img-circle" src="@item.UserImagePath" alt="User Image">
-                                 	 <a asp-controller="User" asp-action="Details" asp-route-id="@item.User_Id">@item.UserName</a>
+                                    <a asp-controller="User" asp-action="Details" asp-route-id="@item.User_Id">@item.UserName</a>
                                     <span class="description">Shared publicly - @item.CreateDate</span>
                                 </div>
                                 <!-- /.user-block -->
                         </div>
                             <!-- /.card-header -->
                         <div class="card-body">
-                                <img class="img-fluid pad" src="@item.ImagePath" alt="Photo">
+                                <img class="img-fluid" src="@item.ImagePath" alt="Photo">
                                 <br />
                                 <h4 class="card-text">@item.Description</h4>
                                 <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a>
-                              
-                                <span class="float-right text-muted">@item.Total_Score Score - @item.Total_Comment Comments</span>
+
                             </div>
                             <!-- /.card-body -->
 
@@ -37,11 +38,9 @@
                     </form>
                 }
             </div>
-            </div>
-            <div class="card-footer">
-                <a asp-action="Create" class="btn btn-primary">Create New One</a>
-            </div>
         </div>
+
+    </div>
     </div>
 
 

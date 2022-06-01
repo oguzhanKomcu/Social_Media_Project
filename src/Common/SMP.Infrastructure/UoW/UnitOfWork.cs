@@ -145,7 +145,15 @@ namespace SMP.Infrastructure.UoW
 
         public async Task Commit()
         {
-            await _appDbContext.SaveChangesAsync();
+            try
+            {
+                await _appDbContext.SaveChangesAsync();
+            }
+            catch (Exception e )
+            {
+
+                throw e;
+            }
         }
 
         private bool _isDisposed = false;

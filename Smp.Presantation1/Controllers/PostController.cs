@@ -74,7 +74,9 @@ namespace Smp.Presantation1.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
-            return View(await _postService.GetById(id));
+            var model = await _postService.GetById(id);
+            ViewData["uploadPath"] = model.ImagePath;
+            return View(model);
         }
 
         [HttpPost]
@@ -84,7 +86,7 @@ namespace Smp.Presantation1.Controllers
             {
                 await _postService.Update(model);
                 TempData["Success"] = "Post has been added..!!";
-                return RedirectToAction("List");
+                return RedirectToAction("UserProfile","User");
 
 
             }
@@ -96,10 +98,10 @@ namespace Smp.Presantation1.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
-            await _postService.Delete(id);
-            return RedirectToAction("Post", "Details");
+            await _postService.Delete(int.Parse(id));
+            return RedirectToAction("User", "UserProfile");
         }
 
        

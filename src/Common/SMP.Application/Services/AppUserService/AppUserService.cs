@@ -161,6 +161,25 @@ namespace SMP.Application.Services.AppUserService
 
         public async Task<GetAppUserVM> UserDetails(string id)
         {
+            var postScore = await _unitOfWork.PostRepository.GetFilteredFirstOrDefault(
+                selector: x => new GetPostVM
+                {
+                    Total_Score = x.Post_Scores.Average(y => y.Score).ToString(),
+                },
+                 expression: x => x.User_Id == id && x.Status != Status.Passive);
+
+            var totalPost = await _unitOfWork.UserRepository.GetFilteredFirstOrDefault(
+                selector: x => new GetAppUserVM
+                {
+                    Total_Post = x.Posts.Count(y => y.Status != Status.Passive).ToString(),
+                },
+                 expression: x => x.Id == id && x.Status != Status.Passive);
+      
+
+
+            var totalUserScore = Convert.ToDecimal(postScore.Total_Score) / Convert.ToDecimal(totalPost.Total_Post);
+
+
             var user = await _unitOfWork.UserRepository.GetFilteredFirstOrDefault(
 
                  selector: x => new GetAppUserVM
@@ -171,7 +190,7 @@ namespace SMP.Application.Services.AppUserService
                      Location = x.Location,
                      ImagePath = x.ImagePath,
                      Biyography = x.Biyography,
-                     User_Score = x.Posts.Average(y => y.Total_Score).ToString(),
+                     User_Score = totalUserScore.ToString().Replace('0', ' '),/*x.Posts.Select(y => y.Post_Scores.Average(z=> z.Score)).Where(x.Id).ToString()*/
                      Follower_Count = x.Followers.Count.ToString(),
                      Following_Count = x.Followings.Count.ToString(),
                      UserPosts = x.Posts.Where(x => x.User_Id == id && x.Status != Status.Passive).OrderByDescending(z => z.CreateDate).Select(y => new GetPostVM
