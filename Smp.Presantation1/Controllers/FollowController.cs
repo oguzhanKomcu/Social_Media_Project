@@ -50,15 +50,14 @@ namespace Smp.Presantation1.Controllers
         [HttpGet]
         public async Task<IActionResult> Followings(string id)
         {
-            await _followService.GetFollowings( id);
-            return RedirectToAction("Follow", "Followings");
+   
+            return View(await _followService.GetFollowings(id));
         }
 
         [HttpGet]
         public async Task<IActionResult> Followers(string id)
         {
-            await _followService.GetFollowers(id);
-            return RedirectToAction("Follow", "Followers");
+            return View(await _followService.GetFollowers(id));
         }
     }
 }

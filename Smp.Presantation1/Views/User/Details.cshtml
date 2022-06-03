@@ -19,10 +19,10 @@
 
         <ul class="list-group list-group-unbordered mb-3">
             <li class="list-group-item">
-                <a asp-controller="Follower" asp-action="Followers" asp-route-id="@Model.Id">Followers</a>  <a class="float-right">@Model.Follower_Count</a>
+                <a asp-controller="Follow" asp-action="Followers" asp-route-id="@Model.Id">Followers</a>  <a class="float-right">@Model.Follower_Count</a>
             </li>
             <li class="list-group-item">
-             <a asp-controller="Follower" asp-action="Followings" asp-route-id="@Model.Id">Followings</a>  <a class="float-right">@Model.Following_Count</a>
+             <a asp-controller="Follow" asp-action="Followings" asp-route-id="@Model.Id">Followings</a>  <a class="float-right">@Model.Following_Count</a>
 
             </li>
 
@@ -69,6 +69,36 @@
         </div>
         </form>
         }
+          @foreach (var item in Model.SaharingPosts)
+    {
+        <form asp-action="UserProfile" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+            <div class="card card-widget">
+                <div class="card-header">
+                    <div class="user-block">
+                        <img class="img-circle" src="@item.UserImagePath" alt="User Image">
+                        <span class="username"><a href="#">@item.UserName</a></span>
+                        <span class="description">Shared publicly - @item.CreateDate.ToShortDateString()</span>
+                    </div>
+                    <!-- /.user-block -->
+            </div>
+                <!-- /.card-header -->
+            <div class="card-body">
+                    <img class="img-fluid pad" src="@item.ImagePath" alt="Photo">
+                    <br />
+                    <h4 class="card-text">@item.Description</h4>
+                    <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a>
+           
+
+                    <a asp-controller="Post" asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Update</a>
+                    <span class="float-right text-muted">@item.Total_Score Score - @item.Total_Comment Comments</span>
+                </div>
+                <!-- /.card-body -->
+
+
+        </div>
+        </form>
+
+    }
 
 
 

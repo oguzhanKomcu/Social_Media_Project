@@ -75,5 +75,7 @@ namespace SMP.Application.Services.PostSharingService
             bool isExist = await _unitOfWork.HashtagRepository.Any(x => x.PostId == postId);
             return isExist;
         }
+
+  
     }
 }

@@ -74,18 +74,7 @@ namespace SMP.Application.Services.FollowService
 
             return followingList;
         }
-        //{
-
-        //    var followings = await _unitOfWork.FollowerRepository.GetFilteredList(
-        //        selector: x => x.FollowerId,
-        //            expression: x => x.Status == Status.Active && x.FollowingId == id,
-        //            orderBy: x => x.OrderBy(y => y.CreateDate),
-        //            include: x => x.Include(x => x.Follow));
-
-            
-        //    return followings;
-        //}
-
+ 
 
 
 
@@ -105,7 +94,7 @@ namespace SMP.Application.Services.FollowService
 
 
                },
-               expression: x => x.Status == Status.Active && x.Follow.Id == id,
+               expression: x => x.Status == Status.Active && x.FollowerId == id,
                orderBy: x => x.OrderBy(y => y.CreateDate),
                include: x => x.Include(x => x.Follow));
 

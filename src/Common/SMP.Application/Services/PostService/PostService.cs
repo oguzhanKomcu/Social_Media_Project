@@ -191,7 +191,8 @@ namespace SMP.Application.Services.PostService
                     UserName = x.AppUser.UserName,
                     UserImagePath = x.AppUser.ImagePath,
                     User_Id = x.User_Id,
-                    Total_Score = x.Post_Scores.Average(y => y.Score).ToString(),
+                    Total_Score = x.Post_Scores.Average(y => y.Score) != null ? Math.Round(x.Post_Scores.Average(y => y.Score), 1).ToString().Remove(4) : Math.Round(x.Post_Scores.Average(y => y.Score), 1).ToString(),
+
                     Total_Comment = x.Post_Comments.Count(y => y.PostId == id).ToString(),
                     CreateDate = x.CreateDate,
                     Comments = x.Post_Comments.Where(x => x.PostId == id)

@@ -8,7 +8,7 @@
     <div class="col-sm-6">
         <div class="row">
             <div class="card-header">
-                <h4>Post List</h4>
+                <h4>Favorite Posts</h4>
             </div>
             <div class="card-body">
                 @foreach (var item in Model)
@@ -29,7 +29,7 @@
                                 <br />
                                 <h4 class="card-text">@item.Description</h4>
                                 <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Post_Id" class="btn btn-warning btn-sm">Details</a>
-                                <a asp-controller="FavoritePost" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Delete</a>
+                                <a asp-controller="FavoritePost" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Remove</a>
                                 <span class="float-right text-muted">@item.Total_Score Score - @item.Total_Comment Comments</span>
                             </div>
                             <!-- /.card-body -->
