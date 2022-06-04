@@ -39,13 +39,17 @@ namespace Smp.Presantation1.Controllers
             }
             
             
-            public async Task<IActionResult> Delete(string id)
-            {
-                await _postSharingService.Delete(int.Parse(id));
-                return RedirectToAction("User", "UserProfile");
-            }
+        
 
 
+        }
+        
+        [HttpPost]
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _postSharingService.Delete(int.Parse(id));
+            return RedirectToAction("User", "UserProfile");
         }
     }
 }

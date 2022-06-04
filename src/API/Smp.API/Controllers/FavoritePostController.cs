@@ -57,10 +57,10 @@ namespace Smp.API.Controllers
         }
 
         
-        [HttpGet("{id:int}")]
-        public async Task<IActionResult> Delete(int id)
+        [HttpGet("{id:string}")]
+        public async Task<IActionResult> Delete(string id)
         {
-            await _favoritePostService.Delete(id);
+            await _favoritePostService.Delete(int.Parse(id));
             return Ok();
         }
 

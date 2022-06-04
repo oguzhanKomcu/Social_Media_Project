@@ -5,7 +5,7 @@ using SMP.Application.Services.PostService;
 
 namespace Smp.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class PostController : ControllerBase
     {
@@ -42,12 +42,13 @@ namespace Smp.API.Controllers
             }
         }
 
-
-        [HttpGet("{id:int}")]
-        public async Task<IActionResult> Details(int id)
+        
+        [HttpGet("{postId:int}")]
+        public async Task<IActionResult> Details(int postId)
         {
+            var model = await _postService.GetPostDetails(postId);
 
-            return Ok(await _postService.GetPostDetails(id));
+            return Ok(model);
         }
 
         [HttpGet("{userId:string}")]
@@ -73,13 +74,13 @@ namespace Smp.API.Controllers
 
         }
 
-        [HttpGet("{userId:string}")]
-        public async Task<IActionResult> AllPosts(string userId)
+        [HttpGet("{userId2:string}")]
+        public async Task<IActionResult> AllPosts(string userId2)
         {
 
-            if (userId != null)
+            if (userId2 != null)
             {
-                var model = await _postService.GetPostsForMembers(userId);
+                var model = await _postService.GetPostsForMembers(userId2);
                 return Ok(model);
             }
             else

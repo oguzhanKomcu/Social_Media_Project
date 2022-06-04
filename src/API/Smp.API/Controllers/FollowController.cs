@@ -48,18 +48,18 @@ namespace Smp.API.Controllers
             return Ok();
         }
 
-        [HttpGet("{userId:string}")]
-        public async Task<IActionResult> Followings(string userId)
+        [HttpGet("{followingUserId:string}")]
+        public async Task<IActionResult> Followings(string followingUserId)
         {
 
-            return Ok(await _followService.GetFollowings(userId));
+            return Ok(await _followService.GetFollowings(followingUserId));
         }
 
         
-        [HttpGet("{userId:string}")]
-         public async Task<IActionResult> Followers(string userId)
+        [HttpGet("{followerUserId:string}")]
+         public async Task<IActionResult> Followers(string followerUserId)
         {
-            return Ok(await _followService.GetFollowers(userId));
+            return Ok(await _followService.GetFollowers(followerUserId));
         }
     }
 }

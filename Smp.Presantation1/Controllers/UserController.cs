@@ -128,7 +128,7 @@ namespace Smp.Presantation1.Controllers
         }
 
 
-        public async Task<IActionResult> logOut(string userName)
+        public async Task<IActionResult> logOut()
         {
             await _appUserService.LogOut();
             return RedirectToAction("Index", "Home");
