@@ -58,6 +58,17 @@ namespace SMP.Application.Services.PostScoreService
             _unitOfWork.PostRepository.Update(postUpdate);
             await _unitOfWork.Commit();
 
+            var userSCORE = await _unitOfWork.UserRepository.GetFilteredFirstOrDefault(
+                selector: x => new GetAppUserVM
+                {
+                    Id = x.Id,
+                    User_Score = x.Posts.Average(y=> y.Total_Score).ToString(),
+                },
+                 expression: x => x.Id == postUpdate.User_Id && x.Status != Status.Passive);
+                
+
+            await _unitOfWork.Commit();
+
 
             await _unitOfWork.Commit();
 

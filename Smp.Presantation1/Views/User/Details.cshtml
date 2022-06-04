@@ -32,9 +32,14 @@
    
         <button type="button" class="btn btn-primary" onclick="following()">Follow</button>
 
-
+        @foreach(var item in Model.Followers)
+        {
+            if( item.FollowerId == User.GetUserId())
+            {
+                 <button type="button" class="btn btn-danger" onclick="unfollow()">UnFollow</button>
+            }
+        }
         
-        <button type="button" class="btn btn-danger" onclick="unfollow()">UnFollow</button>
         
         <br/>
         <br/>
@@ -89,7 +94,7 @@
                     <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a>
            
 
-                    <a asp-controller="Post" asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Update</a>
+                    <a asp-controller="PostSharing" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Delete</a>
                     <span class="float-right text-muted">@item.Total_Score Score - @item.Total_Comment Comments</span>
                 </div>
                 <!-- /.card-body -->

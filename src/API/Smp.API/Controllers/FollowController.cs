@@ -1,0 +1,65 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using SMP.Application.Models.DTOs;
+using SMP.Application.Services.FollowService;
+
+namespace Smp.API.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class FollowController : ControllerBase
+    {
+        private readonly IFollowService _followService;
+
+        public FollowController(IFollowService followService)
+        {
+            _followService = followService;
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> Create(CreateFollowerDTO model, string followingId, string followerId)
+        {
+            
+
+
+            model.FollowingId = followingId;
+            model.FollowerId = followerId;
+            var follow = await _followService.IsFollowExsist(model);
+
+            if (follow != false)
+            {
+                
+                ModelState.AddModelError(String.Empty, "This person is following this user.It can't be traced back.!");
+                return BadRequest(ModelState);
+            }
+            else
+            {
+                model.FollowingId = followingId;
+                model.FollowerId = followerId;
+                await _followService.Create(model);
+                return Ok();
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(string id, string userId)
+        {
+            await _followService.Delete(id, userId);
+            return Ok();
+        }
+
+        [HttpGet("{userId:string}")]
+        public async Task<IActionResult> Followings(string userId)
+        {
+
+            return Ok(await _followService.GetFollowings(userId));
+        }
+
+        
+        [HttpGet("{userId:string}")]
+         public async Task<IActionResult> Followers(string userId)
+        {
+            return Ok(await _followService.GetFollowers(userId));
+        }
+    }
+}

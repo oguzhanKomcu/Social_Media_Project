@@ -175,8 +175,14 @@ namespace SMP.Application.Services.AppUserService
                      ImagePath = x.ImagePath,
                      Biyography = x.Biyography,
                      User_Score =  Math.Round(x.Posts.Average(y => y.Total_Score), 1).ToString(), 
-                     Follower_Count = x.Followers.Count.ToString(),
-                     Following_Count = x.Followings.Count.ToString(),
+                     Follower_Count = x.Followings.Count(y => y.Status != Status.Passive).ToString(),
+                     Following_Count = x.Followers.Count(y=> y.Status != Status.Passive).ToString(),
+                     Followers = x.Followings.Where(x=> x.FollowingId == id && x.Status !=Status.Passive).Select(y => new FollowVM
+                     {
+                         Id = y.Id,
+                         FollowerId = y.FollowerId,
+                         
+                     }).ToList(),
                      UserPosts = x.Posts.Where(x => x.User_Id == id && x.Status != Status.Passive || x.User_Id == null).OrderByDescending(z => z.CreateDate).Select(y => new GetPostVM
                      {
                          Id = y.Id,

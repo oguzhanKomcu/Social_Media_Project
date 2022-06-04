@@ -36,9 +36,9 @@ namespace SMP.Application.Services.PostSharingService
         public async Task Delete(int id)
         {
             
-            var page = await _unitOfWork.PostSharingRepository.GetDefault(x => x.Id == id);
-            page.Status = Status.Passive;
-            page.DeleteDate = DateTime.Now;
+            var post = await _unitOfWork.PostSharingRepository.GetDefault(x => x.Id == id);
+            post.Status = Status.Passive;
+            post.DeleteDate = DateTime.Now;
             await _unitOfWork.Commit();
         }
 
@@ -72,7 +72,7 @@ namespace SMP.Application.Services.PostSharingService
         public async Task<bool> IsRegisteredPostExsist(int postId)
         {
 
-            bool isExist = await _unitOfWork.HashtagRepository.Any(x => x.PostId == postId);
+            bool isExist = await _unitOfWork.PostSharingRepository.Any(x => x.PostId == postId);
             return isExist;
         }
 

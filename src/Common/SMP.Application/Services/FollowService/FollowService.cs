@@ -49,15 +49,15 @@ namespace SMP.Application.Services.FollowService
                  selector: x=>  new FollowVM
                  {
                      Id = x.Id,
-                     UserName = x.Following.UserName,
-                     Image = x.Following.ImagePath,
-                     User_Id = x.FollowingId,
-                     User_Score = x.Following.User_Score,
-
+                     UserName = x.Follow.UserName,
+                     Image = x.Follow.ImagePath,
+                     User_Id = x.FollowerId,
+                     User_Score = x.Follow.User_Score,
+                     FollowerId = x.FollowerId,
 
 
                  },
-                 expression: x => x.Status == Status.Active && x.FollowingId == id,
+                 expression: x => x.Status != Status.Passive && x.FollowingId == id,
                  orderBy: x => x.OrderBy(y => y.CreateDate),
                  include: x => x.Include(x => x.Follow));
 
@@ -89,12 +89,13 @@ namespace SMP.Application.Services.FollowService
                    Image = x.Following.ImagePath,
                    User_Id = x.FollowingId,
                    User_Score = x.Following.User_Score,
+                   FollowerId = id,
 
 
 
 
                },
-               expression: x => x.Status == Status.Active && x.FollowerId == id,
+               expression: x => x.Status != Status.Passive && x.FollowerId == id,
                orderBy: x => x.OrderBy(y => y.CreateDate),
                include: x => x.Include(x => x.Follow));
 

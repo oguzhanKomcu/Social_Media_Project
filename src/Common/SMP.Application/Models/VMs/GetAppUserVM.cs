@@ -30,6 +30,7 @@ namespace SMP.Application.Models.VMs
         public string Following_Count { get; set; }
         public List<GetPostVM> UserPosts { get; set; }
         public List<PostandPostSharingVm> SaharingPosts { get; set; }
+        public List<FollowVM> Followers { get; set; }
 
 
 

@@ -44,7 +44,7 @@ namespace Smp.Presantation1.Controllers
         public async Task<IActionResult> Delete(string id)
         {
             await _followService.Delete(id,User.GetUserId());
-            return RedirectToAction("User", "Details");
+            return RedirectToAction("User", "Profile");
         }
 
         [HttpGet]

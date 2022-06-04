@@ -14,6 +14,8 @@ namespace SMP.Application.Models.VMs
         public string Image { get; set; }
         public string? User_Id { get; set; }
         public string? User_Score { get; set; }
+        public string? FollowingId { get; set; }
+        public string? FollowerId { get; set; }
 
 
 
