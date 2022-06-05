@@ -120,7 +120,7 @@ namespace SMP.Application.Services.PostService
 
                 },
                 expression: x => x.User_Id == id   && x.Status != Status.Passive,
-                orderBy: x => x.OrderBy(x => x.CreateDate));
+                orderBy: x => x.OrderByDescending(x => x.CreateDate));
 
             return posts;
         }
@@ -191,7 +191,11 @@ namespace SMP.Application.Services.PostService
                     UserName = x.AppUser.UserName,
                     UserImagePath = x.AppUser.ImagePath,
                     User_Id = x.User_Id,
-                    Total_Score = x.Post_Scores.Average(y => y.Score) != null ? Math.Round(x.Post_Scores.Average(y => y.Score), 1).ToString().Remove(4) : Math.Round(x.Post_Scores.Average(y => y.Score), 1).ToString(),
+                    Total_Score = x.Post_Scores.Average(y => y.Score) != null
+                    ? 
+                    Math.Round(x.Post_Scores.Average(y => y.Score), 1).ToString().Remove(4)
+                    : 
+                    Math.Round(x.Post_Scores.Average(y => y.Score), 1).ToString(),
 
                     Total_Comment = x.Post_Comments.Count(y => y.PostId == id).ToString(),
                     CreateDate = x.CreateDate,
@@ -208,7 +212,7 @@ namespace SMP.Application.Services.PostService
 
 
                 },
-                expression: x => x.Id == id,
+                expression: x => x.Id == id && x.Status != Status.Passive,
                 include: x => x.Include(x => x.AppUser).Include(x => x.Post_Comments).Include(x => x.Post_Scores));
                 
 

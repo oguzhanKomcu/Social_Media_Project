@@ -31,7 +31,7 @@
             <a asp-controller="Post" asp-action="Update" asp-route-id="@Model.Id" class="btn btn-warning btn-sm">Update</a>
            
 
-            <button type="button" class="btn btn-danger btn-sm" id="btnDelete" @*onclick="PostDelete()"*@ >Delete</button>
+            <button type="button" class="btn btn-danger btn-sm"  onclick="PostDelete1()" >Delete</button>
 
         }
         <span class="float-right text-muted">@Model.Total_Score Score - @Model.Total_Comment Comments</span>
@@ -52,7 +52,7 @@
                     @c.Text
                     @if (c.User_Id == User.GetUserId())
                     {
-                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteComment(e:c.Id)">Delete</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteComment()">Delete</button>
                         
                     }
                 </div>
@@ -72,7 +72,7 @@
             <!-- .img-push is used to add margin to elements next to floating images -->
             <div class="img-push">
                 <input type="text" id="comment2" class="form-control form-control-sm" placeholder="Press enter to post comment">
-                <button type="button" class="btn btn-warning btn-sm" onclick="comment1()">Comment</button>
+                <button type="button" class="btn btn-warning btn-sm" onclick="comment3()">Comment</button>
 
 
 
@@ -144,7 +144,7 @@
         })
     }
 
-     function comment1() {
+    function comment3() {
 
        var comment2 = $('#comment2').val();
         $.ajax({
@@ -162,31 +162,14 @@
             },
 
         })
-     }
+    }
 
 
-     function deleteComment(e) {
 
-
-        $.ajax({
-            type: 'POST',
-            url: '/PostComment/Delete/',
-
-
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            data: { id:},
-
-            success: function (result) {
-                alert('başarılı oldu ');
-                console.log(result);
-            },
-
-        })
-     }
 
 
      
-     function PostDelete() {
+    function PostDelete1() {
 
 
         $.ajax({
@@ -202,8 +185,8 @@
                 console.log(result);
             },
 
-        });
-     }
+        })
+    }
 
 
 
