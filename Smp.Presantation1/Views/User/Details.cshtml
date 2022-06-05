@@ -22,88 +22,111 @@
                 <a asp-controller="Follow" asp-action="Followers" asp-route-id="@Model.Id">Followers</a>  <a class="float-right">@Model.Follower_Count</a>
             </li>
             <li class="list-group-item">
-             <a asp-controller="Follow" asp-action="Followings" asp-route-id="@Model.Id">Followings</a>  <a class="float-right">@Model.Following_Count</a>
+                <a asp-controller="Follow" asp-action="Followings" asp-route-id="@Model.Id">Followings</a>  <a class="float-right">@Model.Following_Count</a>
 
             </li>
 
 
         </ul>
-        
-   
-        <button type="button" class="btn btn-primary" onclick="following()">Follow</button>
 
-        @foreach(var item in Model.Followers)
+
+
+
+
+
+        @if (Model.Followers.Count != 0)
         {
-            if( item.FollowerId == User.GetUserId())
+
+            @foreach (var item in Model.Followers)
             {
-                 <button type="button" class="btn btn-danger" onclick="unfollow()">UnFollow</button>
+
+
+                if (item.FollowerId == User.GetUserId())
+                {
+                    <button type="button" class="btn btn-danger" onclick="unfollow()">UnFollow</button>
+
+                }
             }
+
+
+           
+               
+
         }
-        
-        
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        
+        else
+        {
+            <button type="button" class="btn btn-primary" onclick="following()">Follow</button>
+
+        }
+
+
+
+
+
+
+        <br />
+        <br />
+        <br />
+        <br />
+
         @foreach (var item in Model.UserPosts)
         {
-             <form asp-action="Details" asp-route-returnUrl="@ViewData["ReturnUrl"]">
-            <div class="card card-widget">
-                <div class="card-header">
-                    <div class="user-block">
-                        <img class="img-circle" src="@item.UserImagePath" alt="User Image">
-                        <span class="username"><a href="#">@item.UserName</a></span>
-                        <span class="description">Shared publicly - @item.CreateDate.ToShortDateString()</span>
-                    </div>
-                    <!-- /.user-block -->
-            </div>
-                <!-- /.card-header -->
-            <div class="card-body">
-                    <img class="img-fluid pad" src="@item.ImagePath" alt="Photo">
-                    <br />
-                    <h4 class="card-text">@item.Description</h4>
-                    <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a> 
-                    
-
-                    <span class="float-right text-muted">@item.Total_Score Score - @item.Total_Comment Comments</span>
-            </div>
-                <!-- /.card-body -->
-                <!-- /.card-footer -->
-
-        </div>
-        </form>
-        }
-          @foreach (var item in Model.SaharingPosts)
-    {
-        <form asp-action="UserProfile" asp-route-returnUrl="@ViewData["ReturnUrl"]">
-            <div class="card card-widget">
-                <div class="card-header">
-                    <div class="user-block">
-                        <img class="img-circle" src="@item.UserImagePath" alt="User Image">
-                        <span class="username"><a href="#">@item.UserName</a></span>
-                        <span class="description">Shared publicly - @item.CreateDate.ToShortDateString()</span>
-                    </div>
-                    <!-- /.user-block -->
-            </div>
-                <!-- /.card-header -->
-            <div class="card-body">
-                    <img class="img-fluid pad" src="@item.ImagePath" alt="Photo">
-                    <br />
-                    <h4 class="card-text">@item.Description</h4>
-                    <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a>
-           
-
-                    <a asp-controller="PostSharing" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Delete</a>
-                    <span class="float-right text-muted">@item.Total_Score Score - @item.Total_Comment Comments</span>
+            <form asp-action="Details" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+                <div class="card card-widget">
+                    <div class="card-header">
+                        <div class="user-block">
+                            <img class="img-circle" src="@item.UserImagePath" alt="User Image">
+                            <span class="username"><a href="#">@item.UserName</a></span>
+                            <span class="description">Shared publicly - @item.CreateDate.ToShortDateString()</span>
+                        </div>
+                        <!-- /.user-block -->
                 </div>
-                <!-- /.card-body -->
+                    <!-- /.card-header -->
+                <div class="card-body">
+                        <img class="img-fluid pad" src="@item.ImagePath" alt="Photo">
+                        <br />
+                        <h4 class="card-text">@item.Description</h4>
+                        <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a>
 
 
-        </div>
-        </form>
+                        <span class="float-right text-muted">@item.Total_Score Score - @item.Total_Comment Comments</span>
+                    </div>
+                    <!-- /.card-body -->
+                    <!-- /.card-footer -->
 
-    }
+            </div>
+            </form>
+        }
+        @foreach (var item in Model.SaharingPosts)
+        {
+            <form asp-action="UserProfile" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+                <div class="card card-widget">
+                    <div class="card-header">
+                        <div class="user-block">
+                            <img class="img-circle" src="@item.UserImagePath" alt="User Image">
+                            <span class="username"><a href="#">@item.UserName</a></span>
+                            <span class="description">Shared publicly - @item.CreateDate.ToShortDateString()</span>
+                        </div>
+                        <!-- /.user-block -->
+                </div>
+                    <!-- /.card-header -->
+                <div class="card-body">
+                        <img class="img-fluid pad" src="@item.ImagePath" alt="Photo">
+                        <br />
+                        <h4 class="card-text">@item.Description</h4>
+                        <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a>
+
+
+                        <a asp-controller="PostSharing" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Delete</a>
+                        <span class="float-right text-muted">@item.Total_Score Score - @item.Total_Comment Comments</span>
+                    </div>
+                    <!-- /.card-body -->
+
+
+            </div>
+            </form>
+
+        }
 
 
 
@@ -134,7 +157,7 @@
     }
 
 
-    
+
     function unfollow() {
 
 

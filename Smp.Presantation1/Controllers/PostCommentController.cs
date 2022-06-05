@@ -36,6 +36,7 @@ namespace Smp.Presantation1.Controllers
 
                 await _postCommentService.Create(post_comment);
                 TempData["Success"] = $"The {post_comment.PostId} has been added..!";
+                //return Json(post_comment);
                 return RedirectToAction("Details", "Post", routeValues: new { id = postId });
             }
         }

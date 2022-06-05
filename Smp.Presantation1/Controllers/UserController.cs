@@ -25,14 +25,14 @@ namespace Smp.Presantation1.Controllers
             {
                 return RedirectToAction("UserProfile", "User");
             }
-            var users = await _appUserService.UserDetails(id);
+            var users = await _appUserService.UserDetails(id,User.GetUserId());
             return View(users);
         }
 
         public async Task<IActionResult> UserProfile()
         {
 
-            var user = await _appUserService.UserDetails(User.GetUserId());
+            var user = await _appUserService.UserProfile(User.GetUserId());
             return View(user);
         }
         
@@ -182,36 +182,39 @@ namespace Smp.Presantation1.Controllers
 
 
 
+        //[HttpGet]
+        //public async Task<IActionResult> Users()
+        //{
+
+
+
+        //    return View(await _appUserService.GetUsers());
+
+
+
+
+
+        //}
+
         [HttpGet]
-        public async Task<IActionResult> Users()
-        {
-
-
-
-            return View(await _appUserService.GetUsers());
-
-
-
-
-
-        }
-
-        [HttpPost]
         public async Task<IActionResult> Users(string userName)
         {
-            if (!string.IsNullOrEmpty(userName))
-            {
-                return View(await _appUserService.GetUserName(userName));
-            }
-            else
-            {
-                return View(await _appUserService.GetUsers());
-            }
-      
+            return View(await _appUserService.GetUserName(userName));
 
 
 
 
         }
+        //[HttpGet]
+        //public async  ActionResult Users(string searchString)
+        //{
+        //    if (!string.IsNullOrEmpty(searchString))
+        //    {
+        //        var user = await _appUserService.GetUserName(searchString);
+     
+        //    }
+      
+        //    return View(user);
+        //}
     }
 }

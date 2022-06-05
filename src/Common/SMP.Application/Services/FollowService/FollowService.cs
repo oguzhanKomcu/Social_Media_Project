@@ -35,7 +35,7 @@ namespace SMP.Application.Services.FollowService
         
         public async Task Delete(string id , string userId)
         {
-            var follow = await _unitOfWork.FollowerRepository.GetDefault(X => X.FollowingId == id && X.FollowerId == userId);
+            var follow = await _unitOfWork.FollowerRepository.GetDefault(X => X.FollowingId == id && X.FollowerId == userId && X.Status != Status.Passive);
             follow.Status = Status.Passive;
             follow.DeleteDate = DateTime.Now;
             await _unitOfWork.Commit();

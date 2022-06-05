@@ -97,10 +97,11 @@ namespace Smp.Presantation1.Controllers
             }
 
         }
+        
         [HttpPost]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
-            await _postService.Delete(int.Parse(id));
+            await _postService.Delete(id);
             return RedirectToAction("User", "UserProfile");
         }
 

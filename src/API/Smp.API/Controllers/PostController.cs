@@ -5,7 +5,7 @@ using SMP.Application.Services.PostService;
 
 namespace Smp.API.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class PostController : ControllerBase
     {
@@ -74,13 +74,13 @@ namespace Smp.API.Controllers
 
         }
 
-        [HttpGet("{userId2:string}")]
-        public async Task<IActionResult> AllPosts(string userId2)
+        [HttpGet("{userIdAllPosts:string}")]
+        public async Task<IActionResult> AllPosts(string userIdAllPosts)
         {
 
-            if (userId2 != null)
+            if (userIdAllPosts != null)
             {
-                var model = await _postService.GetPostsForMembers(userId2);
+                var model = await _postService.GetPostsForMembers(userIdAllPosts);
                 return Ok(model);
             }
             else

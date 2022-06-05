@@ -3,60 +3,67 @@
     ViewData["Title"] = "UserPosts";
 }
 
-<div class="col-sm-6">
+@*<div class="col-sm-6">
     <div class="row">
-        <div class="card-header">
-            <h4>User Post List</h4>
-        </div>
-        <div class="card-body">
-            <table class="table table-hover">
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@item.Id</td>
-                            <td>@item.Description</td>
-                            <td>@item.ImagePath</td>
-                            <td>@item.Post_Scores</td>
-                            <td>@item.CreateDate</td>
-                            
-                            <td>
-                                <a asp-action="Post_Comments" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Post_Comments</a>
-                            </td> 
-                            <td>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Delete</a>
-                            </td>
-                            
-                        </tr>
-                    }
-                </tbody>
-                
-            </table>
-        </div>
-        <div class="card-footer">
-            <a asp-action="Create" class="btn btn-primary">Create New One</a>
-        </div>
+    <div class="card-header">
+    <h4>User Post List</h4>
     </div>
-</div>
+    <div class="card-body">
+    <table class="table table-hover">
+    <tbody>
+    @foreach (var item in Model)
+    {
+    <tr>
+    <td>@item.Id</td>
+    <td>@item.Description</td>
+    <td>@item.ImagePath</td>
+    <td>@item.Post_Scores</td>
+    <td>@item.CreateDate</td>
 
-@*<script type="text/javascript">
-    $(function(){
-    $("button.commentbuton").click(function(){ //bu yorum yap butonu
-    var commentcreate = $("input[name=commentcreate]").val(); // burda yorum içeriğini çekiyorum
-    commentcreate=$.trim(commentcreate); boşlukları kaldır
-    var nesne =$(this);
-    var id=nesne.attr("id");
+    <td>
+    <a asp-action="Post_Comments" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Post_Comments</a>
+    </td>
+    <td>
+    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Delete</a>
+    </td>
 
-    var degerler = "id="+id+"&commentcreate="+commentcreate;
-    $.ajax({
-    type: "POST",
-    url: "docs/commentcreate",
-    data: degerler,
-    success:function(sonuc){
-    $("#"+id+".refresh").html(sonuc);  //classı refresh olan divin içine koy
+    </tr>
     }
-    });
-    });
-    });
-    $(function(){ $("button.deneme").click(function(){ alert(); }); });
-</script>*@
+    </tbody>
+
+    </table>
+    </div>
+    <div class="card-footer">
+    <a asp-action="Create" class="btn btn-primary">Create New One</a>
+    </div>
+    </div>
+    </div>*@
+@foreach (var item in Model)
+{
+    <form asp-action="Details" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+        <div class="card card-widget">
+            <div class="card-header">
+                <div class="user-block">
+                    <img class="img-circle" src="@item.UserImagePath" alt="User Image">
+                    <span class="username"><a href="#">@item.UserName</a></span>
+                    <span class="description">Shared publicly - @item.CreateDate.ToShortDateString()</span>
+                </div>
+                <!-- /.user-block -->
+        </div>
+            <!-- /.card-header -->
+        <div class="card-body">
+                <img class="img-fluid pad" src="@item.ImagePath" alt="Photo">
+                <br />
+                <h4 class="card-text">@item.Description</h4>
+                <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a>
+
+
+                <span class="float-right text-muted">@item.Total_Score Score - @item.Total_Comment Comments</span>
+            </div>
+            <!-- /.card-body -->
+            <!-- /.card-footer -->
+
+    </div>
+    </form>
+}
+

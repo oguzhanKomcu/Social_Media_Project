@@ -17,7 +17,8 @@ namespace SMP.Application.Services.AppUserService
         Task LogOut();
 
         Task UpdateUser(UpdateProfilDTO model);
-        Task<GetAppUserVM> UserDetails(string id);
+        Task<GetAppUserVM> UserDetails(string id,string userId);
+        Task<GetAppUserVM> UserProfile(string id);
 
         Task<UpdateProfilDTO> GetById(string id);
         Task<List<GetAppUserVM>> GetUsers();

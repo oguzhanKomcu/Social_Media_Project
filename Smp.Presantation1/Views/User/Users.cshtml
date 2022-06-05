@@ -3,25 +3,50 @@
     ViewData["Title"] = "Users";
 }
 
+
+
+
 <div class="col-sm-12">
     <div class="card">
         <div class="card-header">
             <h4>User List</h4>
         </div>
         <div class="card-body">
+            <p>
+                
+
+                @using(Html.BeginForm("Users","User", FormMethod.Get))
+                {
+                    @Html.TextBox("userName") <input type="submit" value="Search" />
+
+
+                    
+                }                
+
+
+            </p>
+
             <table class="table table-hover">
                 <thead>
                     <tr>
-             
+
                         <th>User Name</th>
                         <th>Image</th>
                         <th>User SCORE</th>
-                   
+
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @if (Model.Count() == 0)
                     {
+                        <tr>
+                        <td colspan="3">No records found.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                         @foreach (var item in Model)
+                       {
                         <tr>
                             <td>
                                 <a asp-controller="User" asp-action="Details" asp-route-id="@item.Id">@item.UserName</a>
@@ -31,16 +56,18 @@
                                 <img src="@item.ImagePath" width="100" height="100">
                             </td>
                             <td>@item.User_Score</td>
- 
+
                             <td>
                                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a>
                             </td>
-                            
-                        </tr>
+
+                         </tr>
+                        }
                     }
+
                 </tbody>
             </table>
         </div>
-        
+
     </div>
 </div>
