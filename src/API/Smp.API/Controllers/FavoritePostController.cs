@@ -6,6 +6,7 @@ using SMP.Application.Services.FavoritePostService;
 namespace Smp.API.Controllers
 
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class FavoritePostController : ControllerBase
@@ -21,13 +22,12 @@ namespace Smp.API.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Create(CreateFavoritePost model, int id ,string userId)
+        public async Task<IActionResult> Create(CreateFavoritePost model)
         {
 
 
-            model.PostId = id;
-            model.UserId = User.GetUserId();
-            var favoritePost = await _favoritePostService.IsFavoriteExsist(id, userId);
+ 
+            var favoritePost = await _favoritePostService.IsFavoriteExsist(model.PostId, model.UserId);
 
             if (favoritePost != false)
             {
@@ -37,8 +37,8 @@ namespace Smp.API.Controllers
             }
             else
             {
-                model.PostId = id;
-                model.UserId = User.GetUserId();
+
+
                 await _favoritePostService.Create(model);
 
                 return Ok();
@@ -56,7 +56,7 @@ namespace Smp.API.Controllers
 
         }
 
-        
+
         [HttpGet("{id:string}")]
         public async Task<IActionResult> Delete(string id)
         {

@@ -28,7 +28,11 @@ namespace SMP.Application.IoC
     {
         protected override void Load(ContainerBuilder builder)
         {
-       
+
+
+
+            base.Load(builder);
+
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 
             
@@ -82,7 +86,6 @@ namespace SMP.Application.IoC
             #endregion
 
 
-            base.Load(builder);
         }
     }
 }

@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Identity;
 using Autofac.Extensions.DependencyInjection;
 using Autofac;
 using SMP.Application.IoC;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+
+
+
+
 });
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
@@ -22,6 +29,17 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
     builder.RegisterModule(new DependencyResolver());
 });
+builder.Services.AddAuthentication().AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
+{
+    options.ClientId = "390900063560-mncj321ih5cjvu4mu2qd8vahe398jojs.apps.googleusercontent.com"/*builder.Configuration["Authentication:Google:ClientId"]*/;
+    options.ClientSecret = "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"/*builder.Configuration["Authentication:Google:ClientSecret"]*/;
+
+
+});
+//.AddCookie(options =>
+//{
+//    options.LoginPath = "/account/google-login"; // Must be lowercase
+//})
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {

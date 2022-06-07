@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using SMP.Application.Models.DTOs;
 using SMP.Application.Models.VMs;
+using SMP.Domain.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace SMP.Application.Services.AppUserService
 {
     public interface IAppUserService
     {
+        AppUser Authentication(string userName, string password);
         Task<IdentityResult> Register(RegisterDTO model);
         Task<SignInResult> Login(LoginDTO model);
         Task LogOut();

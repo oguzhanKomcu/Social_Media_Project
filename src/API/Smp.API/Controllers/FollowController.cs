@@ -4,6 +4,7 @@ using SMP.Application.Services.FollowService;
 
 namespace Smp.API.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class FollowController : ControllerBase
@@ -17,13 +18,11 @@ namespace Smp.API.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Create(CreateFollowerDTO model, string followingId, string followerId)
+        public async Task<IActionResult> Create(CreateFollowerDTO model)
         {
-            
 
 
-            model.FollowingId = followingId;
-            model.FollowerId = followerId;
+
             var follow = await _followService.IsFollowExsist(model);
 
             if (follow != false)
@@ -34,8 +33,7 @@ namespace Smp.API.Controllers
             }
             else
             {
-                model.FollowingId = followingId;
-                model.FollowerId = followerId;
+
                 await _followService.Create(model);
                 return Ok();
             }
@@ -55,9 +53,9 @@ namespace Smp.API.Controllers
             return Ok(await _followService.GetFollowings(followingUserId));
         }
 
-        
+
         [HttpGet("{followerUserId:string}")]
-         public async Task<IActionResult> Followers(string followerUserId)
+        public async Task<IActionResult> Followers(string followerUserId)
         {
             return Ok(await _followService.GetFollowers(followerUserId));
         }

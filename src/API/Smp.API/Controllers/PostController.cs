@@ -5,6 +5,7 @@ using SMP.Application.Services.PostService;
 
 namespace Smp.API.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class PostController : ControllerBase

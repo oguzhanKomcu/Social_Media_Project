@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SMP.Infrastructure.EntityTypeConfig
 {
-    internal class FollowerConfig : BaseEntityConfig<Follower>
+    public class FollowerConfig : BaseEntityConfig<Follower>
     {
         public override void Configure(EntityTypeBuilder<Follower> builder)
         {

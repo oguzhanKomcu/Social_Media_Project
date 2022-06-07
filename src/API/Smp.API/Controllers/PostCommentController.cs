@@ -5,6 +5,7 @@ using SMP.Application.Services.PostCommentService;
 
 namespace Smp.API.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class PostCommentController : ControllerBase
@@ -18,12 +19,12 @@ namespace Smp.API.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Create(string comment, int postId, string userId)
+        public async Task<IActionResult> Create(CreatePostCommentDTO post_comment)
         {
 
 
 
-            if (comment == null || postId == null || userId == null)
+            if (post_comment.Text == null || post_comment.PostId == null || post_comment.UserId == null)
             {
 
                 ModelState.AddModelError(String.Empty, "Some of the required fields are 'null'. Please try again after filling in the required fields!!!");
@@ -32,10 +33,7 @@ namespace Smp.API.Controllers
 
             else
             {
-                CreatePostCommentDTO post_comment = new CreatePostCommentDTO();
-                post_comment.PostId = postId;
-                post_comment.UserId = userId;
-                post_comment.Text = comment;
+
 
 
                 await _postCommentService.Create(post_comment);

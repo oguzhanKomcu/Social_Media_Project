@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SMP.Infrastructure.SeedData
 {
-    internal class PageSeeding : IEntityTypeConfiguration<Page>
+    public class PageSeeding : IEntityTypeConfiguration<Page>
     {
         public void Configure(EntityTypeBuilder<Page> builder)
         {

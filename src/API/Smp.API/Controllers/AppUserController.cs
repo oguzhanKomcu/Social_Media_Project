@@ -7,38 +7,61 @@ using SMP.Application.Services.FollowService;
 
 namespace Smp.API.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class AppUserController : ControllerBase
     {
         private readonly IAppUserService _appUserService;
-        private readonly IFollowService _followService;
-        public AppUserController(IAppUserService appUserService, IFollowService followService)
+
+        public AppUserController(IAppUserService appUserService)
         {
-            _followService = followService;
+
 
             _appUserService = appUserService;
         }
 
-        [HttpGet("userId")]
+        /// <summary>
+        /// This function returns the user whose "id" is given.
+        /// </summary>
+        /// <param name="userId">It is a required area and so type is string</param>
+        /// <returns>If function is succeded will be return Ok, than will be return NotFound</returns>
+        [HttpGet("{userId:string}")]
         public async Task<IActionResult> Details(string userId)
         {
 
-            var users = await _appUserService.UserDetails(userId,User.GetUserId());
-            return Ok(users);
+            var user = await _appUserService.UserDetails(userId,User.GetUserId());
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
         }
 
-        
-        [HttpGet("userIdprofile")]
+        /// <summary>
+        /// With this function, the user's profile page is returned..
+        /// </summary>
+        /// <param name="userIdprofile">It is a required area and so type is string</param>
+        /// <returns>If function is succeded will be return Ok, than will be return NotFound</returns>
+
+        [HttpGet("{userIdprofile:string}")]
         public async Task<IActionResult> UserProfile(string userIdprofile)
         {
 
             var user = await _appUserService.UserProfile(userIdprofile);
+            if (user == null)
+            {
+                return NotFound();
+            }
             return Ok(user);
+ 
         }
-
-
+        /// <summary>
+        /// You can add a new user using this method.
+        /// </summary>
+        /// <returns>If function is succeded will be return CreatedAtAction, than will be return Bad Request</returns>    
         [HttpPost("register")]
+
         public async Task<IActionResult> Register(RegisterDTO register)
         {
             if (ModelState.IsValid == true)
@@ -54,22 +77,21 @@ namespace Smp.API.Controllers
             return Ok(register);
         }
 
+        /// <summary>
+        /// You can get tokens by entering your username and password.
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("user")]
 
-
-
-        [HttpPost("Login")]
-        public async Task<IActionResult> LogIn(LoginDTO Login)
+        public IActionResult Login(/*[FromRoute]*/ LoginDTO user)
         {
-
-            if (ModelState.IsValid)
+            var token = _appUserService.Authentication(user.UserName, user.Password);
+            if (user == null)
             {
-                var result = await _appUserService.Login(Login);
-                return Ok();
+                return Unauthorized();
             }
+            return Ok(new { token, user });
 
-
-            ModelState.AddModelError(String.Empty, "You have not entered the correct username and password . Please try again!!");
-            return BadRequest(ModelState);
         }
 
 
@@ -82,8 +104,12 @@ namespace Smp.API.Controllers
 
         }
 
-    
 
+
+        /// <summary>
+        /// You can update the user by entering the desired fields.
+        /// </summary>
+        /// <returns></returns>
 
         [HttpPut]
         public async Task<IActionResult> Edit(UpdateProfilDTO model)
@@ -106,7 +132,10 @@ namespace Smp.API.Controllers
         }
 
 
-
+        /// <summary>
+        /// With this function you can fetch all user.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async  Task<IActionResult> Users()
         {

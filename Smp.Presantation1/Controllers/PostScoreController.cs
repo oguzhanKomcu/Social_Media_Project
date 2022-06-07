@@ -57,15 +57,6 @@ namespace Smp.Presantation1.Controllers
 
             return RedirectToAction("Post", "Details");
 
-
-
-
-
-
-
-
-
-
         }
     }
 }

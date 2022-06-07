@@ -18,7 +18,7 @@ namespace SMP.Infrastructure
 
         }
 
-
+        public string SecretKey { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }    
         public DbSet<FavoritePost> FavoritePosts { get; set; }
         public DbSet<Follower> Followers { get; set; }

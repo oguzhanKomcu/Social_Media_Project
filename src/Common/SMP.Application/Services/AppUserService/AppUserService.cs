@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
+using Microsoft.IdentityModel.Tokens;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SMP.Application.Models.DTOs;
@@ -9,6 +10,9 @@ using SMP.Domain.Enums;
 using SMP.Domain.Models.Entities;
 using SMP.Domain.UoW;
 using SMP.Infrastructure;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace SMP.Application.Services.AppUserService
 {
@@ -20,14 +24,49 @@ namespace SMP.Application.Services.AppUserService
         private readonly IMapper _mapper;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly AppDbContext _context;
 
-        public AppUserService(IUnitOfWork unitOfWork, IMapper mapper, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+
+        public AppUserService(IUnitOfWork unitOfWork, IMapper mapper, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, AppDbContext context)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
+
+
+        public AppUser Authentication(string userName, string password)
+        {
+            var user = _context.AppUsers.SingleOrDefault(x => x.UserName == userName &&
+                                                              x.PasswordHash == password);
+
+            if (user == null)
+            {
+                return null;
+            }
+            else
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_context.SecretKey);
+                var tokenDescriptor = new SecurityTokenDescriptor()
+                {
+                    Subject = new ClaimsIdentity(new Claim[] {
+                        new Claim(ClaimTypes.Name, user.Id.ToString())
+                    }),
+                    Expires = DateTime.UtcNow.AddDays(7),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                };
+
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                user.Token = tokenHandler.WriteToken(token);
+
+                return user;
+            }
+        }
+
+
 
         public async Task<UpdateProfilDTO> GetById(string id)
         {
