@@ -20,7 +20,11 @@ namespace Smp.API.Controllers
         }
 
 
-        
+        /// <summary>
+        /// With this function, the user's profile page is returned..
+        /// </summary>
+        /// <param name="model">It is a required area and so type is string</param>
+        /// <returns>If function is succeded will be return Ok, than will be return NotFound</returns>
         [HttpPost]
 
         public async Task<IActionResult> Create(PostSharingDTO model)
@@ -35,7 +39,7 @@ namespace Smp.API.Controllers
             }
             else
             {
-     
+
                 await _postSharingService.Create(model);
                 return Ok();
             }
@@ -45,7 +49,11 @@ namespace Smp.API.Controllers
 
 
         }
-
+        /// <summary>
+        /// With this function, the user's profile page is returned..
+        /// </summary>
+        /// <param name="id">It is a required area and so type is string</param>
+        /// <returns>If function is succeded will be return Ok, than will be return NotFound</returns>
         [HttpDelete]
 
         public async Task<IActionResult> Delete(string id)

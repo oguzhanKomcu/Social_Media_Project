@@ -13,13 +13,13 @@ namespace SMP.Application.Services.AppUserService
 {
     public interface IAppUserService
     {
-        AppUser Authentication(string userName, string password);
+        Task<AppUser> Authentication(string userName, string password);
         Task<IdentityResult> Register(RegisterDTO model);
         Task<SignInResult> Login(LoginDTO model);
         Task LogOut();
 
         Task UpdateUser(UpdateProfilDTO model);
-        Task<GetAppUserVM> UserDetails(string id,string userId);
+        Task<GetAppUserVM> UserDetails(string userId, string followerId);
         Task<GetAppUserVM> UserProfile(string id);
 
         Task<UpdateProfilDTO> GetById(string id);

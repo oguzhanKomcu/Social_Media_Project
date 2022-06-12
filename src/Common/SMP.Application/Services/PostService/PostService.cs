@@ -199,10 +199,11 @@ namespace SMP.Application.Services.PostService
 
                     Total_Comment = x.Post_Comments.Count(y => y.PostId == id).ToString(),
                     CreateDate = x.CreateDate,
-                    Comments = x.Post_Comments.Where(x => x.PostId == id)
+                    Comments = x.Post_Comments.Where(x => x.PostId == id && x.Status != Status.Passive)
                     .OrderByDescending(x => x.CreateDate)
                     .Select(x => new PostCommentVM
                     {
+                        Id = x.Id,
                         User_Id = x.UserId,
                         Text = x.Text,
                         UserImage = x.User.ImagePath,

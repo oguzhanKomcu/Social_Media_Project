@@ -1,13 +1,14 @@
+ï»¿
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using SMP.Application.IoC;
+using SMP.Domain.Models.Entities;
 using SMP.Infrastructure;
 using System.Reflection;
-
-
-
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +26,7 @@ builder.Services.AddSwaggerGen(options =>
         Contact = new OpenApiContact()
         {
             Email = "komcuoguzz@gmail.com",
-            Name = "Oðuzhan Kömcü",
+            Name = "OÄŸuzhan KÃ¶mcÃ¼",
             Url = new Uri("https://github.com/oguzhanKomcu")
         },
         License = new OpenApiLicense()
@@ -62,7 +63,7 @@ builder.Services.AddSwaggerGen(options =>
             new List<string>()
           }
         });
-    
+
 
 
 
@@ -70,6 +71,24 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
+var appsettingsSection = builder.Configuration.GetSection("AppSettings");
+builder.Services.Configure<AppSettings>(appsettingsSection);
+
+var appSettings = appsettingsSection.Get<AppSettings>();
+var key = Encoding.ASCII.GetBytes(appSettings.SecretKey);
+
+
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
+    options.SignIn.RequireConfirmedEmail = false;
+    options.SignIn.RequireConfirmedPhoneNumber = false;
+    options.SignIn.RequireConfirmedAccount = false;
+    options.User.RequireUniqueEmail = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 3;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireLowercase = false;
+}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -96,13 +115,11 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
 app.MapControllers();
-
-app.MapControllerRoute(
-    name: "Default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-
 
 app.Run();
 

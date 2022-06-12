@@ -16,7 +16,11 @@ namespace Smp.API.Controllers
             _postCommentService = postCommentService;
         }
 
-
+        /// <summary>
+        /// With this function, the user's profile page is returned..
+        /// </summary>
+        /// <param name="post_comment">It is a required area and so type is string</param>
+        /// <returns>If function is succeded will be return Ok, than will be return NotFound</returns>
         [HttpPost]
 
         public async Task<IActionResult> Create(CreatePostCommentDTO post_comment)
@@ -43,7 +47,12 @@ namespace Smp.API.Controllers
         }
 
 
-        [HttpGet("{id:int}")]
+        /// <summary>
+        /// With this function, the user's profile page is returned..
+        /// </summary>
+        /// <param name="id">It is a required area and so type is string</param>
+        /// <returns>If function is succeded will be return Ok, than will be return NotFound</returns>
+        [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
             await _postCommentService.Delete(id);

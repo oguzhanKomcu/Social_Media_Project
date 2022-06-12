@@ -44,7 +44,7 @@ namespace Smp.Presantation1.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _postCommentService.Delete(id);
-            return RedirectToAction("Details", "Post");
+            return RedirectToAction("Details", "Post" );
 
         }
 

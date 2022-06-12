@@ -52,7 +52,8 @@
                     @c.Text
                     @if (c.User_Id == User.GetUserId())
                     {
-                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteComment()">Delete</button>
+               @*          <input type="hidden" asp-for="@c.Id" />*@
+                         <a asp-controller="PostComment" asp-action="Delete"  asp-route-id="@c.Id" class="btn btn-warning btn-sm">Delete</a>
                         
                     }
                 </div>

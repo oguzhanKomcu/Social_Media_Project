@@ -19,12 +19,18 @@ namespace Smp.API.Controllers
 
         }
 
+        
+        /// <summary>
+        /// With this function, the user's profile page is returned..
+        /// </summary>
+        /// <param name="model">It is a required area and so type is string</param>
+        /// <returns>If function is succeded will be return Ok, than will be return NotFound</returns>
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]  PostDTO model)
+        public async Task<IActionResult> Create([FromBody] PostDTO model)
         {
             if (ModelState.IsValid)
             {
-   
+
                 if (model.User_Id != null)
                 {
                     await _postService.Create(model);
@@ -43,8 +49,12 @@ namespace Smp.API.Controllers
             }
         }
 
-        
-        [HttpGet("{postId:int}")]
+        /// <summary>
+        /// With this function, the user's profile page is returned..
+        /// </summary>
+        /// <param name="postId">It is a required area and so type is string</param>
+        /// <returns>If function is succeded will be return Ok, than will be return NotFound</returns>
+        [HttpGet("Details")]
         public async Task<IActionResult> Details(int postId)
         {
             var model = await _postService.GetPostDetails(postId);
@@ -52,7 +62,12 @@ namespace Smp.API.Controllers
             return Ok(model);
         }
 
-        [HttpGet("{userId:string}")]
+        /// <summary>
+        /// With this function, the user's profile page is returned..
+        /// </summary>
+        /// <param name="userId">It is a required area and so type is string</param>
+        /// <returns>If function is succeded will be return Ok, than will be return NotFound</returns>
+        [HttpGet("UserPosts")]
         public async Task<IActionResult> UserPosts(string userId)
         {
 
@@ -74,8 +89,12 @@ namespace Smp.API.Controllers
 
 
         }
-
-        [HttpGet("{userIdAllPosts:string}")]
+        /// <summary>
+        /// With this function, the user's profile page is returned..
+        /// </summary>
+        /// <param name="userIdAllPosts">It is a required area and so type is string</param>
+        /// <returns>If function is succeded will be return Ok, than will be return NotFound</returns>
+        [HttpGet("AllPosts")]
         public async Task<IActionResult> AllPosts(string userIdAllPosts)
         {
 
@@ -97,7 +116,11 @@ namespace Smp.API.Controllers
         }
 
 
-        
+        /// <summary>
+        /// With this function, the user's profile page is returned..
+        /// </summary>
+        /// <param name="model">It is a required area and so type is string</param>
+        /// <returns>If function is succeded will be return Ok, than will be return NotFound</returns>
         [HttpPut]
         public async Task<IActionResult> Update(PostDTO model)
         {
@@ -111,13 +134,17 @@ namespace Smp.API.Controllers
             }
             else
             {
-;
+                ;
                 ModelState.AddModelError(String.Empty, "Post hasn't been added..!!");
-                return BadRequest(ModelState);                
+                return BadRequest(ModelState);
             }
 
         }
-
+        /// <summary>
+        /// With this function, the user's profile page is returned..
+        /// </summary>
+        /// <param name="id">It is a required area and so type is string</param>
+        /// <returns>If function is succeded will be return Ok, than will be return NotFound</returns>
         [HttpDelete]
         public async Task<IActionResult> Delete(string id)
         {

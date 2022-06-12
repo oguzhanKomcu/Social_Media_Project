@@ -19,9 +19,12 @@ namespace Smp.API.Controllers
         }
 
 
-
+        /// <summary>
+        /// With this function, the user's profile page is returned..
+        /// </summary>
+        /// <param name="post_Score">It is a required area and so type is string</param>
+        /// <returns>If function is succeded will be return Ok, than will be return NotFound</returns>
         [HttpPost]
-
         public async Task<IActionResult> Create(PostScoreDTO post_Score)
         {
 
@@ -45,7 +48,7 @@ namespace Smp.API.Controllers
 
                     Post post = new Post();
                     AppUser appUser = new AppUser();
-                    await _postScore.Create(post_Score,  post,  appUser);
+                    await _postScore.Create(post_Score, post, appUser);
                     return Ok();
 
 
