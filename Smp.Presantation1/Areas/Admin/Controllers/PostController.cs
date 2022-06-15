@@ -27,5 +27,19 @@ namespace Smp.Presantation1.Areas.Admin.Controllers
 
 
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+
+            return View(await _postService.GetPostDetails(id));
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _postService.Delete(id);
+            return RedirectToAction("User", "UserProfile");
+        }
     }
 }

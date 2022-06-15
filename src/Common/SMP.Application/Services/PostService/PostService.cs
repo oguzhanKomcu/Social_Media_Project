@@ -190,6 +190,9 @@ namespace SMP.Application.Services.PostService
                    UserName = x.AppUser.UserName,
                    ImagePath = x.ImagePath,
                    Total_Score = x.Total_Score.ToString(),
+                   Description = x.Description,
+                   CreateDate = x.CreateDate,
+                   UserImagePath = x.AppUser.ImagePath,
                },
                expression: x => x.Status != Domain.Enums.Status.Passive && x.AppUser.UserName.Contains(userName) || userName == null);
 

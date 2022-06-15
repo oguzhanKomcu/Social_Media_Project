@@ -130,6 +130,15 @@ namespace SMP.Application.Services.AppUserService
             return users;
         }
 
+
+        public async Task Delete(string id)
+        {
+            var user = await _unitOfWork.UserRepository.GetDefault(x => x.Id == id);
+            user.Status = Status.Passive;
+            user.DeleteDate = DateTime.Now;
+            await _unitOfWork.Commit();
+        }
+
         public async Task<List<GetAppUserVM>> GetUserName(string user)
         {
 
@@ -141,7 +150,7 @@ namespace SMP.Application.Services.AppUserService
                    UserName = x.UserName,
                    Location = x.Location,
                    ImagePath = x.ImagePath,
-                   User_Score = x.Post_Scores.Average(y => y.Score).ToString(),
+                   User_Score = Math.Round(x.Posts.Average(y => y.Total_Score), 1).ToString(),
                },
                expression: x => x.Status != Domain.Enums.Status.Passive && x.UserName.Contains(user) || user == null);
 

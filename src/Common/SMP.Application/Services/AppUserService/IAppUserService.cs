@@ -17,7 +17,7 @@ namespace SMP.Application.Services.AppUserService
         Task<IdentityResult> Register(RegisterDTO model);
         Task<SignInResult> Login(LoginDTO model);
         Task LogOut();
-
+        Task Delete(string id);
         Task UpdateUser(UpdateProfilDTO model);
         Task<GetAppUserVM> UserDetails(string userId, string followerId);
         Task<GetAppUserVM> UserProfile(string id);

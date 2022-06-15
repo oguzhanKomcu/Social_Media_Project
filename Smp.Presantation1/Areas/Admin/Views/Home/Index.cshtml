@@ -1,15 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
 }
 
 <div class="text-center">
+
     <h1 class="display-4">Welcome</h1>
-    <h1 class="display-4">You, I, We</h1>
   <div class="card-body">
 
-       <a asp-controller="User" asp-action="Register" class="btn btn-primary btn-lg"  >Register</a>
-       <a asp-controller="User" asp-action="LogIn" class="btn btn-success btn-lg"  >LogIn</a>
+
+       <a asp-area="Admin"  asp-controller="User" asp-action="LogIn" class="btn btn-success btn-lg"  >Admin LogIn</a>
 
    
 	</div>
 </div>
+
