@@ -179,6 +179,24 @@ namespace SMP.Application.Services.PostService
             await _unitOfWork.Commit();
         }
 
+        public async Task<List<GetPostVM>> GetAllPostsUserName(string userName)
+        {
+
+
+            var users = await _unitOfWork.PostRepository.GetFilteredList(
+               selector: x => new GetPostVM
+               {
+                   Id = x.Id,
+                   UserName = x.AppUser.UserName,
+                   ImagePath = x.ImagePath,
+                   Total_Score = x.Total_Score.ToString(),
+               },
+               expression: x => x.Status != Domain.Enums.Status.Passive && x.AppUser.UserName.Contains(userName) || userName == null);
+
+
+            return users;
+        }
+
         public async Task<PostDetailsVM> GetPostDetails(int id)
         {
             var post = await _unitOfWork.PostRepository.GetFilteredFirstOrDefault(

@@ -24,7 +24,7 @@ namespace Smp.Presantation1.Controllers
             if (comment == null)
             {
                 TempData["Warning"] = $"The {comment} category already exist..!";
-                return RedirectToAction("User", "Details");
+                return RedirectToAction("Details", "Post", routeValues: new { id = postId });
             }
             else
             {
@@ -36,15 +36,15 @@ namespace Smp.Presantation1.Controllers
 
                 await _postCommentService.Create(post_comment);
                 TempData["Success"] = $"The {post_comment.PostId} has been added..!";
-                return Json(post_comment);
-                //return RedirectToAction("Details", "Post", routeValues: new { id = postId });
+
+                return RedirectToAction("Details", "Post", routeValues: new { id = postId });
             }
         }
 
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, int postId)
         {
             await _postCommentService.Delete(id);
-            return RedirectToAction("Details", "Post" );
+            return RedirectToAction("Details", "Post", routeValues: new { id = postId });
 
         }
 

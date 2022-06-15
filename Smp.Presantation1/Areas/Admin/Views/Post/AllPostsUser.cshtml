@@ -1,0 +1,53 @@
+﻿@model List<GetPostVM>
+@{
+    ViewData["Title"] = "AllPostsUser";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="col-sm-6">
+    <div class="row">
+        <div class="card-header">
+            <h4>User Post List</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Description</th>
+                        <th>ImagePath</th>
+                        <th>Post_Scores</th>
+                        <th>CreateDate</th>
+                        <th>Post_Comments</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Description</td>
+                            <td><img class="img-fluid pad" src="@item.ImagePath" alt="Photo"></td>
+                            <td>@item.Post_Scores</td>
+                            <td>@item.CreateDate</td>
+
+                            <td>
+                                <a asp-action="Post_Comments" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Post_Comments</a>
+                            </td>
+                            <td>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Delete</a>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Create" class="btn btn-primary">Create New One</a>
+        </div>
+    </div>
+</div>
+
+

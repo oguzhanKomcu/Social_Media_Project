@@ -19,7 +19,7 @@ namespace SMP.Application.Services.PostService
         Task<PostDTO> GetById(int id);
 
         Task<List<GetPostVM>> UserGetPosts(string id);
-
+        Task<List<GetPostVM>> GetAllPostsUserName(string userName);
         Task<PostDetailsVM> GetPostDetails(int id);
 
         Task<List<GetPostVM>> GetPostsForMembers(string id);
