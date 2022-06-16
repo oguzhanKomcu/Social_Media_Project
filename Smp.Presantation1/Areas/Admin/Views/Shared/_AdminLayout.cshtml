@@ -21,10 +21,6 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <!-- Site wrapper -->
     <div class="wrapper">
-        
-        @if (User.Identity.IsAuthenticated  && User.IsInRole("admin") || Context.User.Identity.IsAuthenticated && User.IsInRole("admin")) 
-        {
-              
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -38,7 +34,7 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
                 </li>
-            </ul>    
+            </ul>
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
@@ -156,10 +152,10 @@
                 <li class="nav-item ml-2">
                     <a class="btn btn-sm btn-danger mr-2" asp-controller="User" asp-action="LogOut" asp-route-userName="@User.Identity.Name">@User.Identity.Name, Log Out</a>
                 </li>
-                         
+
             </ul>
-         </nav>
-       
+        </nav>
+
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -209,7 +205,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Post" asp-action="List">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Post" asp-action="AllPostsUser">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>List</p>
                                     </a>
@@ -218,7 +214,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                @*                                <i class="nav-icon fas fa-tachometer-alt"></i>*@
+
                                 <p>
                                     User
                                     <i class="right fas fa-angle-left"></i>
@@ -235,7 +231,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                @*                                <i class="nav-icon fas fa-tachometer-alt"></i>*@
+
                                 <p>
                                     Post Comment
                                     <i class="right fas fa-angle-left"></i>
@@ -244,6 +240,39 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="Admin" asp-controller="Post" asp-action="List">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+
+                                <p>
+                                    Role
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Role" asp-action="AssignedToUser">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>AssignedToUser</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Role" asp-action="Create">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Create</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Role" asp-action="List">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>List</p>
                                     </a>
@@ -278,13 +307,13 @@
             <!-- Control sidebar content goes here -->
         </aside>
         <!-- /.control-sidebar -->
-            
-             }
 
-        
+
+
     </div>
     <!-- ./wrapper -->
-    <!-- jQuery -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/media/js/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="~/media/js/bootstrap.bundle.min.js"></script>

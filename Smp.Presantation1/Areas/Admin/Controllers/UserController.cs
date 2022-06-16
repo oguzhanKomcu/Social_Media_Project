@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SMP.Application.Models.DTOs;
 using SMP.Application.Services.AppUserService;
 
 namespace Smp.Presantation1.Areas.Admin.Controllers
 {
     [Area("Admin")]
+
     public class UserController : Controller
     {
 
@@ -21,6 +23,7 @@ namespace Smp.Presantation1.Areas.Admin.Controllers
 
 
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Users(string userName)
         {
@@ -39,7 +42,7 @@ namespace Smp.Presantation1.Areas.Admin.Controllers
             return RedirectToAction("User", "Users");
         }
 
-        //[AllowAnonymous]
+        [HttpGet]
         public IActionResult LogIn(string returnUrl = "/")
         {
             if (User.Identity.IsAuthenticated)

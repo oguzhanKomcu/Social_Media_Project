@@ -46,23 +46,30 @@
                     {
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>@item.Id</td>
-                                <td>@item.Description</td>
-                                <td><img class="img-fluid pad" src="@item.ImagePath" alt="Photo"></td>
-                                <td>
-                                    <a asp-controller="User" asp-action="Details" asp-route-id="@item.Id">@item.UserName</a>
-                                </td>
-                                <td>@item.Total_Score</td>
-                                <td>@item.CreateDate</td>
-                                <td>
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Delete</a>
-                                </td>
 
-                                <td>
-                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Details</a>
-                                </td>
-                            </tr>
+
+                            if (item.Status != SMP.Domain.Enums.Status.Passive)
+                            {
+                                <tr id="postUser">
+                                    <td>@item.Id</td>
+                                    <td>@item.Description</td>
+                                    <td><img class="img-fluid pad" src="@item.ImagePath" alt="Photo"></td>
+                                    <td>
+                                        <a asp-controller="User" asp-action="Details" asp-route-id="@item.Id">@item.UserName</a>
+                                    </td>
+                                    <td>@item.Total_Score</td>
+                                    <td>@item.CreateDate</td>
+                                    <td>
+
+                                        <button type="button" class="btn btn-danger btn-sm" id="postDlt" data-id="@item.Id" onclick="postDelete()">Delete</button>
+
+                                    </td>
+
+                                    <td>
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Details</a>
+                                    </td>
+                                </tr>
+                            }
                         }
                     }
 
@@ -77,3 +84,28 @@
 </div>
 
 
+<script type="text/javascript">
+
+
+
+
+    function postDelete(){
+        
+        var id1 = $('#postDlt').data('id');
+        var url = '@Url.Action("Delete", "Post")';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: { id: id1 },
+            success: function (data) {
+                alert("Silme işlemi başarılı");
+                $('#postUser').remove();
+            }
+        });
+    };
+
+
+
+
+
+</script>

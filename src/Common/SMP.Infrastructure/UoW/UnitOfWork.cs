@@ -13,6 +13,9 @@ namespace SMP.Infrastructure.UoW
     public class UnitOfWork : IUnitOfWork
     {
 
+
+
+
         private readonly AppDbContext _appDbContext; 
         
         public UnitOfWork(AppDbContext db)
@@ -37,6 +40,8 @@ namespace SMP.Infrastructure.UoW
         private IFavoritePostRepository _favoritePostRepository;
         public IFavoritePostRepository FavoritePostRepository
         {
+            
+
             get
             {
                 if (_favoritePostRepository == null)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SMP.Application.Services.PostService;
 
 namespace Smp.Presantation1.Areas.Admin.Controllers
@@ -16,6 +17,7 @@ namespace Smp.Presantation1.Areas.Admin.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> AllPostsUser(string userName)
         {
@@ -39,7 +41,7 @@ namespace Smp.Presantation1.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _postService.Delete(id);
-            return RedirectToAction("User", "UserProfile");
+            return RedirectToAction("AllPostsUser", "Post");
         }
     }
 }

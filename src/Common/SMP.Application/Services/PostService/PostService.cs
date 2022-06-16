@@ -193,8 +193,11 @@ namespace SMP.Application.Services.PostService
                    Description = x.Description,
                    CreateDate = x.CreateDate,
                    UserImagePath = x.AppUser.ImagePath,
+                   Status = x.Status,
+
                },
-               expression: x => x.Status != Domain.Enums.Status.Passive && x.AppUser.UserName.Contains(userName) || userName == null);
+               expression: x => x.Status != Status.Passive &&  x.AppUser.UserName.Contains(userName) || userName == null);
+
 
 
             return users;
@@ -202,6 +205,9 @@ namespace SMP.Application.Services.PostService
 
         public async Task<PostDetailsVM> GetPostDetails(int id)
         {
+
+
+
             var post = await _unitOfWork.PostRepository.GetFilteredFirstOrDefault(
                 selector: x => new PostDetailsVM
                 {

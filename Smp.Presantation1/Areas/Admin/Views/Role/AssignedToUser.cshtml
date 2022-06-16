@@ -1,0 +1,81 @@
+﻿@using Smp.Presantation1.Areas.Admin.Models.DTOs
+@model AssignedRoleToUserDTO
+@{
+    ViewData["Title"] = "AssignedToUser";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Assigned Role to User</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="AssignedToUser">
+                    <input type="hidden" asp-for="RoleName" />
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6 class="card-title">
+                                Add user to <span class="badge badge-primary">@Model.RoleName</span>
+                            </h6>
+                            <table class="table table-hover">
+                                @if (Model.HasNoRole.Count() == 0)
+                                {
+                                    <tr>
+                                        <td>There is no user to assinged..!</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    foreach (var item in Model.HasNoRole)
+                                    {
+                                        <tr>
+                                            <td>@item.UserName</td>
+                                            <td>
+                                                <input type="checkbox" value="@item.Id" name="AddIds">
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </table>
+                        </div>
+                        <div class="col-sm-6">
+                            <h6 class="card-title">
+                                Remove user to <span class="badge badge-primary">@Model.RoleName</span>
+                            </h6>
+                            <table class="table table-hover">
+                                @if (Model.HasRole.Count() == 0)
+                                {
+                                    <tr>
+                                        <td>There is no user to assinged..!</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    foreach (var item in Model.HasRole)
+                                    {
+                                        <tr>
+                                            <td>@item.UserName</td>
+                                            <td>
+                                                <input type="checkbox" value="@item.Id" name="RemoveIds">
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-sm float-end" value="Submit" />
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <a asp-action="List" class="btn btn-info btn-sm">Back To List</a>
+            </div>
+        </div>
+    </div>
+</div>
+

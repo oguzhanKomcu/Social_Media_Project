@@ -1,4 +1,5 @@
-﻿using SMP.Domain.Models.Entities;
+﻿using SMP.Domain.Enums;
+using SMP.Domain.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace SMP.Application.Models.VMs
         public string Total_Score { get; set; }
         public string Total_Post { get; set; }
         public string Total_Comment { get; set; }
+        public Status Status { get; set; }
         public DateTime CreateDate { get; set; }
 
 

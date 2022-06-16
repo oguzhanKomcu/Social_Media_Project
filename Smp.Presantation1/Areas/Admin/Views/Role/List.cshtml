@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h4>Role List</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Users</th>
+                        <th>Assigned to User</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td user-role="@item.Id"></td>
+                            <td>
+                                <a asp-action="AssignedToUser" asp-route-id="@item.Id" class="btn btn-info btn-sm">Assigned</a>
+                            </td>
+                            <td>
+                                <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Update</a>
+                            </td>
+                            <td>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Create" class="btn btn-primary">Create New One</a>
+        </div>
+    </div>
+</div>
+
+

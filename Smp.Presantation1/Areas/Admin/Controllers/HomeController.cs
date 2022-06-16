@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Smp.Presantation1.Models;
 using System.Diagnostics;
 
 namespace Smp.Presantation1.Areas.Admin.Controllers
 {
     [Area("Admin")]
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,7 +20,7 @@ namespace Smp.Presantation1.Areas.Admin.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("AllPosts", "Post");
+                return RedirectToAction("AllPostsUser", "Post");
             }
             return View();
         }

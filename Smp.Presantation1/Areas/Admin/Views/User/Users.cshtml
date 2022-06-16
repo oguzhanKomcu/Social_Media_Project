@@ -30,7 +30,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-
+                        <th>Id</th>
                         <th>User Name</th>
                         <th>Image</th>
                         <th>User SCORE</th>
@@ -48,23 +48,31 @@
                     {
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    <a asp-controller="User" asp-action="Details" asp-route-id="@item.Id">@item.UserName</a>
-                                </td>
+                            if (item.Status != SMP.Domain.Enums.Status.Passive)
+                            {
+                                <tr id="user1">
 
-                                <td>
-                                    <img src="@item.ImagePath" width="100" height="100">
-                                </td>
-                                <td>@item.User_Score</td>
+                                    <td>@item.Id</td>
+                                    <td>
+                                        <a asp-controller="User" asp-action="Details" asp-route-id="@item.Id">@item.UserName</a>
+                                    </td>
 
-                                <td>
-                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a>
-                                </td>
-                                <td>
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Delete</a>
-                                </td>
-                            </tr>
+                                    <td>
+                                        <img src="@item.ImagePath" width="100" height="100">
+                                    </td>
+                                    <td>@item.User_Score</td>
+
+                                    <td>
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a>
+                                    </td>
+                                    <td>
+           
+                                        <button type="button" class="btn btn-danger btn-sm" id="userDlt" data-id="@item.Id" onclick="userDelete()">Delete</button>
+
+
+                                    </td>
+                                </tr>
+                            }
                         }
                     }
 
@@ -74,3 +82,30 @@
 
     </div>
 </div>
+
+
+<script type="text/javascript">
+
+
+
+
+    function userDelete(){
+
+        var id1 = $('#userDlt').data('id');
+        var url = '@Url.Action("Delete", "User")';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: { id: id1 },
+            success: function (data) {
+                alert("Silme işlemi başarılı");
+                $('#user1').remove();
+            }
+        });
+    };
+
+
+
+
+
+</script>
