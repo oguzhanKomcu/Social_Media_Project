@@ -1,6 +1,6 @@
 # Social Media Project
 I'm doing a social media project. In this project, I used the Unit Of Work Design Pattern, which is an enterprise design pattern, and added innovations that are different from a social media site.
------Sql diyagram ve trigger gelicek
+
 
 ## DOMAIN
 
@@ -38,4 +38,5 @@ I'm doing a social media project. In this project, I used the Unit Of Work Desig
 
 ## API 
 
+- On the API side, I created the commands and queries of the necessary data on the client side, but I did not create the client side.
 
