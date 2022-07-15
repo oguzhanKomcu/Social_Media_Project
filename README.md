@@ -15,7 +15,7 @@ I'm doing a social media project. In this project, I used the Unit Of Work Desig
 - Post_Comment,
 - Post_Score,
 - PostSharing
-
+<img src="https://user-images.githubusercontent.com/96787308/179271134-047a064d-3fea-4e99-96cb-3f60e291b564.png" width="1000" height="700">
 #### I created a base interface that inherits all my entities. This is my "IBaseEntity" interface.
 #### I've created my repositories' interfaces and an "IBaseRepository" base.
 #### I created my "IUnitOfWork" interface, which is necessary to implement my UnitOfWork design pattern.
@@ -29,8 +29,13 @@ I'm doing a social media project. In this project, I used the Unit Of Work Desig
 - First of all, when integrating the Asp.NET Core Identity library into a project, we need to evaluate the event in terms of both the library and the database. Since we use Identity in our system, we need to create the equivalent of this identity structure in the database, and we can do this with the "IdentityDbContext" class. Therefore, it is derived from the "IdentityDbContext" class in order to specify which identity the context class will work with.
 
 ## APPLİCATİON
+
 - In this layer, I created my Services and their interfaces, mapping, dto and viems, validation, extensions classes, and my container for dependency injection. I used AutoMapper for mapping, Autofac for my container, and FluentValidation for validation.
 
 ## PRESENTATION
 
 - In this layer, I created the necessary controllers and Views for the Admin and the user.The user, who is an admin, can assign roles, post operations and user-related operations. If the admin wishes, he can use the features reserved for the user as a user. Users can comment, post, user, favorite post, shared post, follow.
+
+## API 
+
+
