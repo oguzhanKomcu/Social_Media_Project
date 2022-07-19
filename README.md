@@ -40,3 +40,13 @@ I'm doing a social media project. In this project, I used the Unit Of Work Desig
 
 - On the API side, I created the commands and queries of the necessary data on the client side, but I did not create the client side.
 
+## Technologies
+
+- DotNet
+- MsSql
+- Asp.Net 
+- Autofac
+- AutoMapper
+- FluentValidation
+- Swagger / Postman
+- Boostrap
