@@ -27,7 +27,7 @@ namespace Smp.Presantation1.Controllers
 
             if (follow != false)
             {
-                TempData["Warning"] = $"The {model.FollowingId} category already exist..!";
+                TempData["Warning"] = $"The {model.FollowingId} category already exist....!";
                 return RedirectToAction("User","Details");
             }
             else
